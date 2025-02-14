@@ -7,6 +7,27 @@ function LoginPain({ handleForgotPassword }) {
     const handleLoginButton = () => {
         console.log("Login button clicked:", username, password);
 
+        try {   //TODO this is not tested yet, needs a test. Was made more for showing where the logic can be placed
+            const response =  fetch("/api/auth/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ username, password }),});
+
+                const responseData= response.json(); //might need to await this
+                //TODO add logic for handling the response
+
+
+
+        } catch (error) {
+            alert("Error: " + error);
+        }
+
+
+
+
+
         // Need to add proper validation logic
         if (username === "admin" && password === "admin") {
             console.log("Login successful");
