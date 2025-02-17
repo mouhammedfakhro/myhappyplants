@@ -3,6 +3,7 @@ import "./globals.css";
 import React from "react";
 import LoginBox from "./components/LoginBox";
 import ForgotPasswordBox from "./forgotpassword/ForgotPasswordBox";
+import SignUpBox from "./signup/SignUpBox";
 
 function LandingPage() {
 
@@ -22,7 +23,8 @@ function LandingPage() {
                 min-w-[80%] max-w-[80%]
                 shadow-md shadow-black/20 p-10" >
                   {/*<LoginBox/>*/} 
-                  <ForgotPasswordBox/>
+                  {/*<ForgotPasswordBox/>*/} 
+                  <SignUpBox/>
                 </div>
 
             </div>
