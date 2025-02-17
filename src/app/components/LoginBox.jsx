@@ -20,11 +20,11 @@ const LoginBox = ({}) => {
     return (
         <div className="justify-center items-center flex"
         >
-            <div className="space-y-5 justify-items-center items-center">
-                <p>Login to your account</p>
+            <div className="space-y-5 justify-items-center items-center pt-8" >
+                <h1 className="text-2xl font-light">Login to your account</h1>
 
                 <div className="">
-                    <p>Username</p>
+                    <p className="text-xl font-light pt-2">Username</p>
                     <input
                     type="text"
                     value={loginText}
@@ -35,7 +35,7 @@ const LoginBox = ({}) => {
                 </div>
 
                 <div>
-                <p>Password</p>
+                <p className="text-xl font-light">Password</p>
                 <input
                 type="text"
                 value={passText}
@@ -47,7 +47,7 @@ const LoginBox = ({}) => {
 
                 <div className="align-middle justify-items-center">
                 <button
-                className="bg-lime-950 text-white hover:bg-lime-900 rounded-md p-2 min-w-[100px]"
+                className="bg-lime-950 text-white hover:bg-lime-900 rounded-md p-2 min-w-[100px] "
                 onClicked={loginClicked}
                 >
                     Login
@@ -56,7 +56,7 @@ const LoginBox = ({}) => {
 
                 <br/>
 
-                <p onClick={forgotPasswordClicked} className="underline">Forgot Password?</p>
+                <p onClick={forgotPasswordClicked} className="underline text-l font-light">Forgot Password?</p>
                 
             </div>
 
