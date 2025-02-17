@@ -2,6 +2,7 @@
 import "./globals.css";
 import React from "react";
 import LoginBox from "./components/LoginBox";
+import ForgotPasswordBox from "./forgotpassword/ForgotPasswordBox";
 
 function LandingPage() {
 
@@ -20,7 +21,8 @@ function LandingPage() {
                 min-h-[80%] max-h-[80%]
                 min-w-[80%] max-w-[80%]
                 shadow-md shadow-black/20 p-10" >
-                    <LoginBox/>
+                  {/*<LoginBox/>*/} 
+                  <ForgotPasswordBox/>
                 </div>
 
             </div>
