@@ -2,7 +2,7 @@
 import React, {useRef, useState} from "react";
 import { useRouter } from "next/navigation";
 
-const LoginBox = ({}) => {
+const PasswordBox = ({}) => {
 
     const [loginText, setLoginText] = useState("");
 
@@ -55,4 +55,4 @@ const LoginBox = ({}) => {
     );
 };
 
-export default LoginBox;
+export default PasswordBox;

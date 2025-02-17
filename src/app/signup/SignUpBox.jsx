@@ -2,7 +2,7 @@
 import React, {useRef, useState} from "react";
 import { useRouter } from "next/navigation";
 
-const LoginBox = ({}) => {
+const SignUpBox = ({}) => {
 
     const [loginText, setLoginText] = useState("");
     const [passText, setPassText] = useState("");
@@ -21,10 +21,10 @@ const LoginBox = ({}) => {
         <div className="justify-center items-center flex"
         >
             <div className="space-y-5 justify-items-center items-center pt-8" >
-                <h1 className="text-2xl font-light">Create account</h1>
+                <h1 className="text-2xl font-light"  style={{ color: '#344E41' }}>Create account</h1>
 
                 <div className="">
-                    <p className="text-xl font-light pt-2">Username</p>
+                    <p className="text-xl font-light pt-2"  style={{ color: '#344E41' }}>Username</p>
                     <input
                     type="text"
                     value={loginText}
@@ -35,7 +35,7 @@ const LoginBox = ({}) => {
                 </div>
 
                 <div>
-                <p className="text-xl font-light">Password</p>
+                <p className="text-xl font-light"  style={{ color: '#344E41' }}>Password</p>
                 <input
                 type="text"
                 value={passText}
@@ -63,7 +63,7 @@ const LoginBox = ({}) => {
 
                 <br/>
 
-                <p onClick={loginPage} className="underline text-l font-light">Back to login</p>
+                <p onClick={loginPage} className="underline text-l font-light"  style={{ color: '#344E41' }}>Back to login</p>
                 
             </div>
 
@@ -73,4 +73,4 @@ const LoginBox = ({}) => {
     );
 };
 
-export default LoginBox;
+export default SignUpBox;
