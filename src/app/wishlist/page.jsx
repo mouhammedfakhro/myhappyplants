@@ -30,20 +30,26 @@ const WishlistPage = ({}) => {
 
                 <div className="space-y-3">
                     <div></div>
-                    <WishlistItem/>
-                    <WishlistItem/>
-                    <WishlistItem/>
-                    <WishlistItem/>
-                    <WishlistItem/>
-                    <WishlistItem/>
-                    <WishlistItem/>
-                    <WishlistItem/>
-                    <WishlistItem/>
-                    <WishlistItem/>
-                    <WishlistItem/>
-                    <WishlistItem/>
-                    <WishlistItem/>
-                    <WishlistItem/>
+                    <WishlistItem
+                        imageLink="https://images.pexels.com/photos/30727074/pexels-photo-30727074/free-photo-of-vibrant-philodendron-verrucosum-in-white-pots.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                        scientificName="Monstera deliciosa"
+                        familyName="Arceae"/>
+                        <WishlistItem
+                        imageLink="https://images.pexels.com/photos/30727074/pexels-photo-30727074/free-photo-of-vibrant-philodendron-verrucosum-in-white-pots.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                        scientificName="Monstera deliciosa"
+                        familyName="Arceae"/>
+                        <WishlistItem
+                        imageLink="https://images.pexels.com/photos/30727074/pexels-photo-30727074/free-photo-of-vibrant-philodendron-verrucosum-in-white-pots.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                        scientificName="Monstera deliciosa"
+                        familyName="Arceae"/>
+                        <WishlistItem
+                        imageLink="https://images.pexels.com/photos/30727074/pexels-photo-30727074/free-photo-of-vibrant-philodendron-verrucosum-in-white-pots.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                        scientificName="Monstera deliciosa"
+                        familyName="Arceae"/>
+                        <WishlistItem
+                        imageLink="https://images.pexels.com/photos/30727074/pexels-photo-30727074/free-photo-of-vibrant-philodendron-verrucosum-in-white-pots.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                        scientificName="Monstera deliciosa"
+                        familyName="Arceae"/>
                 </div>
 
             </div>

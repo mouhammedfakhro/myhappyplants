@@ -8,9 +8,6 @@ import Navbar from "../components/Navbar"
 
 const LoggedinHome = ({}) => {
     const router = useRouter();
-
-    
-
     
     return (
         <div className="max-w-screen min-w-screen
@@ -33,7 +30,42 @@ const LoggedinHome = ({}) => {
 
                 <div className="space-y-3">
                     <div></div>
-                    <LibraryItemLite/> <LibraryItemLite/> <LibraryItemLite/> <LibraryItemLite/>
+                    <LibraryItemLite
+                        imageLink="https://images.pexels.com/photos/30727074/pexels-photo-30727074/free-photo-of-vibrant-philodendron-verrucosum-in-white-pots.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                        plantName="Olof Palme"
+                        scientificName="Monstera deliciosa"
+                        familyName="Arceae"/>
+                        <LibraryItemLite
+                        imageLink="https://images.pexels.com/photos/30727074/pexels-photo-30727074/free-photo-of-vibrant-philodendron-verrucosum-in-white-pots.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                        plantName="Olof Palme"
+                        scientificName="Monstera deliciosa"
+                        familyName="Arceae"/>
+                        <LibraryItemLite
+                        imageLink="https://images.pexels.com/photos/30727074/pexels-photo-30727074/free-photo-of-vibrant-philodendron-verrucosum-in-white-pots.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                        plantName="Olof Palme"
+                        scientificName="Monstera deliciosa"
+                        familyName="Arceae"/>
+                        <LibraryItemLite
+                        imageLink="https://images.pexels.com/photos/30727074/pexels-photo-30727074/free-photo-of-vibrant-philodendron-verrucosum-in-white-pots.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                        plantName="Olof Palme"
+                        scientificName="Monstera deliciosa"
+                        familyName="Arceae"/>
+                        <LibraryItemLite
+                        imageLink="https://images.pexels.com/photos/30727074/pexels-photo-30727074/free-photo-of-vibrant-philodendron-verrucosum-in-white-pots.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                        plantName="Olof Palme"
+                        scientificName="Monstera deliciosa"
+                        familyName="Arceae"/>
+                        <LibraryItemLite
+                        imageLink="https://images.pexels.com/photos/30727074/pexels-photo-30727074/free-photo-of-vibrant-philodendron-verrucosum-in-white-pots.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                        plantName="Olof Palme"
+                        scientificName="Monstera deliciosa"
+                        familyName="Arceae"/>
+                        <LibraryItemLite
+                        imageLink="https://images.pexels.com/photos/30727074/pexels-photo-30727074/free-photo-of-vibrant-philodendron-verrucosum-in-white-pots.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                        plantName="Olof Palme"
+                        scientificName="Monstera deliciosa"
+                        familyName="Arceae"/>
+                        
                 </div>
 
             </div>
@@ -49,8 +81,42 @@ const LoggedinHome = ({}) => {
                 <div className="space-y-2 space-x-2 text-white">
                     <div></div>
                     <p>Reminders</p>
-                    <ReminderBox/> <ReminderBox/> <ReminderBox/> <ReminderBox/>
-                    <ReminderBox/> <ReminderBox/> <ReminderBox/> <ReminderBox/>
+                    <ReminderBox
+                        date="2025-02-19"
+                        message="Water your Monstera."/>
+                    <ReminderBox
+                        date="2025-02-06"
+                        message="Water your Cactus."/>
+                        <ReminderBox
+                        date="2025-02-19"
+                        message="Water your Monstera."/>
+                    <ReminderBox
+                        date="2025-02-06"
+                        message="Water your Cactus."/>
+                    <ReminderBox
+                        date="2025-02-19"
+                        message="Water your Monstera."/>
+                    <ReminderBox
+                        date="2025-02-06"
+                        message="Water your Cactus."/>
+                        <ReminderBox
+                        date="2025-02-19"
+                        message="Water your Monstera."/>
+                    <ReminderBox
+                        date="2025-02-06"
+                        message="Water your Cactus."/>
+                    <ReminderBox
+                        date="2025-02-19"
+                        message="Water your Monstera."/>
+                    <ReminderBox
+                        date="2025-02-06"
+                        message="Water your Cactus."/>
+                        <ReminderBox
+                        date="2025-02-19"
+                        message="Water your Monstera."/>
+                    <ReminderBox
+                        date="2025-02-06"
+                        message="Water your Cactus."/>
                 </div>
 
             </div>

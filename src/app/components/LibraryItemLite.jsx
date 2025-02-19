@@ -2,7 +2,13 @@
 import React, {useRef, useState} from "react";
 import { useRouter } from "next/navigation";
 
-const LibraryItemLite = ({}) => {
+const LibraryItemLite = ({
+    imageLink,
+    plantName,
+    scientificName,
+    familyName,
+    plantID
+    }) => {
 
     const plantClicked = (plantID) => {   
 
@@ -13,14 +19,14 @@ const LibraryItemLite = ({}) => {
         hover:bg-gray-300"
         onClick={plantClicked}>
             
-            <img src="https://images.pexels.com/photos/30727074/pexels-photo-30727074/free-photo-of-vibrant-philodendron-verrucosum-in-white-pots.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            <img src={imageLink}
             className="w-[25%] aspect-square object-cover rounded-2xl">
             </img>
 
             <div className="justify-items-start">
-                <p className="text-xl">Plant Name</p>
-                <p className="text-md">Scientific Name</p>
-                <p className="text-sm">Family Name</p>
+                <p className="text-xl">{plantName}</p>
+                <p className="text-md">{scientificName}</p>
+                <p className="text-sm">{familyName}</p>
 
             </div>
 

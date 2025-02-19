@@ -15,9 +15,8 @@ const Navbar = ({}) => {
     // discovery
     let disoveryIcon = "https://i.ibb.co/PGs8RjF4/discovery.png";
     const discoveryClicked = () => {  
-
+        router.push('/discovery'); 
     }
-
 
     // library
     let libraryIcon = "https://i.ibb.co/My486cfT/library.png";
@@ -34,13 +33,13 @@ const Navbar = ({}) => {
     // settings
     let settingsIcon = "https://i.ibb.co/0RCFvnQG/settings.png";
     const settingsClicked = () => {  
-
+        router.push('/settingsPage'); 
     }
 
     // logout
     let logoutIcon = "https://i.ibb.co/0ygHrGB2/logout.png";
     const logoutClicked = () => {   
-
+        router.push('../');
     }
 
     return (

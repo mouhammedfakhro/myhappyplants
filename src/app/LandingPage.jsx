@@ -2,9 +2,9 @@
 import "./globals.css";
 import React from "react";
 import LoginBox from "./components/LoginBox";
-import ForgotPasswordBox from "./forgotpassword/ForgotPasswordBox";
-import SignUpBox from "./signup/SignUpBox";
-import EmailSentbox from "./emailsent/EmailSentBox";
+import ForgotPasswordBox from "./components/ForgotPasswordBox";
+import SignUpBox from "./components/SignUpBox";
+import EmailSentbox from "./components/EmailSentBox";
 
 function LandingPage() {
 
@@ -24,7 +24,7 @@ function LandingPage() {
                 min-h-[80%] max-h-[80%]
                 min-w-[70%] max-w-[70%]
                 shadow-md shadow-black/20 p-10
-                mt-[5%]" >
+                mt-[5%]">
                     <LoginBox/>
                 </div>
 

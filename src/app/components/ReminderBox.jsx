@@ -2,7 +2,11 @@
 import React, {useRef, useState} from "react";
 import { useRouter } from "next/navigation";
 
-const ReminderBox = ({}) => {
+const ReminderBox = ({
+    date,
+    message,
+    plantID
+}) => {
 
     const reminderClicked = () => {
 
@@ -19,8 +23,8 @@ const ReminderBox = ({}) => {
 
             <div></div>
             <div className="w-[70%] justify-items-start">
-                <p className="text-xs">2025-02-18</p>
-                <p className="text-md">Water your Monstera.</p>
+                <p className="text-xs">{date}</p>
+                <p className="text-md">{message}</p>
             </div>
 
             <button
