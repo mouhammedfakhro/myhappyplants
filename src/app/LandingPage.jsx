@@ -2,6 +2,9 @@
 import "./globals.css";
 import React from "react";
 import LoginBox from "./components/LoginBox";
+import ForgotPasswordBox from "./forgotpassword/ForgotPasswordBox";
+import SignUpBox from "./signup/SignUpBox";
+import EmailSentbox from "./emailsent/EmailSentBox";
 
 function LandingPage() {
 
