@@ -2,6 +2,7 @@
 import React, {useRef, useState} from "react";
 import { useRouter } from "next/navigation";
 
+
 const LibraryItem = ({
     imageLink,
     plantName,
@@ -10,8 +11,10 @@ const LibraryItem = ({
     tags,
     plantID
 }) => {
+    const router = useRouter();
+
     const viewClicked = () => {
-        
+        router.push('/plantview'); 
     }
 
     return (
