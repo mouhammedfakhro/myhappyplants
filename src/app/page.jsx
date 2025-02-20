@@ -10,7 +10,9 @@ const Layout = () => {
       <body>
        {/*<LandingPage/>*/} 
        {/*<SettingsPage/>*/} 
-       <DiscoveryPage/>
+      {/*<DiscoveryPage/>*/} 
+
+       <SettingsPage/>
       </body>
     </html>
   )
