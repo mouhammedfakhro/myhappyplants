@@ -11,7 +11,14 @@ const EmailSentbox = ({ email }) => {
     const router = useRouter();
 
     const changePassword = () => {
-        router.push(`../?content=${"successReset"}`);
+        if (!code || !pass || !confPass) {
+            alert("Please fill in all of the fields.");
+        } else {
+            // API request for password reset
+                // if successful:
+                router.push(`../?content=${"successReset"}`);
+                // else: show error
+        }
     }
 
     const loginPage = () => {

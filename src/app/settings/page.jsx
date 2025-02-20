@@ -25,8 +25,8 @@ const SettingsPage = ({}) => {
             dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
 
                 <div className="w-[85%]">
-                    <h1 className="text-3xl font-light" style={{ color: '#3A5A40' }}>Settings</h1>
-                    <hr className="h-px my-5 bg-gray-200 border-0" style={{ color: '#3A5A40' }}></hr>
+                <p className="text-2xl">My Settings</p>
+                <hr className="h-px my-5 bg-gray-200 border-0 dark:bg-gray-700"></hr>
 
                     <div class="flex mb-4">
                         <div class="w-1/2  h-dvh">

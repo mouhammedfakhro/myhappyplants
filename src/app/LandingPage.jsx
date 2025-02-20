@@ -1,13 +1,13 @@
 "use client";
 import "./globals.css";
 import React from "react";
-import LoginBox from "./components/LoginBox";
-import ForgotPasswordBox from "./components/ForgotPasswordBox";
-import SignUpBox from "./components/SignUpBox";
-import EmailSentbox from "./components/EmailSentBox";
-import SuccessfulPasswordResetBox from "./components/SuccessfulPasswordResetBox"
-import VerifyAccount from "./components/VerifyAccount"
-import SuccessfulVerification from "./components/SuccessfulVerification"
+import LoginBox from "./components/auth/LoginBox";
+import ForgotPasswordBox from "./components/auth/ForgotPasswordBox";
+import SignUpBox from "./components/auth/SignUpBox";
+import EmailSentbox from "./components/auth/EmailSentBox";
+import SuccessfulPasswordResetBox from "./components/auth/SuccessfulPasswordResetBox"
+import VerifyAccount from "./components/auth/VerifyAccount"
+import SuccessfulVerification from "./components/auth/SuccessfulVerification"
 import { useSearchParams } from "next/navigation";
 
 

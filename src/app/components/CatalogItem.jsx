@@ -2,13 +2,13 @@
 import React, {useRef, useState} from "react";
 import { useRouter } from "next/navigation";
 
-const DiscoveryItemLight = ({
+const CatalogItem = ({
     imageLink,
     commonName,
     scientificName,
     familyName,
     category,
-    plantID
+    catalogID
 }) => {
     const viewClicked = () => {
         
@@ -34,4 +34,4 @@ const DiscoveryItemLight = ({
     );
 };
 
-export default DiscoveryItemLight;
+export default CatalogItem;

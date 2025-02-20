@@ -2,13 +2,21 @@
 import React, {useRef, useState} from "react";
 import { useRouter } from "next/navigation";
 
-const PasswordBox = ({}) => {
+const VerifyAccount = ({}) => {
 
-    const [emailText, setEmailText] = useState("");
+    const [verCode, setVerCode] = useState("");
     
     const router = useRouter();
-    const sendCodeClicked = () => {
-        router.push(`../?content=${"emailSent"}`);
+    const verifyClicked = () => {
+
+        if (verCode) {
+            // API CALL - verification code
+
+            // if sucessful:
+            router.push(`../?content=${"successVerify"}`);
+            // else:
+            //alert("Could not verify account.");
+        }
     }
     const loginPage = () => {
         router.push(`../?content=${"login"}`);
@@ -17,27 +25,29 @@ const PasswordBox = ({}) => {
     return (
         <div className="justify-center items-center flex"
         >
-            <div className="space-y-6 justify-items-center items-center pt-8" >
-                <h1 className="text-2xl font-light">Reset password request</h1>
-                <h1 className="text-lg font-light">Please enter your registered email.</h1>
+            <div className="space-y-3 justify-items-center items-center pt-8" >
+                <h1 className="text-lg font-light">A verification code has been sent to your email.</h1>
+                <h1 className="text-md font-light">Please verify your account to be able to login.</h1>
 
                 <div className="align-middle justify-items-center flex space-x-1">
                     <input
                     type="text"
-                    value={emailText}
-                    onChange={(e) => setEmailText(e.target.value)}
+                    value={verCode}
+                    onChange={(e) => setVerCode(e.target.value)}
                     className="rounded-md text-black border-2 outline-green-950 p-2 focus:outline-0"
-                    placeholder="example@email.com">
+                    placeholder="Verification Code">
                     </input>
 
                     <button
                     className="bg-lime-900 text-white text-sm hover:bg-lime-950 rounded-md p-3 min-w-[100px] "
-                    onClick={sendCodeClicked}
+                    onClick={verifyClicked}
                     >
-                        Send code
+                        Verify
                     </button>
 
                 </div>
+
+                <br/>
                 
                 <button
                 className="underline hover:text-lime-800 font-light"
@@ -51,4 +61,4 @@ const PasswordBox = ({}) => {
     );
 };
 
-export default PasswordBox;
+export default VerifyAccount;

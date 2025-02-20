@@ -1,8 +1,8 @@
 "use client";
 import React, {useRef, useState} from "react";
 import { useRouter } from "next/navigation";
-import LibraryItemLite from "../components/LibraryItemLite";
-import ReminderBox from "../components/ReminderBox"
+import LibraryItemLite from "../components/home/LibraryItemLite";
+import ReminderBox from "../components/home/ReminderBox"
 import Navbar from "../components/Navbar"
 
 

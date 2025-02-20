@@ -11,7 +11,20 @@ const SignUpBox = ({}) => {
     const router = useRouter();
 
     const signUpClicked = () => {
-        router.push(`../?content=${"verify"}`);
+
+        if (!usernameText || !emailText || !passText) {
+            alert("Please make sure username, email and password are filled in");
+        } else {
+
+            // regex check
+                // if false: show error
+                // if true: API CALL signup request
+                    // if successful:
+                    router.push(`../?content=${"verify"}`);
+                    // else: show error
+                        // taken username
+                        // taken email
+        }
     }
 
     const loginPage = () => {

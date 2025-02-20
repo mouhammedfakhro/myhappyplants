@@ -13,7 +13,7 @@ const LoginBox = ({}) => {
     const loginClicked = () => {
 
         if (!usernameText || !passText) {
-            setErrorMessage("*Please enter both username and password.");
+            setErrorMessage("*Please fill in both username and password fields.");
         } else {
             // api login request
             // if correct, push home

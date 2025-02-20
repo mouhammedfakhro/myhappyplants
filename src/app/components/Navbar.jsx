@@ -33,7 +33,7 @@ const Navbar = ({}) => {
     // settings
     let settingsIcon = "https://i.ibb.co/0RCFvnQG/settings.png";
     const settingsClicked = () => {  
-        router.push('/settingsPage'); 
+        router.push('/settings'); 
     }
 
     // logout

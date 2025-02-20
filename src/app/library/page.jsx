@@ -1,9 +1,9 @@
 "use client";
 import React, {useRef, useState} from "react";
 import { useRouter } from "next/navigation";
-import LibraryItem from "../components/LibraryItem";
+import LibraryItem from "../components/library/LibraryItem";
 import Navbar from "../components/Navbar"
-import FilterBar from "../components/FilterBar"
+import FilterBar from "../components/library/FilterBar"
 
 const LibraryPage = ({}) => {
     const router = useRouter();
