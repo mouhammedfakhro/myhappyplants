@@ -11,7 +11,7 @@ const SignUpBox = ({}) => {
     const router = useRouter();
 
     const signUpClicked = () => {
-        alert('email: ' + emailText + ' username: ' + usernameText + ' password: ' + passText);
+        router.push(`../?content=${"verify"}`);
     }
 
     const loginPage = () => {
@@ -21,14 +21,14 @@ const SignUpBox = ({}) => {
     return (
         <div className="justify-center items-center flex"
         >
-            <div className="space-y-2 justify-items-center items-center" >
+            <div className="space-y-3 justify-items-center items-center" >
 
                 <h1 className="text-xl font-light"  style={{ color: '#344E41'}}>
                     Create a new account
                 </h1>
 
                 <div className="">
-                    <p className="text-md font-light pt-2"  style={{ color: '#344E41' }}>Username</p>
+                    <p className="text-md font-light"  style={{ color: '#344E41' }}>Username</p>
                     <input
                     type="text"
                     value={usernameText}
@@ -39,7 +39,7 @@ const SignUpBox = ({}) => {
                 </div>
 
                 <div className="">
-                    <p className="text-md font-light pt-2"  style={{ color: '#344E41' }}>Email</p>
+                    <p className="text-md font-light"  style={{ color: '#344E41' }}>Email</p>
                     <input
                     type="text"
                     value={emailText}
@@ -50,7 +50,7 @@ const SignUpBox = ({}) => {
                 </div>
 
                 <div className="">
-                    <p className="text-md font-light pt-2"  style={{ color: '#344E41' }}>Password</p>
+                    <p className="text-md font-light"  style={{ color: '#344E41' }}>Password</p>
                     <input
                     type="password"
                     value={passText}
@@ -68,7 +68,7 @@ const SignUpBox = ({}) => {
 
                 <div className="align-middle justify-items-center">
                 <button
-                className="bg-lime-950 text-white hover:bg-lime-900 rounded-md p-2 min-w-[100px] "
+                className="bg-lime-900 text-white hover:bg-lime-950 rounded-md p-2 min-w-[100px] "
                 onClick={signUpClicked}
                 >
                     Sign up

@@ -8,11 +8,10 @@ const Layout = () => {
   return (
     <html lang="en">
       <body>
-       {/*<LandingPage/>*/} 
+       <LandingPage/>
        {/*<SettingsPage/>*/} 
       {/*<DiscoveryPage/>*/} 
 
-       <SettingsPage/>
       </body>
     </html>
   )

@@ -4,10 +4,14 @@ import { useRouter } from "next/navigation";
 
 const EmailSentbox = ({ email }) => {
 
+    const [code, setCode] = useState("");
+    const [pass, setPass] = useState("");
+    const [confPass, setConfPass] = useState("");
+
     const router = useRouter();
 
-    const sendLinkAgain = () => {
-        alert("send link again clicked!");
+    const changePassword = () => {
+        router.push(`../?content=${"successReset"}`);
     }
 
     const loginPage = () => {
@@ -16,29 +20,59 @@ const EmailSentbox = ({ email }) => {
 
     return (
         <div className="justify-center items-center flex">
-            <div className="space-y-6 justify-items-center items-center pt-8" >
+            <div className="space-y-2 justify-items-center items-center" >
 
                 <div className="space-y-1 justify-items-center items-center">
-
-                    <h1 className="text-xl font-light"  style={{ color: '#344E41' }}> A code has been sent to your email.</h1>
-                    <h1 className="text-xl font-light" style={{ color: '#879472' }}> {email} </h1>
-
+                    <h1 className="text-md font-light"  style={{ color: '#344E41' }}> If there is an account registered with that email, a password reset code has been sent to the inbox.</h1>
                 </div>
-               
+
+                <div className="">
+                    <p className="text-md font-light"  style={{ color: '#344E41' }}>Code</p>
+                    <input
+                    type="text"
+                    value={code}
+                    onChange={(e) => setCode(e.target.value)}
+                    className="rounded-sm text-black border-2 outline-green-950 p-2 focus:outline-0"
+                    placeholder="enter your code">
+                    </input>
+                </div>
+
+                <div className="">
+                    <p className="text-md font-light"  style={{ color: '#344E41' }}>New password</p>
+                    <input
+                    type="password"
+                    value={pass}
+                    onChange={(e) => setPass(e.target.value)}
+                    className="rounded-sm text-black border-2 outline-green-950 p-2 focus:outline-0"
+                    placeholder="enter new password">
+                    </input>
+                </div>
+
+                <div className="pb-2">
+                    <p className="text-md font-light"  style={{ color: '#344E41' }}>Confirm new password</p>
+                    <input
+                    type="password"
+                    value={confPass}
+                    onChange={(e) => setConfPass(e.target.value)}
+                    className="rounded-sm text-black border-2 outline-green-950 p-2 focus:outline-0"
+                    placeholder="confirm new password">
+                    </input>
+                </div>
+
+                <button
+                className="bg-lime-900 text-white text-sm hover:bg-lime-950 rounded-md p-3 min-w-[100px]"
+                onClick={changePassword}
+                >
+                    Change Password
+                </button>
+
                 <div className="space-y-1 justify-items-center items-center">
-                    <p className="text-md font-light pt-2"  style={{ color: '#344E41' }} >Haven't received an email?</p>
+                    <p className="text-sm font-light pt-2"  style={{ color: '#344E41' }} >Haven't received an email?</p>
                     
-                    <p className="text-md font-light text-red-800">
+                    <p className="text-sm font-light text-red-800">
                         *please wait for 5 minutes, and check the spam folder
                     </p> 
                 </div>
-               
-                <button
-                className="bg-lime-950 text-white text-sm hover:bg-lime-900 rounded-md p-3 min-w-[100px] "
-                onClick={sendLinkAgain}
-                >
-                    Send link again
-                </button>
 
                 <br/>
 

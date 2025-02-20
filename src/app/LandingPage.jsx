@@ -5,6 +5,9 @@ import LoginBox from "./components/LoginBox";
 import ForgotPasswordBox from "./components/ForgotPasswordBox";
 import SignUpBox from "./components/SignUpBox";
 import EmailSentbox from "./components/EmailSentBox";
+import SuccessfulPasswordResetBox from "./components/SuccessfulPasswordResetBox"
+import VerifyAccount from "./components/VerifyAccount"
+import SuccessfulVerification from "./components/SuccessfulVerification"
 import { useSearchParams } from "next/navigation";
 
 
@@ -16,6 +19,7 @@ function LandingPage({}) {
     const content = params.get("content");
 
     const renderContent = () => {
+        
         switch (content) {
             case "login":
                 return <LoginBox/>;
@@ -25,6 +29,12 @@ function LandingPage({}) {
                 return <EmailSentbox/>;
             case "forgotPassword":
                 return <ForgotPasswordBox/>;
+            case "successReset":
+                return <SuccessfulPasswordResetBox/>
+            case "verify":
+                return <VerifyAccount/>
+            case "successVerify":
+                return <SuccessfulVerification/>
             default:
                 return <LoginBox/>;
         }
@@ -42,7 +52,7 @@ function LandingPage({}) {
 
                 <div id="contentCard"
                 className="bg-white rounded-3xl
-                min-h-[80%] max-h-[80%]
+                min-h-[85%] max-h-[85%]
                 min-w-[70%] max-w-[70%]
                 shadow-md shadow-black/20 p-10
                 mt-[5%]">
