@@ -2,54 +2,54 @@
 import React, {useRef, useState} from "react";
 import { useRouter } from "next/navigation";
 
-const EmailSentbox = ({}) => {
+const EmailSentbox = ({ email }) => {
 
-    const [loginText, setLoginText] = useState("");
-    const [passText, setPassText] = useState("");
+    const router = useRouter();
 
-    const router = useRouter;
-    const email = "userEmail";
-
-    const signUpClicked = () => {
-
+    const sendLinkAgain = () => {
+        alert("send link again clicked!");
     }
 
     const loginPage = () => {
-        router.push('/loginPage');
+        router.push(`../?content=${"login"}`);
     }
 
     return (
-        <div className="justify-center items-center flex"
-        >
-            <div className="space-y-5 justify-items-center items-center pt-8" >
-                <h1 className="text-2xl font-light"  style={{ color: '#344E41' }}>An email has been sent to <span style={{ color: '#A3B18A' }}>{email}</span></h1>
+        <div className="justify-center items-center flex">
+            <div className="space-y-6 justify-items-center items-center pt-8" >
 
-               
-                <div className="">
-                <p className="text-xl font-light pt-2"  style={{ color: '#344E41' }} >Haven't received an email?</p>
+                <div className="space-y-1 justify-items-center items-center">
+
+                    <h1 className="text-xl font-light"  style={{ color: '#344E41' }}> A code has been sent to your email.</h1>
+                    <h1 className="text-xl font-light" style={{ color: '#879472' }}> {email} </h1>
+
                 </div>
-                <p className="text-sm font-light text-red-800">
-                    *please wait for 5 minutes, and check the spam folder
-                    </p> 
                
-
-                <div className="align-middle justify-items-center">
+                <div className="space-y-1 justify-items-center items-center">
+                    <p className="text-md font-light pt-2"  style={{ color: '#344E41' }} >Haven't received an email?</p>
+                    
+                    <p className="text-md font-light text-red-800">
+                        *please wait for 5 minutes, and check the spam folder
+                    </p> 
+                </div>
+               
                 <button
-                className="bg-lime-950 text-white hover:bg-lime-900 rounded-md p-2 min-w-[100px] "
-                onClicked={signUpClicked}
+                className="bg-lime-950 text-white text-sm hover:bg-lime-900 rounded-md p-3 min-w-[100px] "
+                onClick={sendLinkAgain}
                 >
                     Send link again
                 </button>
-                </div>
 
                 <br/>
 
-                <p onClick={loginPage} className="underline text-l font-light"  style={{ color: '#344E41' }}>Back to login</p>
+                <button
+                className="underline hover:text-lime-800 font-light"
+                onClick={loginPage}
+                >
+                    {"<< back to login"}
+                </button>
                 
             </div>
-
-
-
         </div>
     );
 };

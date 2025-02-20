@@ -4,22 +4,31 @@ import { useRouter } from "next/navigation";
 
 const LoginBox = ({}) => {
 
-    const [loginText, setLoginText] = useState("");
+    const [usernameText, setUsernameText] = useState("");
     const [passText, setPassText] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
     const router = useRouter(); 
 
     const loginClicked = () => {
-        router.push('/home'); 
+
+        if (!usernameText || !passText) {
+            setErrorMessage("*Please enter both username and password.");
+        } else {
+            // api login request
+            // if correct, push home
+            // if incorrect:
+            // setErrorMessage("*Incorrect username and/or password.");
+            router.push('/home'); 
+        }
     }
 
     const forgotPasswordClicked = () => {
-        router.push('/forgotpassword'); 
+        router.push(`../?content=${"forgotPassword"}`); 
     }
 
     const signupClicked = () => {
-        router.push('/signup'); 
+        router.push(`../?content=${"signup"}`); 
     }
 
     return (
@@ -32,8 +41,8 @@ const LoginBox = ({}) => {
                         <p>Username</p>
                         <input
                         type="text"
-                        value={loginText}
-                        onChange={(e) => setLoginText(e.target.value)}
+                        value={usernameText}
+                        onChange={(e) => setUsernameText(e.target.value)}
                         className="rounded-md text-black border-2 outline-green-950 p-2 focus:outline-0 w-full"
                         placeholder="">
                         </input>
@@ -59,16 +68,16 @@ const LoginBox = ({}) => {
                     </button>
                     </div>
 
-                <p onClick={forgotPasswordClicked} className="underline hover:text-lime-800">Forgot Password?</p>
+                <button onClick={forgotPasswordClicked} className="underline hover:text-lime-800 font-light">Forgot Password?</button>
 
                 <div className="flex bottom-0">Don't have an account? &nbsp;
-                    <p className="underline hover:text-lime-800" onClick={signupClicked}> Sign up now!</p>
+                    <button className="underline hover:text-lime-800 font-light" onClick={signupClicked}> Sign up now!</button>
                 </div>
 
 
                 <br/>
                 <div className="min-h-[10%]">
-                    <p className="text-red-700">{errorMessage}</p>
+                    <p className="text-red-600">{errorMessage}</p>
                 </div>
                 
             </div>
