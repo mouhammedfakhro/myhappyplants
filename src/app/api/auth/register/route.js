@@ -22,7 +22,6 @@ export async function POST(req) {
       "passText",
       "emailText",
     ]);
-
     if (!isValid) {
       return createServerResponse(
         { error: `Missing or empty field: ${missingField}` },
@@ -40,7 +39,6 @@ export async function POST(req) {
         400
       );
     }
-
     const mailerSend = new MailerSend({
       apiKey: process.env.MAILERSEND_API_KEY,
     });

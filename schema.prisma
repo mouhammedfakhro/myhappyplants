@@ -39,3 +39,4 @@ model User {
   expiresAt           DateTime?
   Plant               Plant[]
 }
+
