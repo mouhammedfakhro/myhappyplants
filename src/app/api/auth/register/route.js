@@ -1,6 +1,6 @@
 import prisma from "../../../../../lib/prisma";
 import bcrypt from "bcrypt";
-import { createServerResponse, validateRequestBody } from "@/app/utils";
+import { createServerResponse, validateRequestBody } from "../../../utils";
 
 export async function POST(req) {
   try {

@@ -1,6 +1,6 @@
 import { SignJWT } from "jose";
 import prisma from "../../../../../lib/prisma";
-import { createServerResponse } from "@/app/utils";
+import { createServerResponse } from "../../../utils";
 import bcrypt from "bcrypt";
 
 const SECRET_KEY = process.env.SECRET_KEY;
