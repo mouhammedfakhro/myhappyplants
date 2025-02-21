@@ -1,15 +1,26 @@
 import prisma from "../../../../../lib/prisma";
 import bcrypt from "bcrypt";
-import { createServerResponse, validateRequestBody } from "../../../utils";
+import {
+  createServerResponse,
+  generateRandomVerificationCode,
+  validateRequestBody,
+} from "../../../utils";
+import {
+  MailerSend,
+  EmailParams,
+  Sender,
+  Recipient,
+} from "mailersend";
 
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { username, password, email } = body;
+    const { usernameText, emailText, passText } = body;
+
     const { isValid, missingField } = validateRequestBody(body, [
-      "username",
-      "password",
-      "email",
+      "usernameText",
+      "passText",
+      "emailText",
     ]);
 
     if (!isValid) {
@@ -20,7 +31,7 @@ export async function POST(req) {
     }
 
     const existingUser = await prisma.user.findUnique({
-      where: { email: email },
+      where: { email: emailText },
     });
 
     if (existingUser) {
@@ -30,18 +41,45 @@ export async function POST(req) {
       );
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const mailerSend = new MailerSend({
+      apiKey: process.env.MAILERSEND_API_KEY,
+    });
 
-    await prisma.user.create({
+    const hashedPassword = await bcrypt.hash(passText, 10);
+    const verificationCode = generateRandomVerificationCode();
+
+    const user = await prisma.user.create({
       data: {
-        name: username,
-        email: email,
+        name: usernameText,
+        email: emailText,
         password: hashedPassword,
+        verificationCode: verificationCode,
       },
     });
 
-    return createServerResponse({ username, password, email }, 201);
+    const sentFrom = new Sender(
+      "MS_VOp91O@trial-pr9084z0wnmlw63d.mlsender.net",
+      "Your verification code"
+    );
+    const recipients = [new Recipient(emailText, usernameText)];
+
+    const emailParams = new EmailParams()
+      .setFrom(sentFrom)
+      .setTo(recipients) 
+      .setSubject("Your verification code")
+      .setText(`Your verification code is: ${verificationCode}`);
+      
+    await mailerSend.email.send(emailParams);
+
+    return createServerResponse(
+      {
+        message: "User created successfully",
+        user: { username: user.name, email: user.email },
+      },
+      201
+    );
   } catch (error) {
-    return createServerResponse({ error: "Invalid request body" }, 400);
+    console.error("Server error:", error);
+    return createServerResponse({ error: "Internal server error" }, 500);
   }
 }

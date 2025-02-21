@@ -3,26 +3,29 @@ import prisma from "../../../../../lib/prisma";
 import { createServerResponse } from "../../../utils";
 import bcrypt from "bcrypt";
 
-const SECRET_KEY = process.env.SECRET_KEY;
+const SECRET_KEY = process.env.JWT_SECRET;
 
 export async function POST(req) {
   try {
     const body = await req.json();
 
-    const { email, password } = body;
+    const { username, password } = body;
+    console.log(username, password);
     const user = await prisma.user.findUnique({
-      where: { email: email },
+      where: { name: username },
     });
 
     if (!user) createServerResponse({ error: "User not found" }, 400);
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return createServerResponse({ error: "Invalid password" }, 400);
+    if (!isMatch)
+      return createServerResponse({ error: "Invalid password" }, 400);
 
     const userPayLoad = {
       id: user.id,
-      email: user.email,
-      username: user.name,
+      name: user.email,
+      name: user.name,
+      plants: user.plants,
     };
 
     const token = await new SignJWT(userPayLoad)
