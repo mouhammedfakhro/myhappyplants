@@ -3,19 +3,22 @@ import React, {useRef, useState} from "react";
 import { useRouter } from "next/navigation";
 
 
-const LibraryItem = ({
+const PlantViewPlantInfo = ({
     imageLink,
     plantName,
     commonName,
     scientificName,
     familyName,
-    tags,
     water
 }) => {
     const router = useRouter();
 
-    const viewClicked = () => {
-        router.push('/plantview'); 
+    const editClicked = () => {
+        router.push('/editplant');
+    }
+
+    const moreInformation = () => {
+        router.push('/moreinformation');
     }
 
     return (
@@ -34,11 +37,11 @@ const LibraryItem = ({
             </div>
             <div className="justify-items-end p-3 w-1/2">
                 <div className="p-5 w-[18%] h-[3vh] space-y-3 rounded-xl flex items-center justify-center" style={{ background: '#3A5A40' }}>
-                    <button className="text-center" style={{ color: '#FFFFFF' }}>Edit</button> 
+                    <button className="text-center" style={{ color: '#FFFFFF' }} onClick={editClicked}>Edit</button> 
                 </div>
                 <div className="h-[30vh]"></div>
                 <div className="p-5 w-[55%] h-[3vh] space-y-3 rounded-xl flex items-center justify-center" style={{ background: '#3A5A40' }}>
-                    <button className="text-center" style={{ color: '#FFFFFF' }}>More Information</button> 
+                    <button className="text-center" style={{ color: '#FFFFFF' }} onClick={moreInformation}>More Information</button> 
                 </div>
             </div>
 
@@ -46,4 +49,4 @@ const LibraryItem = ({
     );
 };
 
-export default LibraryItem;
+export default PlantViewPlantInfo;
