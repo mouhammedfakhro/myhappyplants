@@ -17,7 +17,7 @@ const SuccessfulVerification = ({}) => {
                 <h1 className="text-lg font-light">Your account is now verified! </h1>
 
                 <button
-                className="underline hover:text-lime-800 font-light"
+                className="underline hover:text-lime-800 font-light text-sm"
                 onClick={loginPage}
                 >
                     {"<< back to login"}

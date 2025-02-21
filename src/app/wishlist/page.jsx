@@ -12,7 +12,7 @@ const WishlistPage = ({}) => {
     
     return (
         <div className="max-w-screen min-w-screen
-        max-h-screen min-h-screen flex">
+        max-h-screen min-h-screen flex font-light">
 
             <div className="w-[7%] min-h-full bg-lime-950">
                 <Navbar/>

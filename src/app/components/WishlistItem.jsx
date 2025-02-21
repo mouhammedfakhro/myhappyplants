@@ -24,18 +24,18 @@ const WishlistItem = ({
             className="w-[20%] aspect-square object-cover rounded-2xl">
             </img>
 
-            <div className="justify-items-start space-y-2 ">
+            <div className="justify-items-start space-y-1">
                 <p className="text-md">{scientificName}</p>
-                <p className="text-sm">{familyName}</p>
+                <p className="text-md">{familyName}</p>
 
                 <button
-                className="p-2 bg-lime-900 hover:bg-lime-950 rounded-md text-white text-xs w-[100%]"
+                className="p-2 bg-lime-900 hover:bg-lime-950 rounded-md text-white text-sm w-[100%]"
                 onClick={removeClicked}>
                     Remove item
                 </button>
 
                 <button
-                className="p-2 bg-lime-900 hover:bg-lime-950 rounded-md text-white text-xs w-[100%]"
+                className="p-2 bg-lime-900 hover:bg-lime-950 rounded-md text-white text-sm w-[100%]"
                 onClick={plantClicked}>
                     Details
                 </button>

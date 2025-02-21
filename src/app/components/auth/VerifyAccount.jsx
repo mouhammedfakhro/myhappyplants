@@ -49,12 +49,12 @@ const VerifyAccount = ({}) => {
 
                 <br/>
                 
-                <button
-                className="underline hover:text-lime-800 font-light"
-                onClick={loginPage}
-                >
-                    {"<< back to login"}
-                </button>
+                    <button
+                    className="underline hover:text-lime-800 font-light text-sm"
+                    onClick={loginPage}
+                    >
+                        {"<< back to login"}
+                    </button>
             </div>
 
         </div>

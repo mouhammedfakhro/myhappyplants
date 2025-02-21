@@ -14,6 +14,11 @@ const PasswordBox = ({}) => {
             router.push(`../?content=${"emailSent"}`);
         }
     }
+
+    const nextPage = () => {
+        router.push(`../?content=${"newPass"}`);
+    }
+
     const loginPage = () => {
         router.push(`../?content=${"login"}`);
     }
@@ -42,9 +47,18 @@ const PasswordBox = ({}) => {
                     </button>
 
                 </div>
-                
+
                 <button
-                className="underline hover:text-lime-800 font-light"
+                className="underline hover:text-lime-800 font-light text-sm"
+                onClick={nextPage}
+                >
+                    Already have a code? Click Here.
+                </button>
+                
+                <br/>
+
+                <button
+                className="underline hover:text-lime-800 font-light justify-center text-sm"
                 onClick={loginPage}
                 >
                     {"<< back to login"}

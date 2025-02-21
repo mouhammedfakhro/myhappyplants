@@ -26,6 +26,7 @@ function LandingPage({}) {
             case "signup":
                 return <SignUpBox/>;
             case "emailSent":
+            case "newPass":
                 return <EmailSentbox/>;
             case "forgotPassword":
                 return <ForgotPasswordBox/>;
@@ -41,7 +42,7 @@ function LandingPage({}) {
     }
 
     return (
-        <div className="flex w-screen min-h-screen bg-zinc-300">
+        <div className="flex w-screen min-h-screen bg-zinc-300 font-light">
 
             <img className="min-w-[45%] min-h-screen max-h-screen flex overflow-hidden object-cover" 
             src={sideImage}>
