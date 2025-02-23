@@ -1,0 +1,42 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Plant {
+  id          String   @id @default(uuid())
+  userId      String
+  nickname    String
+  lastWatered DateTime
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Species {
+  id             String  @id @default(uuid())
+  scientificName String
+  genus          String
+  family         String
+  commonName     String?
+  imageUrl       String?
+  light          String?
+  urlWikipediaEn String?
+  waterFrequency Int?
+}
+
+model User {
+  id                  String    @id @default(uuid())
+  name                String    @unique
+  email               String    @unique
+  password            String
+  isVerified          Boolean   @default(false)
+  verificationCode    String?
+  notificationEnabled Boolean   @default(false)
+  expiresAt           DateTime?
+  Plant               Plant[]
+}
+

@@ -1,90 +1,100 @@
 "use client";
-import React, {useRef, useState} from "react";
+import React, { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import auth from "@/services/auth";
 
 const Navbar = ({}) => {
+  const router = useRouter();
 
-    const router = useRouter();
+  // home
+  let homeIcon = "https://i.ibb.co/TBhJLwJg/home.png";
+  const homeClicked = () => {
+    router.push("/home");
+  };
 
-    // home 
-    let homeIcon = "https://i.ibb.co/TBhJLwJg/home.png";
-    const homeClicked = () => {
-        router.push('/home'); 
+  // discovery
+  let disoveryIcon = "https://i.ibb.co/PGs8RjF4/discovery.png";
+  const discoveryClicked = () => {
+    router.push("/discovery");
+  };
+
+  // library
+  let libraryIcon = "https://i.ibb.co/My486cfT/library.png";
+  const libraryClicked = () => {
+    router.push("/library");
+  };
+
+  // wishlist
+  let wishlistIcon = "https://i.ibb.co/Wpgymk5L/wishlist.png";
+  const wishlistClicked = () => {
+    router.push("/wishlist");
+  };
+
+  // settings
+  let settingsIcon = "https://i.ibb.co/0RCFvnQG/settings.png";
+  const settingsClicked = () => {
+    router.push("/settings");
+  };
+
+  // logout
+  let logoutIcon = "https://i.ibb.co/0ygHrGB2/logout.png";
+  async function logoutClicked() {
+    try {
+      auth.logout();
+      router.push("../");
+    } catch (error) {
+      console.error("Error occured during logout: ", error);
     }
+  }
 
-    // discovery
-    let disoveryIcon = "https://i.ibb.co/PGs8RjF4/discovery.png";
-    const discoveryClicked = () => {  
-        router.push('/discovery'); 
-    }
+  return (
+    <div className="p-3 w-full justify-items-center space-y-2 text-xs text-white">
+      <button className="space-y-1 justify-items-center" onClick={homeClicked}>
+        <img src={homeIcon} className="w-[35%] mt-5" />
+        <p>Home</p>
+      </button>
 
-    // library
-    let libraryIcon = "https://i.ibb.co/My486cfT/library.png";
-    const libraryClicked = () => {   
-        router.push('/library'); 
-    }
+      <button
+        className="space-y-1 justify-items-center"
+        onClick={discoveryClicked}
+      >
+        <img src={disoveryIcon} className="w-[35%] mt-5" />
+        <p>Discovery</p>
+      </button>
 
-    // wishlist
-    let wishlistIcon = "https://i.ibb.co/Wpgymk5L/wishlist.png";
-    const wishlistClicked = () => {
-        router.push('/wishlist');
-    }
+      <button
+        className="space-y-1 justify-items-center"
+        onClick={libraryClicked}
+      >
+        <img src={libraryIcon} className="w-[35%] mt-5" />
+        <p>My Library</p>
+      </button>
 
-    // settings
-    let settingsIcon = "https://i.ibb.co/0RCFvnQG/settings.png";
-    const settingsClicked = () => {  
-        router.push('/settings'); 
-    }
+      <button
+        className="space-y-1 justify-items-center"
+        onClick={wishlistClicked}
+      >
+        <img src={wishlistIcon} className="w-[35%] mt-5" />
+        <p>Wishlist</p>
+      </button>
 
-    // logout
-    let logoutIcon = "https://i.ibb.co/0ygHrGB2/logout.png";
-    const logoutClicked = () => {   
-        router.push('../');
-    }
+      <button
+        className="space-y-1 justify-items-center"
+        onClick={settingsClicked}
+      >
+        <img src={settingsIcon} className="w-[35%] mt-5" />
+        <p>Settings</p>
+      </button>
 
-    return (
-
-        <div className="p-3 w-full justify-items-center space-y-2 text-xs text-white">
-
-        <button className="space-y-1 justify-items-center" onClick={homeClicked}>
-            <img src={homeIcon}
-                className="w-[35%] mt-5"/>
-            <p>Home</p>
-        </button>
-
-        <button className="space-y-1 justify-items-center" onClick={discoveryClicked}>
-            <img src={disoveryIcon}
-                className="w-[35%] mt-5"/>
-            <p>Discovery</p>
-        </button>
-
-        <button className="space-y-1 justify-items-center" onClick={libraryClicked}>
-            <img src={libraryIcon}
-                className="w-[35%] mt-5"/>
-            <p>My Library</p>
-        </button>
-
-        <button className="space-y-1 justify-items-center" onClick={wishlistClicked}>
-            <img src={wishlistIcon}
-                className="w-[35%] mt-5"/>
-            <p>Wishlist</p>
-        </button>
-
-        <button className="space-y-1 justify-items-center" onClick={settingsClicked}>
-            <img src={settingsIcon}
-                className="w-[35%] mt-5"/>
-            <p>Settings</p>
-        </button>
-
-        <button className="space-y-1 justify-items-center" onClick={logoutClicked}>
-            <img src={logoutIcon}
-                className="w-[35%] mt-5"/>
-            <p>Logout</p>
-        </button>
-
+      <button
+        className="space-y-1 justify-items-center"
+        onClick={logoutClicked}
+      >
+        <img src={logoutIcon} className="w-[35%] mt-5" />
+        <p>Logout</p>
+      </button>
     </div>
-        
-    );
+  );
 };
 
 export default Navbar;

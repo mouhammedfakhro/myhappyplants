@@ -1,4 +1,6 @@
 import { NextResponse } from "next/server";
+import crypto from "crypto";
+
 
 export function validateRequestBody(body, requiredFields) {
   for (const field of requiredFields) {
@@ -9,6 +11,10 @@ export function validateRequestBody(body, requiredFields) {
   return { isValid: true };
 }
 
-export function createServerResponse(data, errorCode) {
-  return NextResponse.json({ data }, { status: errorCode });
+export function createServerResponse(data, statusCode = 200) {
+  return NextResponse.json(data, { status: statusCode });
+}
+
+export function generateRandomVerificationCode() {
+  return crypto.randomInt(10000, 99999).toString();
 }
