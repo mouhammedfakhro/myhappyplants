@@ -1,15 +1,14 @@
 "use client";
-import "./globals.css";
 import React, { Suspense } from "react";
-import ForgotPasswordBox from "./components/auth/ForgotPasswordBox";
 import { useSearchParams } from "next/navigation";
+import PasswordBox from "../components/auth/ForgotPasswordBox";
 
 function PageContent() {
     const params = useSearchParams();
     const content = params.get("content");
 
     const renderContent = () => {
-        return <ForgotPasswordBox/>;
+        return <PasswordBox/>;
     };
 
     return renderContent();

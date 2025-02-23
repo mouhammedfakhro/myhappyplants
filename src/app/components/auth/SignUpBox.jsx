@@ -20,12 +20,14 @@ const SignUpBox = ({}) => {
       // if successful:
       //router.push(`../?content=${"verify"}`);
 
+      router.push(`/verifyEmail?content=verify&email=${"encodedEmail"}`)
+
       axios
         .post("api/auth/register", { usernameText, emailText, passText })
         .then(() => {
           const encodedEmail = encodeURIComponent(emailText);
           //router.push(`../?content=verify&email=${encodedEmail}`);
-          router.push(`/verifyEmail?content=verify&email=${encodedEmail}`)
+          //router.push(`/verifyEmail?content=verify&email=${encodedEmail}`)
         })
         .catch((error) => {
           if (error.response) {

@@ -29,6 +29,7 @@ const LoginBox = ({}) => {
   };
 
   const signupClicked = () => {
+    console.log("asdfghjkl");
     router.push("/signup");
   };
 

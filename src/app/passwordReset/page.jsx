@@ -1,8 +1,7 @@
 "use client";
-import "./globals.css";
 import React, { Suspense } from "react";
-import EmailSentbox from "./components/auth/EmailSentBox";
-import SuccessfulPasswordResetBox from "./components/auth/SuccessfulPasswordResetBox"
+import EmailSentbox from "../components/auth/EmailSentBox";
+import SuccessfulPasswordResetBox from "../components/auth/SuccessfulPasswordResetBox"
 import { useSearchParams } from "next/navigation";
 
 function PageContent() {

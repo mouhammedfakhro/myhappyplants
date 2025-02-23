@@ -1,8 +1,7 @@
 "use client";
-import "./globals.css";
 import React, { Suspense } from "react";
-import VerifyAccount from "./components/auth/VerifyAccount"
-import SuccessfulVerification from "./components/auth/SuccessfulVerification"
+import VerifyAccount from "../components/auth/VerifyAccount"
+import SuccessfulVerification from "../components/auth/SuccessfulVerification"
 import { useSearchParams } from "next/navigation";
 
 function PageContent() {

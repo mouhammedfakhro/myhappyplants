@@ -42,5 +42,5 @@ export async function middleware(req) {
 }
 
 export const config = {
-  matcher: "/((?!^/$|api/.*|_next/.*|favicon.ico|assets).*)",
+  matcher: "/((?!^/$|api/.*|_next/.*|favicon.ico|assets|signup|verifyEmail|passWordResetRequest|passwordReset).*)",
 };

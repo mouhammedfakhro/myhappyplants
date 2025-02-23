@@ -1,7 +1,6 @@
 "use client";
-import "./globals.css";
 import React, { Suspense } from "react";
-import SignUpBox from "./components/auth/SignUpBox";
+import SignUpBox from "../components/auth/SignUpBox";
 import { useSearchParams } from "next/navigation";
 
 function PageContent() {

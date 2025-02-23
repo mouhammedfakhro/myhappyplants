@@ -13,6 +13,8 @@ const VerifyAccount = ({}) => {
     if (verCode) {
       // API CALL - verification code
 
+      //router.push(`/verifyEmail?content=${"successVerify"}`);
+
       axios
         .post("api/auth/verifyaccount", { emailText, verCode })
         .then(() => {
