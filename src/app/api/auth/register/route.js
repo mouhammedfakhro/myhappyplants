@@ -5,17 +5,13 @@ import {
   generateRandomVerificationCode,
   validateRequestBody,
 } from "../../../utils";
-import {
-  MailerSend,
-  EmailParams,
-  Sender,
-  Recipient,
-} from "mailersend";
+import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
 
 export async function POST(req) {
   try {
     const body = await req.json();
     const { usernameText, emailText, passText } = body;
+    console.log(usernameText, emailText, passText);
 
     const { isValid, missingField } = validateRequestBody(body, [
       "usernameText",
@@ -56,17 +52,17 @@ export async function POST(req) {
     });
 
     const sentFrom = new Sender(
-      "MS_VOp91O@trial-pr9084z0wnmlw63d.mlsender.net",
+      "MS_wLFXoq@trial-3vz9dlenvnnlkj50.mlsender.net",
       "Your verification code"
     );
     const recipients = [new Recipient(emailText, usernameText)];
 
     const emailParams = new EmailParams()
       .setFrom(sentFrom)
-      .setTo(recipients) 
+      .setTo(recipients)
       .setSubject("Your verification code")
       .setText(`Your verification code is: ${verificationCode}`);
-      
+
     await mailerSend.email.send(emailParams);
 
     return createServerResponse(

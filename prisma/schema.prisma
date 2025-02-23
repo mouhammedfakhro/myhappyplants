@@ -35,6 +35,7 @@ model User {
   password            String
   isVerified          Boolean   @default(false)
   verificationCode    String?
+  passwordResetCode   String?
   notificationEnabled Boolean   @default(false)
   expiresAt           DateTime?
   Plant               Plant[]

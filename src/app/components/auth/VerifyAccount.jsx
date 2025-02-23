@@ -8,31 +8,41 @@ const VerifyAccount = ({}) => {
   const searchParams = useSearchParams();
   const emailText = searchParams.get("email");
 
+  console.log(emailText);
+
   const router = useRouter();
-  const verifyClicked = () => {
-    if (verCode) {
-      // API CALL - verification code
+  const verifyClicked = async () => {
+    if (!emailText) {
+      alert("No email found. Please try again.");
+      return;
+    }
 
-      //router.push(`/verifyEmail?content=${"successVerify"}`);
+    if (!verCode) {
+      alert("Please enter the verification code.");
+      return;
+    }
 
-      axios
-        .post("api/auth/verifyaccount", { emailText, verCode })
-        .then(() => {
-          router.push(`/verifyEmail?content=${"successVerify"}`);
-        })
-        .catch((error) => {
-          if (error.response) {
-            console.error("Error response:", error.response.data);
-          } else {
-            console.error("Axios error:", error.message);
-          }
-        });
+    try {
+      const response = await axios.post("/api/auth/verifyaccount", {
+        emailText,
+        verCode,
+      });
 
-      // if sucessful:
-      // else:
-      //alert("Could not verify account.");
+      console.log("Verification successful:", response.data);
+
+      router.push(`/verifyEmail?content=successVerify`);
+    } catch (error) {
+      console.error(
+        "Verification error:",
+        error.response?.data || error.message
+      );
+
+      alert(
+        error.response?.data?.error || "Verification failed. Please try again."
+      );
     }
   };
+
   const loginPage = () => {
     router.push(`../`);
   };

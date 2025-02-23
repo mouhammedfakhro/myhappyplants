@@ -10,36 +10,36 @@ const SignUpBox = ({}) => {
 
   const router = useRouter();
 
-  const signUpClicked = () => {
+  const signUpClicked = async () => {
     if (!usernameText || !emailText || !passText) {
-      alert("Please make sure username, email and password are filled in");
-    } else {
-      // regex check
-      // if false: show error
-      // if true: API CALL signup request
-      // if successful:
-      //router.push(`../?content=${"verify"}`);
+      alert("Please make sure username, email, and password are filled in.");
+      return;
+    }
 
-      router.push(`/verifyEmail?content=verify&email=${"encodedEmail"}`)
+    try {
+      const response = await axios.post("/api/auth/register", {
+        usernameText,
+        emailText,
+        passText,
+      });
 
-      axios
-        .post("api/auth/register", { usernameText, emailText, passText })
-        .then(() => {
-          const encodedEmail = encodeURIComponent(emailText);
-          //router.push(`../?content=verify&email=${encodedEmail}`);
-          //router.push(`/verifyEmail?content=verify&email=${encodedEmail}`)
-        })
-        .catch((error) => {
-          if (error.response) {
-            console.error("Error response:", error.response.data);
-          } else {
-            console.error("Axios error:", error.message);
-          }
-        });
+      console.log("User registered successfully:", response.data);
 
-      // else: show error
-      // taken username
-      // taken email
+      // Redirect to email verification page
+      const encodedEmail = encodeURIComponent(emailText);
+      router.push(`/verifyEmail?email=${encodedEmail}`);
+    } catch (error) {
+      console.error(
+        "Registration error:",
+        error.response?.data || error.message
+      );
+
+      // Handle specific errors (e.g., username/email already taken)
+      if (error.response?.data?.error) {
+        alert(error.response.data.error);
+      } else {
+        alert("Failed to register. Please try again.");
+      }
     }
   };
 
