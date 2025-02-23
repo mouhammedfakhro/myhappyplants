@@ -7,7 +7,7 @@ const SuccessfulPasswordResetBox = ({}) => {
     const router = useRouter();
 
     const loginPage = () => {
-        router.push(`../?content=${"login"}`);
+        router.push(`../`);
     }
 
     return (

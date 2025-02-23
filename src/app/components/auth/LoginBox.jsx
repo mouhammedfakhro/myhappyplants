@@ -16,19 +16,20 @@ const LoginBox = ({}) => {
     } else {
       try {
         await auth.login(usernameText, passText);
-        router.push("/home");
+        router.push('/home');
       } catch (error) {
         console.log("Fel användarnamn eller lösenord.");
+        setErrorMessage("Incorrect username and/or password. Please try again.");
       }
     }
   };
 
   const forgotPasswordClicked = () => {
-    router.push(`../?content=${"forgotPassword"}`);
+    router.push("/passWordResetRequest");
   };
 
   const signupClicked = () => {
-    router.push(`../?content=${"signup"}`);
+    router.push("/signup");
   };
 
   return (

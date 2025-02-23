@@ -1,7 +1,8 @@
 "use client";
 import "./globals.css";
 import React, { Suspense } from "react";
-import LoginBox from "./components/auth/LoginBox";
+import VerifyAccount from "./components/auth/VerifyAccount"
+import SuccessfulVerification from "./components/auth/SuccessfulVerification"
 import { useSearchParams } from "next/navigation";
 
 function PageContent() {
@@ -9,13 +10,20 @@ function PageContent() {
     const content = params.get("content");
 
     const renderContent = () => {
-        return <LoginBox/>;
+        switch (content) {
+            case "verify":
+                return <VerifyAccount/>;
+            case "successVerify":
+                return <SuccessfulVerification/>;
+            default:
+                return <VerifyAccount/>;
+        }
     };
 
     return renderContent();
 }
 
-function LandingPage() {
+function VerifyEmailPage() {
     let sideImage = "https://images.pexels.com/photos/5858235/pexels-photo-5858235.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
 
     return (
@@ -40,4 +48,4 @@ function LandingPage() {
     );
 }
 
-export default LandingPage;
+export default VerifyEmailPage;

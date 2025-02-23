@@ -16,7 +16,7 @@ const VerifyAccount = ({}) => {
       axios
         .post("api/auth/verifyaccount", { emailText, verCode })
         .then(() => {
-          router.push(`../?content=${"successVerify"}`);
+          router.push(`/verifyEmail?content=${"successVerify"}`);
         })
         .catch((error) => {
           if (error.response) {
@@ -32,7 +32,7 @@ const VerifyAccount = ({}) => {
     }
   };
   const loginPage = () => {
-    router.push(`../?content=${"login"}`);
+    router.push(`../`);
   };
 
   return (
