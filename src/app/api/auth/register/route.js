@@ -1,61 +1,47 @@
+import prisma from "../../../../../lib/prisma";
+import bcrypt from "bcrypt";
+import { createServerResponse, validateRequestBody } from "../../../utils";
 
-async function register(email, confirmEmail, username, password, confirmPassword) {
+export async function POST(req) {
+  try {
+    const body = await req.json();
+    const { username, password, email } = body;
+    const { isValid, missingField } = validateRequestBody(body, [
+      "username",
+      "password",
+      "email",
+    ]);
 
-    if (!email || !confirmEmail || !username || !password || !confirmPassword) {
-      alert("All fields are required.");
-      return;
+    if (!isValid) {
+      return createServerResponse(
+        { error: `Missing or empty field: ${missingField}` },
+        400
+      );
     }
-  
-    if (email !== confirmEmail) {
-      alert("Emails do not match.");
-      return;
+
+    const existingUser = await prisma.user.findUnique({
+      where: { email: email },
+    });
+
+    if (existingUser) {
+      return createServerResponse(
+        { error: "This email has already been taken." },
+        400
+      );
     }
-  
-    if (password !== confirmPassword) {
-      alert("Passwords do not match.");
-      return;
-    }
-  
-    const gdprConsent = confirm(
-      "Your account details will be saved in accordance with GDPR requirements.\nDo you still want to create the account?"
-    );
-  
-    if (!gdprConsent) {
-      console.log("User declined GDPR consent");
-      return;
-    }
-    
-    const registrationData = {
-      email,
-      confirmEmail,
-      username,
-      password,
-      confirmPassword,
-    };
-  
-    try {
-      const response = await fetch("/api/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(registrationData),
-      });
-  
-      const responseData = await response.json();
-  
-      if (response.ok && responseData.success) {
-        alert(responseData.message);
-        console.log("User registered successfully:", responseData.data);
-      } else {
-        alert(responseData.message || "Registration failed.");
-        console.error("Error:", responseData);
-      }
-    } catch (error) {
-      alert("An error occurred. Please try again.");
-      console.error("Error during registration:", error);
-    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    await prisma.user.create({
+      data: {
+        name: username,
+        email: email,
+        password: hashedPassword,
+      },
+    });
+
+    return createServerResponse({ username, password, email }, 201);
+  } catch (error) {
+    return createServerResponse({ error: "Invalid request body" }, 400);
   }
-
-  
-  
-
-  
+}
