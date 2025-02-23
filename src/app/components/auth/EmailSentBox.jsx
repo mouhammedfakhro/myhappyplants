@@ -16,13 +16,13 @@ const EmailSentbox = ({ email }) => {
         } else {
             // API request for password reset
                 // if successful:
-                router.push(`../?content=${"successReset"}`);
+                router.push(`/passwordReset?content=${"successReset"}`);
                 // else: show error
         }
     }
 
     const loginPage = () => {
-        router.push(`../?content=${"login"}`);
+        router.push(`../`);
     }
 
     return (

@@ -2,11 +2,22 @@
 import React, { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Navbar from "../components/Navbar";
-import SettingsAccountDetails from "../components/SettingsAccountDetails";
-import SettingsEmailTogglebar from "../components/SettingsEmailToggleBar";
+
 
 const SettingsPage = ({}) => {
-  const router = useRouter();
+    const router = useRouter();
+
+    // TODO: useState value to be retrieved from API
+    const [isToggled, setIsToggled] = useState(false);
+    
+    const handleToggleChange = () => {
+        // TODO: send notification pref to API
+        setIsToggled((prev) => !prev);
+    };
+
+    // TODO: get info from API instead
+    let userName = "userName";
+    let userEmail = "email@example.com";
 
   return (
     <div
@@ -23,25 +34,81 @@ const SettingsPage = ({}) => {
             [&::-webkit-scrollbar-track]:bg-gray-100
             [&::-webkit-scrollbar-thumb]:bg-gray-300
             dark:[&::-webkit-scrollbar-track]:bg-neutral-700
-            dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
-      >
-        <div className="w-[85%]">
-          <p className="text-2xl">My Settings</p>
-          <hr className="h-px my-5 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+            dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
 
-          <div class="flex mb-4">
-            <div class="w-1/2  h-dvh">
-              <SettingsAccountDetails />
-            </div>
+                {/*title + divider */}
+                <div className="w-[85%]">
+                <p className="text-2xl">My Settings</p>
+                <hr className="h-px my-5 bg-gray-200 border-0 dark:bg-gray-700"></hr>
 
-            <div class="w-1/2 h-dvh">
-              <SettingsEmailTogglebar />
+                    {/*flexbox */}
+                    <div className="flex">
+
+                        {/*col 1: account details */}
+                        <div className="w-[60%] space-y-3">
+
+                            <h1 className="text-2xl" style={{ color: '#3A5A40' }}>
+                                Account Details
+                            </h1>
+                            <p className="text-xl pr-3" style={{ color: '#3A5A40' }}>
+                                Username: 
+                                <span className="text-xl pl-3" style={{ color: '#A3B18A' }}>
+                                    {userName}
+                                </span>
+                            </p>
+                            <p className="text-xl pr-3" style={{ color: '#3A5A40' }}>
+                                Email: 
+                                <span className="text-xl pl-3" style={{ color: '#A3B18A' }}>
+                                    {userEmail}
+                                </span>
+                            </p>
+
+                        </div>
+
+                        {/*col 2: email settings*/}
+                        <div className="w-[35%] space-y-3">
+                            <h1 className="text-2xl" style={{ color: '#3A5A40' }}>
+                                Settings
+                            </h1>
+
+                                <table className="min-w-full">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                            <p className="text-xl pr-3" style={{ color: '#3A5A40' }}>
+                                                Email Notifications:
+                                                <span className="text-lg pl-3" style={{ color: '#A3B18A' }}>
+                                                    {isToggled ? "On" : "Off"} 
+                                                </span>
+                                            </p>
+                                            </td>
+                                            <td>
+                                                <label className="inline-flex items-center cursor-pointer float-right">
+                                                    <input type="checkbox" value="" className="sr-only peer"
+                                                        onChange={handleToggleChange}
+                                                    />
+                                                    <div className="relative w-11 h-6 bg-gray-200
+                                                    peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 
+                                                    dark:peer-focus:ring-lime-800 rounded-full peer dark:bg-gray-700 
+                                                    peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full 
+                                                    peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] 
+                                                    after:start-[2px] after:bg-white after:border-gray-300 after:border 
+                                                    after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 
+                                                    peer-checked:bg-lime-600 dark:peer-checked:bg-lime-600"></div>
+                                                    <span className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                                        .
+                                                    </span>
+                                                </label>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default SettingsPage;

@@ -11,16 +11,16 @@ const PasswordBox = ({}) => {
 
         if (emailText) {
             // API REQUEST for password reset code
-            router.push(`../?content=${"emailSent"}`);
+            router.push(`/passwordReset`);
         }
     }
 
     const nextPage = () => {
-        router.push(`../?content=${"newPass"}`);
+        router.push(`/passwordReset`);
     }
 
     const loginPage = () => {
-        router.push(`../?content=${"login"}`);
+        router.push(`../`);
     }
 
     return (

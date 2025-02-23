@@ -3,6 +3,7 @@ import LandingPage from "./LandingPage";
 import LoggedinHome from "./home/page.jsx";
 import SettingsPage from "./settings/page.jsx";
 import DiscoveryPage from "./discovery/page.jsx";
+import PlantView from "./plantview/page.jsx";
 
 const Layout = () => {
   return (
@@ -11,7 +12,7 @@ const Layout = () => {
        <LandingPage/>
        {/*<SettingsPage/>*/} 
       {/*<DiscoveryPage/>*/} 
-
+      {/*<PlantView/>*/}
       </body>
     </html>
   )

@@ -1,7 +1,7 @@
 "use client";
-import "./globals.css";
 import React, { Suspense } from "react";
-import LoginBox from "./components/auth/LoginBox";
+import EmailSentbox from "../components/auth/EmailSentBox";
+import SuccessfulPasswordResetBox from "../components/auth/SuccessfulPasswordResetBox"
 import { useSearchParams } from "next/navigation";
 
 function PageContent() {
@@ -9,13 +9,21 @@ function PageContent() {
     const content = params.get("content");
 
     const renderContent = () => {
-        return <LoginBox/>;
+        switch (content) {
+            case "emailSent":
+            case "newPass":
+                return <EmailSentbox/>;
+            case "successReset":
+                return <SuccessfulPasswordResetBox/>;
+            default:
+                return <EmailSentbox/>;
+        }
     };
 
     return renderContent();
 }
 
-function LandingPage() {
+function NewPasswordPage() {
     let sideImage = "https://images.pexels.com/photos/5858235/pexels-photo-5858235.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
 
     return (
@@ -40,4 +48,4 @@ function LandingPage() {
     );
 }
 
-export default LandingPage;
+export default NewPasswordPage;
