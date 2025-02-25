@@ -7,10 +7,10 @@ const SECRET_KEY = process.env.JWT_SECRET;
 
 export async function POST(req) {
   try {
+    
     const body = await req.json();
 
     const { username, password } = body;
-    console.log(username, password);
     const user = await prisma.user.findUnique({
       where: { name: username },
     });

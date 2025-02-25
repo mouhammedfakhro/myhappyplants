@@ -9,7 +9,6 @@ export async function POST(req) {
     const body = await req.json();
 
     const { email, code, pass } = body;
-    console.log(email, code, pass);
 
     const user = await prisma.user.findFirst({
       where: {
@@ -18,13 +17,9 @@ export async function POST(req) {
       },
     });
 
-    console.log("USER: ", user);
-
     if (!user) createServerResponse({ error: "User not found or invalid code." }, 400);
 
     const hashedPassword = await bcrypt.hash(pass, 10);
-
-    console.log(hashedPassword);
 
     const updatedUser = await prisma.user.update({
       where: {
@@ -33,8 +28,6 @@ export async function POST(req) {
       },
       data: { password: hashedPassword },
     });
-
-    console.log(updatedUser);
 
     if (!updatedUser)
       createServerResponse({ error: "Failed to reset password." }, 400);

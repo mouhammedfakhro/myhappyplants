@@ -11,14 +11,10 @@ export async function POST(req) {
 
     const resetCode = generateRandomVerificationCode();
 
-    console.log(resetCode);
-
     const user = await prisma.user.update({
       where: { email: emailText },
       data: { passwordResetCode: resetCode },
     });
-
-    console.log(user);
 
     if (!user) createServerResponse({ error: "User not found" }, 400);
 

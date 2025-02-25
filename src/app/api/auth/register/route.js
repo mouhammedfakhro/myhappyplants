@@ -11,7 +11,6 @@ export async function POST(req) {
   try {
     const body = await req.json();
     const { usernameText, emailText, passText } = body;
-    console.log(usernameText, emailText, passText);
 
     const { isValid, missingField } = validateRequestBody(body, [
       "usernameText",
@@ -73,7 +72,6 @@ export async function POST(req) {
       201
     );
   } catch (error) {
-    console.error("Server error:", error);
     return createServerResponse({ error: "Internal server error" }, 500);
   }
 }
