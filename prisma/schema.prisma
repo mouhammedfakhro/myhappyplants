@@ -15,9 +15,9 @@ model Plant {
   toBeWatered DateTime
   catalogID   String
 
-  user     User       @relation(fields: [userId], references: [id])
-  Reminder Reminder[]
-  Tags     Tag[]
+  user      User       @relation(fields: [userId], references: [id])
+  reminders Reminder[]
+  tags      Tag[]
 }
 
 // TODO: Remove this
@@ -43,7 +43,7 @@ model User {
   passwordResetCode   String?
   notificationEnabled Boolean   @default(false)
   expiresAt           DateTime?
-  Plant               Plant[]
+  plants              Plant[]
 }
 
 model Reminder {

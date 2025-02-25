@@ -13,13 +13,13 @@ export async function POST(req) {
     const user = await prisma.user.findUnique({
       where: { name: username },
       include: {
-          Plant: {
-              select: {
-                  Reminder: true,
-              },
+        plants: {
+          select: {
+            reminders: true,
           },
+        },
       },
-  });
+    });
 
     if (!user) createServerResponse({ error: "User not found" }, 400);
 
@@ -31,7 +31,7 @@ export async function POST(req) {
       id: user.id,
       email: user.email,
       name: user.name,
-      plant: user.Plant,
+      plants: user.plants,
     };
 
     console.log(user);

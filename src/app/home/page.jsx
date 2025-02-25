@@ -8,12 +8,12 @@ import auth from "../../services/auth";
 const LoggedinHome = ({}) => {
   const user = auth.getCurrentUser();
   const renderReminders = () => {
-    if (!user || !Array.isArray(user.plant)) return null;
+    if (!user || !Array.isArray(user.plants)) return null;
 
-    return user.plant.map((plant, plantIndex) => (
+    return user.plants.map((plant, plantIndex) => (
       <div key={plantIndex}>
-        {Array.isArray(plant.Reminder) &&
-          plant.Reminder.map((reminder) => (
+        {Array.isArray(plant.reminders) &&
+          plant.reminders.map((reminder) => (
             <ReminderBox
               key={reminder.id}
               date={reminder.createdAt}
