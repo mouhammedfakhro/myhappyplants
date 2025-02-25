@@ -7,19 +7,9 @@ const SECRET_KEY = process.env.JWT_SECRET;
 
 export async function POST(req) {
   try {
-    const body = await req.json();
-
-    const { username, password } = body;
     const user = await prisma.user.findUnique({
       where: { name: username },
-      include: {
-          Plant: {
-              select: {
-                  Reminder: true,
-              },
-          },
-      },
-  });
+    });
 
     if (!user) createServerResponse({ error: "User not found" }, 400);
 
@@ -31,11 +21,9 @@ export async function POST(req) {
       id: user.id,
       email: user.email,
       name: user.name,
-      plant: user.Plant,
+      plants: user.plants,
+      reminders: user.reminders
     };
-
-    console.log(user);
-    console.log(userPayLoad);
 
     const token = await new SignJWT(userPayLoad)
       .setProtectedHeader({ alg: "HS256" })

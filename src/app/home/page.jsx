@@ -4,10 +4,23 @@ import { useRouter } from "next/navigation";
 import LibraryItemLite from "../components/home/LibraryItemLite";
 import ReminderBox from "../components/home/ReminderBox"
 import Navbar from "../components/Navbar"
-
+import { cookies, getCookies } from "cookies-next";
+import auth from "../../services/auth"
+import prisma from "../../../lib/prisma";
 
 const LoggedinHome = ({}) => {
     const router = useRouter();
+
+    const user = auth.getCurrentUser();
+    console.log(user);
+    
+    const plants = user.plant;
+    
+    const renderReminders = () => {
+
+        
+        return <ReminderBox></ReminderBox>
+    }
     
     return (
         <div className="max-w-screen min-w-screen
@@ -81,42 +94,7 @@ const LoggedinHome = ({}) => {
                 <div className="space-y-2 space-x-2 text-white">
                     <div></div>
                     <p>Reminders</p>
-                    <ReminderBox
-                        date="2025-02-19"
-                        message="Water your Monstera."/>
-                    <ReminderBox
-                        date="2025-02-06"
-                        message="Water your Cactus."/>
-                        <ReminderBox
-                        date="2025-02-19"
-                        message="Water your Monstera."/>
-                    <ReminderBox
-                        date="2025-02-06"
-                        message="Water your Cactus."/>
-                    <ReminderBox
-                        date="2025-02-19"
-                        message="Water your Monstera."/>
-                    <ReminderBox
-                        date="2025-02-06"
-                        message="Water your Cactus."/>
-                        <ReminderBox
-                        date="2025-02-19"
-                        message="Water your Monstera."/>
-                    <ReminderBox
-                        date="2025-02-06"
-                        message="Water your Cactus."/>
-                    <ReminderBox
-                        date="2025-02-19"
-                        message="Water your Monstera."/>
-                    <ReminderBox
-                        date="2025-02-06"
-                        message="Water your Cactus."/>
-                        <ReminderBox
-                        date="2025-02-19"
-                        message="Water your Monstera."/>
-                    <ReminderBox
-                        date="2025-02-06"
-                        message="Water your Cactus."/>
+                    {renderReminders()}
                 </div>
 
             </div>
