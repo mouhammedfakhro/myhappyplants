@@ -10,6 +10,7 @@ const imgLink = "https://images.pexels.com/photos/4623043/pexels-photo-4623043.j
 
 const PlantView = ({}) => {
     const [isEditing, setIsEditing] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
     const [thisname, setThisName] = useState("Pelle Pion");
     const [thiscommonName, setThisCommonName] = useState("Peony");
     const [thisscientificName, setThisScientificName] = useState("Paeonia Officinalis");
@@ -39,6 +40,10 @@ const PlantView = ({}) => {
     const cancelClicked = () => {
         setIsEditing(false);
     }
+
+    const deletePlant = () => {
+        setDelete(true);
+    }
     
     return (
         <div className="max-w-screen min-w-screen
@@ -55,7 +60,11 @@ const PlantView = ({}) => {
             dark:[&::-webkit-scrollbar-track]:bg-neutral-700
             dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
 
-                <button className="text-2xl" onClick={returnClicked}>&lt;&lt;Return</button>
+            <div className="flex items-center">
+                <button className="text-2xl" onClick={returnClicked}>&lt;&lt; Return</button>
+                <button className="p-5 ml-[55vw] w-[10%] h-[3vh] space-y-3 rounded-xl flex items-center justify-center text-white" onClick={deletePlant} style={{ background: "#3A5A40" }}>Water Plant
+                </button>
+            </div>
                 <hr className="h-px my-5 bg-gray-200 border-0 dark:bg-gray-700"></hr>
 
             
