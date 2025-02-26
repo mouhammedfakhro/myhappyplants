@@ -3,35 +3,26 @@ import React, { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Navbar from "../components/Navbar";
 import PlantViewPlantInfo from "../components/PlantViewPlantInfo";
-import PlantViewGallery from "../components/PlantViewPlantInfo";
 
 const imgLink =
   "https://images.pexels.com/photos/4623043/pexels-photo-4623043.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
 
 const PlantView = ({}) => {
 
-    const params = useSearchParams();
-    const plantID = params.get("plantID");
+  //const params = useSearchParams();
+  //const plantID = params.get("plantID");
 
-    
-
-  // temporary data - hämta från databasen 
-    const [thisname, setThisName] = useState("Pelle Pion");
-  const [thiscommonName, setThisCommonName] = useState("Peony");
-  const [thisscientificName, setThisScientificName] = useState(
-    "Paeonia Officinalis"
-  );
-  const [thisfamilyName, setThisFamilyName] = useState("Paeoniaceae");
-  const [thistags, setThisTags] = useState("#peony #fave");
-  const [thislastWatered, setThisLastWatered] = useState("yyyy/mm/dd");
-  const [thistoBeWatered, setThisToBeWatered] = useState("yyyy/mm/dd");
-  const [thisWateringPrefence, setThisWateringPreference] =
-    useState("Every 3 days");
-  const [thisSunlightPreference, setThisSunlightPreference] =
-    useState("Medium");
-  const [thisMoreInfo, setThisMoreInfo] = useState(
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer neque est, dapibus eu fermentum at, malesuada sit amet risus. Pellentesque quis massa quis purus cursus tempus dignissim non sem. Sed viverra pharetra sapien, id sollicitudin justo. Suspendisse potenti. Integer in suscipit mi, eget fringilla erat. Nulla facilisi. Nullam posuere, velit a iaculis mollis, orci eros bibendum orci, ut egestas turpis ipsum a urna. Morbi rutrum, ipsum quis finibus feugiat, quam eros tristique nisi, ac posuere quam diam ac lacus. In finibus ipsum in gravida pellentesque. Nulla malesuada aliquam enim at tincidunt. Quisque quam mauris, tincidunt vel rhoncus in, feugiat id arcu. Praesent at vulputate nibh. Ut tempor eu est id suscipit. In congue tellus nec nisi laoreet dapibus. Sed ut rutrum urna."
-  );
+  // temporary data - hämta från databasen
+  const thisname = "Pelle Pion";
+  const thiscommonName = "Peony";
+  const thisscientificName = "Paeonia Officinalis";
+  const thisfamilyName = "Paeoniaceae";
+  const thistags = "#peony #fave";
+  const thislastWatered = "yyyy/mm/dd";
+  const thistoBeWatered = "yyyy/mm/dd";
+  const thisWateringPrefence = "Every 3 days";
+  const thisSunlightPreference = "Medium";
+  const thisMoreInfo = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer neque est, dapibus eu fermentum at, malesuada sit amet risus. Pellentesque quis massa quis purus cursus tempus dignissim non sem. Sed viverra pharetra sapien, id sollicitudin justo. Suspendisse potenti. Integer in suscipit mi, eget fringilla erat. Nulla facilisi. Nullam posuere, velit a iaculis mollis, orci eros bibendum orci, ut egestas turpis ipsum a urna. Morbi rutrum, ipsum quis finibus feugiat, quam eros tristique nisi, ac posuere quam diam ac lacus. In finibus ipsum in gravida pellentesque. Nulla malesuada aliquam enim at tincidunt. Quisque quam mauris, tincidunt vel rhoncus in, feugiat id arcu. Praesent at vulputate nibh. Ut tempor eu est id suscipit. In congue tellus nec nisi laoreet dapibus. Sed ut rutrum urna.";
 
   const router = useRouter();
 
@@ -48,7 +39,7 @@ const PlantView = ({}) => {
       className="max-w-screen min-w-screen
         max-h-screen min-h-screen flex"
     >
-      <div className="w-[7%] min-h-full bg-lime-950">
+      <div className="w-[7%] min-h-full" style={{ background: "#3A5A40" }}>
         <Navbar />
       </div>
 
@@ -61,23 +52,29 @@ const PlantView = ({}) => {
             dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
       >
         <table className="min-w-full">
-                        <tbody>
-                            <tr>
-                                <td>
-                                <button className="text-2xl hover:text-lime-800" onClick={returnClicked}> {"<< Return"} </button>
-                                </td>
-                                <td>
-                                    <button
-                                    className="text-white text-sm rounded-md p-3 pl-4 pr-4 float-right"
-                                    style={{ background: "#3A5A40" }}
-                                    onClick={deletePlant}
-                                    >
-                                        Delete Plant
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+          <tbody>
+            <tr>
+              <td>
+                <button
+                  className="text-2xl hover:text-lime-800"
+                  onClick={returnClicked}
+                >
+                  {" "}
+                  {"<< Return"}{" "}
+                </button>
+              </td>
+              <td>
+                <button
+                  className="text-white text-sm rounded-md p-3 pl-4 pr-4 float-right"
+                  style={{ background: "#3A5A40" }}
+                  onClick={deletePlant}
+                >
+                  Delete Plant
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
         <hr className="h-px my-5 bg-gray-200 border-0 dark:bg-gray-700"></hr>
 

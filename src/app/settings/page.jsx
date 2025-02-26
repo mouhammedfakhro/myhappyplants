@@ -10,11 +10,18 @@ const SettingsPage = ({}) => {
     const user = auth.getCurrentUser();
 
     // TODO: useState value to be retrieved from API
-    const [isToggled, setIsToggled] = useState(false);
+    const [isToggled, setIsToggled] = useState(true);
     
-    const handleToggleChange = () => {
+    async function handleToggleChange () {
+
         // TODO: send notification pref to API
         setIsToggled((prev) => !prev);
+
+        /*try {
+                await me.notifications(isToggled);
+              } catch (error) {
+                console.log("Couldn't update email notification prefrences.");
+              }*/
     };
 
     // TODO: get info from database
