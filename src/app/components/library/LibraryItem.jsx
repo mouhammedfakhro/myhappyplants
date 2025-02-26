@@ -14,7 +14,7 @@ const LibraryItem = ({
     const router = useRouter();
 
     const viewClicked = () => {
-        router.push('/plantview'); 
+        router.push(`../plantview?plantID=${"testID"}`);
     }
 
     return (
