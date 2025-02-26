@@ -2,10 +2,12 @@
 import React, { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Navbar from "../components/Navbar";
+import auth from "../../services/auth";
 
 
 const SettingsPage = ({}) => {
     const router = useRouter();
+    const user = auth.getCurrentUser();
 
     // TODO: useState value to be retrieved from API
     const [isToggled, setIsToggled] = useState(false);
@@ -15,9 +17,9 @@ const SettingsPage = ({}) => {
         setIsToggled((prev) => !prev);
     };
 
-    // TODO: get info from API instead
-    let userName = "userName";
-    let userEmail = "email@example.com";
+    // TODO: get info from database
+    let userName = user.name;
+    let userEmail = user.email;
 
   return (
     <div
