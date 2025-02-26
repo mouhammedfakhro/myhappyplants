@@ -7,7 +7,6 @@ const CatalogItem = ({
     commonName,
     scientificName,
     familyName,
-    category,
     catalogID
 }) => {
     const viewClicked = () => {
@@ -26,7 +25,6 @@ const CatalogItem = ({
                 <p className="text-xl">{commonName}</p>
                 <p className="text-md">{scientificName}</p>
                 <p className="text-sm">{familyName}</p>
-                <p className="text-sm">{category}</p>
 
             </div>
 

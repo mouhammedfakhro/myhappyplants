@@ -1,7 +1,7 @@
 "use client";
 import React, {useRef, useState} from "react";
 import { useRouter } from "next/navigation";
-import LibraryItemLite from "../components/home/LibraryItemLite";
+import LibraryItem from "../components/library/LibraryItem";
 import ReminderBox from "../components/home/ReminderBox"
 import Navbar from "../components/Navbar"
 
@@ -30,37 +30,37 @@ const LoggedinHome = ({}) => {
 
                 <div className="space-y-3">
                     <div></div>
-                    <LibraryItemLite
+                    <LibraryItem
                         imageLink="https://images.pexels.com/photos/30727074/pexels-photo-30727074/free-photo-of-vibrant-philodendron-verrucosum-in-white-pots.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                         plantName="Olof Palme"
                         scientificName="Monstera deliciosa"
                         familyName="Arceae"/>
-                        <LibraryItemLite
+                        <LibraryItem
                         imageLink="https://images.pexels.com/photos/30727074/pexels-photo-30727074/free-photo-of-vibrant-philodendron-verrucosum-in-white-pots.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                         plantName="Olof Palme"
                         scientificName="Monstera deliciosa"
                         familyName="Arceae"/>
-                        <LibraryItemLite
+                        <LibraryItem
                         imageLink="https://images.pexels.com/photos/30727074/pexels-photo-30727074/free-photo-of-vibrant-philodendron-verrucosum-in-white-pots.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                         plantName="Olof Palme"
                         scientificName="Monstera deliciosa"
                         familyName="Arceae"/>
-                        <LibraryItemLite
+                        <LibraryItem
                         imageLink="https://images.pexels.com/photos/30727074/pexels-photo-30727074/free-photo-of-vibrant-philodendron-verrucosum-in-white-pots.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                         plantName="Olof Palme"
                         scientificName="Monstera deliciosa"
                         familyName="Arceae"/>
-                        <LibraryItemLite
+                        <LibraryItem
                         imageLink="https://images.pexels.com/photos/30727074/pexels-photo-30727074/free-photo-of-vibrant-philodendron-verrucosum-in-white-pots.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                         plantName="Olof Palme"
                         scientificName="Monstera deliciosa"
                         familyName="Arceae"/>
-                        <LibraryItemLite
+                        <LibraryItem
                         imageLink="https://images.pexels.com/photos/30727074/pexels-photo-30727074/free-photo-of-vibrant-philodendron-verrucosum-in-white-pots.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                         plantName="Olof Palme"
                         scientificName="Monstera deliciosa"
                         familyName="Arceae"/>
-                        <LibraryItemLite
+                        <LibraryItem
                         imageLink="https://images.pexels.com/photos/30727074/pexels-photo-30727074/free-photo-of-vibrant-philodendron-verrucosum-in-white-pots.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                         plantName="Olof Palme"
                         scientificName="Monstera deliciosa"
