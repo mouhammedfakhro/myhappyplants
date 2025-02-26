@@ -12,10 +12,15 @@ model Plant {
   userId      String
   nickname    String
   lastWatered DateTime
+  toBeWatered DateTime
+  catalogID   String
 
-  user User @relation(fields: [userId], references: [id])
+  user      User       @relation(fields: [userId], references: [id])
+  reminders Reminder[]
+  tags      Tag[]
 }
 
+// TODO: Remove this
 model Species {
   id             String  @id @default(uuid())
   scientificName String
@@ -35,8 +40,26 @@ model User {
   password            String
   isVerified          Boolean   @default(false)
   verificationCode    String?
+  passwordResetCode   String?
   notificationEnabled Boolean   @default(false)
   expiresAt           DateTime?
-  Plant               Plant[]
+  plants              Plant[]
 }
 
+model Reminder {
+  id      String @id @default(uuid())
+  plantId String
+
+  createdAt DateTime @default(now())
+  label     String
+
+  plant Plant @relation(fields: [plantId], references: [id])
+}
+
+model Tag {
+  id      String @id @default(uuid())
+  tagName String
+  plantId String
+
+  plant Plant @relation(fields: [plantId], references: [id])
+}

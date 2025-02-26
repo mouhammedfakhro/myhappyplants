@@ -5,12 +5,7 @@ import {
   generateRandomVerificationCode,
   validateRequestBody,
 } from "../../../utils";
-import {
-  MailerSend,
-  EmailParams,
-  Sender,
-  Recipient,
-} from "mailersend";
+import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
 
 export async function POST(req) {
   try {
@@ -56,17 +51,17 @@ export async function POST(req) {
     });
 
     const sentFrom = new Sender(
-      "MS_VOp91O@trial-pr9084z0wnmlw63d.mlsender.net",
+      "MS_wLFXoq@trial-3vz9dlenvnnlkj50.mlsender.net",
       "Your verification code"
     );
     const recipients = [new Recipient(emailText, usernameText)];
 
     const emailParams = new EmailParams()
       .setFrom(sentFrom)
-      .setTo(recipients) 
+      .setTo(recipients)
       .setSubject("Your verification code")
       .setText(`Your verification code is: ${verificationCode}`);
-      
+
     await mailerSend.email.send(emailParams);
 
     return createServerResponse(
@@ -77,7 +72,6 @@ export async function POST(req) {
       201
     );
   } catch (error) {
-    console.error("Server error:", error);
     return createServerResponse({ error: "Internal server error" }, 500);
   }
 }

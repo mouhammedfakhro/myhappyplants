@@ -4,9 +4,6 @@ import SignUpBox from "../components/auth/SignUpBox";
 import { useSearchParams } from "next/navigation";
 
 function PageContent() {
-    const params = useSearchParams();
-    const content = params.get("content");
-
     const renderContent = () => {
         return <SignUpBox/>;
     };
