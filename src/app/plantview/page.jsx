@@ -14,7 +14,13 @@ const PlantView = ({}) => {
     const [thiscommonName, setThisCommonName] = useState("Peony");
     const [thisscientificName, setThisScientificName] = useState("Paeonia Officinalis");
     const [thisfamilyName, setThisFamilyName] = useState("Paeoniaceae");
-    const [thiswater, setThistWater] = useState("In 3 days");
+    const [thistags, setThisTags] = useState("#peony #fave");
+    const [thislastWatered, setThisLastWatered] = useState("yyyy/mm/dd");
+    const [thistoBeWatered, setThisToBeWatered] = useState("yyyy/mm/dd");
+    const [thisWateringPrefence, setThisWateringPreference] = useState("Every 3 days");
+    const [thisSunlightPreference, setThisSunlightPreference] = useState("Medium");
+    const [thisMoreInfo, setThisMoreInfo] = useState("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer neque est, dapibus eu fermentum at, malesuada sit amet risus. Pellentesque quis massa quis purus cursus tempus dignissim non sem. Sed viverra pharetra sapien, id sollicitudin justo. Suspendisse potenti. Integer in suscipit mi, eget fringilla erat. Nulla facilisi. Nullam posuere, velit a iaculis mollis, orci eros bibendum orci, ut egestas turpis ipsum a urna. Morbi rutrum, ipsum quis finibus feugiat, quam eros tristique nisi, ac posuere quam diam ac lacus. In finibus ipsum in gravida pellentesque. Nulla malesuada aliquam enim at tincidunt. Quisque quam mauris, tincidunt vel rhoncus in, feugiat id arcu. Praesent at vulputate nibh. Ut tempor eu est id suscipit. In congue tellus nec nisi laoreet dapibus. Sed ut rutrum urna.");
+
 
     const router = useRouter();
 
@@ -63,7 +69,12 @@ const PlantView = ({}) => {
                     commonName={thiscommonName}
                     scientificName={thisscientificName}
                     familyName={thisfamilyName}
-                    water={thiswater}
+                    tags={thistags}
+                    lastWatered={thislastWatered}
+                    toBeWatered={thistoBeWatered}
+                    wateringPreference={thisWateringPrefence}
+                    sunlightPreference={thisSunlightPreference}
+                    moreInfo={thisMoreInfo}
                 />
                 </div>
                  
