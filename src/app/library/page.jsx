@@ -49,7 +49,7 @@ const LibraryPage = ({}) => {
         <div className="max-w-screen min-w-screen
         max-h-screen min-h-screen flex font-light">
 
-            <div className="w-[7%] min-h-full bg-lime-950">
+            <div className="w-[7%] min-h-full"  style={{ background: "#3A5A40" }}>
                 <Navbar/>
             </div>
 
@@ -87,7 +87,7 @@ const LibraryPage = ({}) => {
                                 <td>
                                     <button
                                     className="text-white text-sm rounded-md p-2 float-right
-                                    hover:bg-lime-900 bg-lime-950 "
+                                    " c style={{ background: "#3A5A40" }}
                                     >
                                         CLEAR
                                     </button>

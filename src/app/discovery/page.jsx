@@ -13,7 +13,7 @@ const DiscoveryPage = ({}) => {
         <div className="max-w-screen min-w-screen
             max-h-screen min-h-screen flex font-light">
 
-            <div className="w-[7%] min-h-full bg-lime-950">
+            <div className="w-[7%] min-h-full"  style={{ background: "#3A5A40" }}>
                 <Navbar/>
             </div>
 
@@ -37,7 +37,7 @@ const DiscoveryPage = ({}) => {
                                 <td>
                                     <button
                                     className="text-white text-sm rounded-md p-3 pl-4 pr-4 float-right
-                                    hover:bg-purple-950 bg-lime-950 "
+                                    "  style={{ background: "#3A5A40" }}
                                     >
                                         Get Plant Recommendations
                                     </button>
