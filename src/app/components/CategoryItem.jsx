@@ -8,8 +8,10 @@ const CategoryItem = ({
     categoryID
 }) => {
 
+    const router = useRouter();
+
     const categoryClicked = () => {
-        alert("category clicked - make category view");
+        router.push(`../category?categoryName=${name}`);
     }
 
     return (
