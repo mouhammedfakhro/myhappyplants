@@ -1,12 +1,13 @@
 "use client";
 import React from "react";
-import LibraryItem from "../components/Library/LibraryItem";
+import LibraryItem from "../components/library/LibraryItem";
 import ReminderBox from "../components/home/ReminderBox";
 import Navbar from "../components/Navbar";
 import auth from "../../services/auth";
 
 const LoggedinHome = ({}) => {
   const user = auth.getCurrentUser();
+
   const renderReminders = () => {
     if (!user || !Array.isArray(user.plants)) return null;
 
@@ -26,21 +27,7 @@ const LoggedinHome = ({}) => {
   };
 
   const renderPlantItems = () => {
-    if (!user || !Array.isArray(user.plants)) return null;
-
-    return user.plants.map((plant, plantIndex) => (
-      <div key={plantIndex}>
-        {Array.isArray(plant.reminders) &&
-          plant.reminders.map((reminder) => (
-            <ReminderBox
-              key={reminder.id}
-              date={reminder.createdAt}
-              message={reminder.label}
-              plantID={plant.id}
-            />
-          ))}
-      </div>
-    ));
+    
   };
 
   return (
