@@ -63,7 +63,7 @@ const LoginBox = ({}) => {
 
         <div className="align-middle justify-items-center">
           <button
-            className="bg-lime-900 text-white text-base hover:bg-lime-950 rounded-md p-2 min-w-[100px]"
+            className=" text-white text-base hover:bg-lime-950 rounded-md p-2 min-w-[100px]"  style={{ background: "#3A5A40" }}
             onClick={loginClicked}
           >
             Login

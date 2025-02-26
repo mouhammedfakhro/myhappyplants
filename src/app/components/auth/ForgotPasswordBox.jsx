@@ -60,7 +60,7 @@ const PasswordBox = ({}) => {
           ></input>
 
           <button
-            className="bg-lime-900 text-white text-sm hover:bg-lime-950 rounded-md p-3 min-w-[100px] "
+            className=" text-white text-sm rounded-md p-3 min-w-[100px] "  style={{ background: "#3A5A40" }}
             onClick={sendCodeClicked}
           >
             Send code

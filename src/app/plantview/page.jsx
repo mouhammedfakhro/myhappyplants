@@ -49,7 +49,7 @@ const PlantView = ({}) => {
         <div className="max-w-screen min-w-screen
         max-h-screen min-h-screen flex">
 
-            <div className="w-[7%] min-h-full bg-lime-950">
+            <div className="w-[7%] min-h-full" style={{ background: "#3A5A40" }}>
                 <Navbar/>
             </div>
 

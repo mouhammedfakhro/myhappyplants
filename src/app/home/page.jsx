@@ -35,7 +35,7 @@ const LoggedinHome = ({}) => {
       className="max-w-screen min-w-screen
         max-h-screen min-h-screen flex font-light"
     >
-      <div className="w-[7%] min-h-full bg-lime-950">
+      <div className="w-[7%] min-h-full"  style={{ background: "#3A5A40" }}>
         <Navbar />
       </div>
 
@@ -58,12 +58,12 @@ const LoggedinHome = ({}) => {
       </div>
 
       <div
-        className="w-[30%] min-h-full bg-lime-950 p-5 pt-[3%] overflow-y-scroll
+        className="w-[30%] min-h-full p-5 pt-[3%] overflow-y-scroll
             [&::-webkit-scrollbar]:w-2
             [&::-webkit-scrollbar-track]:bg-gray-100
             [&::-webkit-scrollbar-thumb]:bg-gray-300
             dark:[&::-webkit-scrollbar-track]:bg-neutral-700
-            dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
+            dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"  style={{ background: "#3A5A40" }}
       >
         <div></div>
         <div className="space-y-2 space-x-2 text-white">

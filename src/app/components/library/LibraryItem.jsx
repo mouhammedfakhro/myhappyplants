@@ -26,9 +26,9 @@ const LibraryItem = ({
             </img>
 
             <div className="justify-items-start">
-                <p className="text-xl">{plantName}</p>
-                <p className="text-md">{scientificName}</p>
-                <p className="text-sm">{familyName}</p>
+                <p className="text-xl"  style={{ color: "#3A5A40" }}>{plantName}</p>
+                <p className="text-md"  style={{ color: "#3A5A40" }}>{scientificName}</p>
+                <p className="text-sm"  style={{ color: "#3A5A40" }}>{familyName}</p>
 
                 <div className="text-md text-purple-800 font-bold">{tags}</div>
             </div>

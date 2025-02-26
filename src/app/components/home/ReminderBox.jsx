@@ -28,7 +28,7 @@ const ReminderBox = ({
             </div>
 
             <button
-            className="p-3 bg-lime-900 hover:bg-lime-950 rounded-md text-white text-xs w-[30%]"
+            className="p-3 rounded-md text-white text-xs w-[30%]"  style={{ background: "#3A5A40" }}
             onClick={doneClicked}>
                 Done
             </button>
