@@ -23,7 +23,7 @@ export async function POST(req) {
         400
       );
     }
-
+  
     const existingUser = await prisma.user.findUnique({
       where: { email: emailText },
     });
@@ -51,7 +51,7 @@ export async function POST(req) {
     });
 
     const sentFrom = new Sender(
-      "MS_wLFXoq@trial-3vz9dlenvnnlkj50.mlsender.net",
+      "MS_ZIFGCM@innovatechab.se",
       "Your verification code"
     );
     const recipients = [new Recipient(emailText, usernameText)];

@@ -1,15 +1,11 @@
+import { verifyUser } from "../../../../../lib/auth";
 import prisma from "../../../../../lib/prisma";
 import { createServerResponse, validateRequestBody } from "../../../utils";
 
-export async function POST(req) {
+export async function PUT(req) {
   try {
     const body = await req.json();
-    const { newToggle } = body;
-    const header = await req.headers.get("Authorization");
-    const userName = header.split(" ")[1];
-
-    console.log("new toggle value:" + newToggle);
-
+    const { newToggle, userName } = body;
     const { isValid, missingField } = validateRequestBody(body, ["newToggle"]);
 
     if (!isValid) {
@@ -18,6 +14,10 @@ export async function POST(req) {
         400
       );
     }
+
+    const userVerified = await verifyUser(req, userName);
+    if (!userVerified)
+      return NextResponse.json({ error: "Unauthorized user" }, { status: 403 });
 
     await prisma.user.update({
       where: { name: userName },
