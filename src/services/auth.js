@@ -14,6 +14,22 @@ async function login(username, password) {
   return token;
 }
 
+async function updateToken(username) {
+  const { data: token } = await axios.get(
+    `/api/auth/update?username=${username}`,
+    {
+      headers: {
+        Authorization: `Bearer ${getCookie(TOKEN_KEY)}`,
+        "Content-Type": "application/json",
+      },
+    }
+  );
+  setCookie(TOKEN_KEY, token, {
+    secure: process.env.NODE_ENV === "production",
+  });
+  return token;
+}
+
 function logout() {
   deleteCookie(TOKEN_KEY);
   deleteCookie("user");
@@ -32,4 +48,5 @@ export default {
   login,
   logout,
   getCurrentUser,
+  updateToken,
 };

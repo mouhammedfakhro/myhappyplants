@@ -1,44 +1,21 @@
 import { NextResponse } from "next/server";
 import prisma from "../../../../../lib/prisma";
-import { jwtDecode } from "jwt-decode";
-
-const JWT_SECRET = process.env.JWT_SECRET;
+import { getUser, verifyUser } from "../../../../../lib/auth";
 
 export async function DELETE(req) {
   try {
-    const authHeader = req.headers.get("Authorization");
-    const token = authHeader.split(" ")[1];
-
-    if (!authHeader || !authHeader.startsWith("Bearer ")) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-
-    let decoded;
-    try {
-      decoded = jwtDecode(token, JWT_SECRET);
-    } catch (err) {
-      return NextResponse.json(
-        { error: "Invalid or expired token" },
-        { status: 401 }
-      );
-    }
-
-    const { email } = await req.json();
-
-    if (decoded.email !== email) {
+    const body = await req.json();
+    const { userName } = body;
+    
+    const userVerified = await verifyUser(req, userName);
+    if (!userVerified)
       return NextResponse.json({ error: "Unauthorized user" }, { status: 403 });
-    }
 
-    const user = await prisma.user.findUnique({
-      where: { email },
-    });
-
-    if (!user) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
-    }
+    const user = await getUser(userName);
+    if (!user) createServerResponse({ error: "User not found" }, 400);
 
     await prisma.user.delete({
-      where: { email },
+      where: { name: userName },
     });
 
     return NextResponse.json(

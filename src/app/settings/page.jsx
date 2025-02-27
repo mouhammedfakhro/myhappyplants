@@ -5,7 +5,6 @@ import Navbar from "../components/Navbar";
 import auth from "../../services/auth";
 import axios from "axios";
 import { getCookie } from "cookies-next";
-
 import { TOKEN_KEY } from "@/constants";
 
 const SettingsPage = ({}) => {
@@ -51,7 +50,7 @@ const SettingsPage = ({}) => {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
-        data: { email: userEmail },
+        data: { userName },
       });
 
       if (response.status === 200) {
@@ -67,24 +66,31 @@ const SettingsPage = ({}) => {
 
   async function sendToggle(newToggle) {
     try {
-      const response = await axios.post(
+      const token = getCookie(TOKEN_KEY);
+      if (!token) {
+        alert("You are not authenticated. Please log in again.");
+        return;
+      }
+      
+      await axios.put(
         "/api/me/notifications",
-        { newToggle },
+        { newToggle, userName },
         {
           headers: {
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
-            Authorization: `Bearer ${userName}`,
           },
         }
       );
-      alert("Your email notification perefrences were updated successfully!");
-    } catch (error) {
-      alert("Couldn't update email notification prefrences.");
 
-      setIsToggled((prev) => !prev);
+      auth.updateToken(userName);
+      alert("Your email notification preferences were updated successfully!");
+    } catch (error) {
+      alert("Couldn't update email notification preferences.");
+      setIsToggled((prev) => !prev); // Revert toggle if request fails
 
       console.error(
-        "Email notification prefrences error:",
+        "Email notification preferences error:",
         error.response?.data || error.message
       );
     }

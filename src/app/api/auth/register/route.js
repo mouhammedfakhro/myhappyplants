@@ -23,7 +23,7 @@ export async function POST(req) {
         400
       );
     }
-
+  
     const existingUser = await prisma.user.findUnique({
       where: { email: emailText },
     });

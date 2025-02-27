@@ -1,24 +1,21 @@
 import { SignJWT } from "jose";
-import prisma from "../../../../../lib/prisma";
 import { createServerResponse } from "../../../utils";
-import bcrypt from "bcrypt";
-import { getUser } from "../../../../../lib/auth";
+import { getUser, verifyUser } from "../../../../../lib/auth";
 
 const SECRET_KEY = process.env.JWT_SECRET;
 
-export async function POST(req) {
+export async function GET(req) {
   try {
-    const body = await req.json();
+    const { searchParams } = new URL(req.url);
+    const username = searchParams.get("username");
 
-    const { username, password } = body;
+    const userVerified = await verifyUser(req, username);
+    if (!userVerified)
+      return NextResponse.json({ error: "Unauthorized user" }, { status: 403 });
+
     const user = await getUser(username);
-
     if (!user) createServerResponse({ error: "User not found" }, 400);
   
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch)
-      return createServerResponse({ error: "Invalid password" }, 400);
-
     const userPayLoad = {
       id: user.id,
       email: user.email,
