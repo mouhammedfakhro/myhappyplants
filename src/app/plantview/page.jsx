@@ -1,16 +1,21 @@
 "use client";
 import React, { useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Navbar from "../components/Navbar";
 import PlantViewPlantInfo from "../components/PlantViewPlantInfo";
+import auth from "../../services/auth";
 
-const imgLink =
-  "https://images.pexels.com/photos/4623043/pexels-photo-4623043.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
 
 const PlantView = ({}) => {
 
-  //const params = useSearchParams();
-  //const plantID = params.get("plantID");
+  const router = useRouter();
+
+  const params = useSearchParams();
+  const plantID = params.get("plantID");
+
+  const user = auth.getCurrentUser();
+  const plant = user.plants.find(p => p.id === plantId);
+  
 
   // temporary data - hämta från databasen
   const thisname = "Pelle Pion";
@@ -23,8 +28,9 @@ const PlantView = ({}) => {
   const thisWateringPrefence = "Every 3 days";
   const thisSunlightPreference = "Medium";
   const thisMoreInfo = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer neque est, dapibus eu fermentum at, malesuada sit amet risus. Pellentesque quis massa quis purus cursus tempus dignissim non sem. Sed viverra pharetra sapien, id sollicitudin justo. Suspendisse potenti. Integer in suscipit mi, eget fringilla erat. Nulla facilisi. Nullam posuere, velit a iaculis mollis, orci eros bibendum orci, ut egestas turpis ipsum a urna. Morbi rutrum, ipsum quis finibus feugiat, quam eros tristique nisi, ac posuere quam diam ac lacus. In finibus ipsum in gravida pellentesque. Nulla malesuada aliquam enim at tincidunt. Quisque quam mauris, tincidunt vel rhoncus in, feugiat id arcu. Praesent at vulputate nibh. Ut tempor eu est id suscipit. In congue tellus nec nisi laoreet dapibus. Sed ut rutrum urna.";
+  const imgLink =
+  "https://images.pexels.com/photos/4623043/pexels-photo-4623043.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
 
-  const router = useRouter();
 
   const returnClicked = () => {
     router.push("/library");

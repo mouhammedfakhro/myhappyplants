@@ -9,13 +9,11 @@ const SettingsPage = ({}) => {
   const router = useRouter();
   const user = auth.getCurrentUser();
 
-  // TODO: get info from database
   let userName = user.name;
   let userEmail = user.email;
 
-  console.log(user);
+  const [deleteConfirm, setDeleteConfirm] = useState("");
 
-  // TODO: useState value to be retrieved from API
   const [isToggled, setIsToggled] = useState(user.notificationEnabled);
 
   async function handleToggleChange() {
@@ -24,6 +22,21 @@ const SettingsPage = ({}) => {
       sendToggle(newValue);
       return newValue;
     });
+  }
+
+  async function deleteAccountClicked() {
+
+    if (deleteConfirm) {
+      if (deleteConfirm === userName) {
+
+        // BACKEND DELETE ACCOUNT
+
+      }
+      else {
+        alert("Entered username not matching. Couldn't delete account.")
+      }
+    }
+
   }
 
   async function sendToggle(newToggle) {
@@ -142,6 +155,33 @@ const SettingsPage = ({}) => {
                 </tbody>
               </table>
             </div>
+          </div>
+
+          {/*account deletion box*/}
+          <hr className="h-px my-5 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+
+          <div className="space-y-3 space-x-2">
+            <h1 className="text-2xl" style={{ color: "#3A5A40" }}>
+              Delete Account
+            </h1>
+
+            <p className="italic">
+              *Type your name to confirm account deletion
+            </p>
+            <input
+              type="text"
+              value={deleteConfirm}
+              onChange={(e) => setDeleteConfirm(e.target.value)}
+              className="rounded-xl text-black p-2 focus:outline-0 pl-3 bg-gray-300"
+              placeholder="username.."
+            ></input>
+            <button
+              className=" text-white text-lg hover:bg-lime-950 rounded-xl p-2 min-w-[100px]"
+              style={{ background: "#3A5A40" }}
+              onClick={deleteAccountClicked}
+            >
+              Delete Account
+            </button>
           </div>
         </div>
       </div>
