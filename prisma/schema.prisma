@@ -44,15 +44,24 @@ model User {
   notificationEnabled Boolean   @default(false)
   expiresAt           DateTime?
   plants              Plant[]
-  wishlist Wishlist?
+  wishlist            Wishlist?
 }
 
 model Wishlist {
   id        String @id @default(uuid())
-  catalogID String
 
   user   User?   @relation(fields: [userID], references: [id])
   userID String? @unique
+
+  items     WishItem[]
+}
+
+model WishItem {
+  id        String @id @default(uuid())
+  catalogID String
+
+  wishlist   Wishlist?   @relation(fields: [wishlistID], references: [id])
+  wishlistID String?
 }
 
 model Reminder {
