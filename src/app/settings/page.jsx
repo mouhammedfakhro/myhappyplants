@@ -4,17 +4,20 @@ import { useRouter } from "next/navigation";
 import Navbar from "../components/Navbar";
 import auth from "../../services/auth";
 import axios from "axios";
+import { getCookie } from "cookies-next";
+
+import { TOKEN_KEY } from "@/constants";
 
 const SettingsPage = ({}) => {
   const router = useRouter();
   const user = auth.getCurrentUser();
 
-  let userName = user.name;
-  let userEmail = user.email;
+  let userName = user?.name;
+  let userEmail = user?.email;
 
   const [deleteConfirm, setDeleteConfirm] = useState("");
 
-  const [isToggled, setIsToggled] = useState(user.notificationEnabled);
+  const [isToggled, setIsToggled] = useState(user?.notificationEnabled);
 
   async function handleToggleChange() {
     setIsToggled((prev) => {
@@ -25,18 +28,41 @@ const SettingsPage = ({}) => {
   }
 
   async function deleteAccountClicked() {
-
-    if (deleteConfirm) {
-      if (deleteConfirm === userName) {
-
-        // BACKEND DELETE ACCOUNT
-
-      }
-      else {
-        alert("Entered username not matching. Couldn't delete account.")
-      }
+    if (!deleteConfirm) {
+      alert("Please enter your username to confirm deletion.");
+      return;
     }
 
+    if (deleteConfirm !== userName) {
+      alert("Entered username does not match. Couldn't delete account.");
+      return;
+    }
+
+    try {
+      const token = getCookie(TOKEN_KEY);
+
+      if (!token) {
+        alert("You are not authenticated. Please log in again.");
+        return;
+      }
+
+      const response = await axios.delete("/api/auth/delete", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        data: { email: userEmail },
+      });
+
+      if (response.status === 200) {
+        alert("Account deleted successfully.");
+        auth.logout();
+        router.push("/");
+      }
+    } catch (error) {
+      console.error("Error deleting account:", error);
+      alert("Failed to delete account. Please try again later.");
+    }
   }
 
   async function sendToggle(newToggle) {
