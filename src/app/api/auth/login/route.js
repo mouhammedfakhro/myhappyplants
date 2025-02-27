@@ -20,7 +20,9 @@ export async function POST(req) {
           },
         },
 
-        wishlist: true,
+        wishlist: {
+          include: { items: true },
+        },
       },
     });
 
