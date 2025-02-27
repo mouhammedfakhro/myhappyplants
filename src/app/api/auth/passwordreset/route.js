@@ -37,7 +37,7 @@ export async function POST(req) {
     });
 
     const sentFrom = new Sender(
-      "MS_wLFXoq@trial-3vz9dlenvnnlkj50.mlsender.net",
+      "MS_ZIFGCM@innovatechab.se",
       "Your password has been reset."
     );
     const recipients = [new Recipient(email, "Password reset")];
