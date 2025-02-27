@@ -18,6 +18,8 @@ export async function POST(req) {
             reminders: true,
           },
         },
+
+        wishlist : true
       },
     });
 
@@ -33,6 +35,7 @@ export async function POST(req) {
       name: user.name,
       plants: user.plants,
       notificationEnabled: user.notificationEnabled,
+      wishlist: user.wishlist,
     };
 
     console.log(user);
