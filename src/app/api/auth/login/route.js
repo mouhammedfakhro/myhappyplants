@@ -14,12 +14,13 @@ export async function POST(req) {
       where: { name: username },
       include: {
         plants: {
-          select: {
+          include: {
             reminders: true,
+            // rest of info retrieved from API using catalogID (included)
           },
         },
 
-        wishlist : true
+        wishlist: true,
       },
     });
 

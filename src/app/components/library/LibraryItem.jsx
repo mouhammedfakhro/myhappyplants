@@ -9,12 +9,13 @@ const LibraryItem = ({
     scientificName,
     familyName,
     tags,
-    plantID
+    plantID,
+    returnPage
 }) => {
     const router = useRouter();
 
     const viewClicked = () => {
-        router.push(`../plantview?plantID=${"testID"}`);
+        router.push(`../plantview?plantID=${plantID}&return=${returnPage}`);
     }
 
     return (

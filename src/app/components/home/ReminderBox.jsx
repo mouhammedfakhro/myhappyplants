@@ -8,14 +8,15 @@ const ReminderBox = ({
     plantID
 }) => {
 
+    const router = useRouter();
+    
     const reminderClicked = () => {
 
     }
 
-    const doneClicked = () => {
-
+    const viewClicked = () => {
+        router.push(`../plantview?plantID=${plantID}&return=home`);
     }
-
 
     return (
         <div className="p-5 w-full rounded-2xl bg-gray-200 space-x-5 text-black flex"
@@ -29,8 +30,8 @@ const ReminderBox = ({
 
             <button
             className="p-3 rounded-md text-white text-xs w-[30%]"  style={{ background: "#3A5A40" }}
-            onClick={doneClicked}>
-                Done
+            onClick={viewClicked}>
+                View
             </button>
         
 

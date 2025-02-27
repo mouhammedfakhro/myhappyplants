@@ -27,7 +27,23 @@ const LoggedinHome = ({}) => {
   };
 
   const renderPlantItems = () => {
+    if (!user || !Array.isArray(user.plants)) return null;
+    return user.plants.map((plant, plantIndex) => (
+      <div
+      key={plantIndex}
+      className="mb-2">
+            <LibraryItem
+              imageLink={null}
+              plantName={plant.nickname}
+              scientificName={null}
+              familyName={null}
+              tags={plant.tags}
+              plantID={plant.id}
+              returnPage="home"
+            />
+      </div>
     
+    ));
   };
 
   return (
@@ -35,7 +51,7 @@ const LoggedinHome = ({}) => {
       className="max-w-screen min-w-screen
         max-h-screen min-h-screen flex font-light"
     >
-      <div className="w-[7%] min-h-full"  style={{ background: "#3A5A40" }}>
+      <div className="w-[7%] min-h-full" style={{ background: "#3A5A40" }}>
         <Navbar />
       </div>
 
@@ -63,7 +79,8 @@ const LoggedinHome = ({}) => {
             [&::-webkit-scrollbar-track]:bg-gray-100
             [&::-webkit-scrollbar-thumb]:bg-gray-300
             dark:[&::-webkit-scrollbar-track]:bg-neutral-700
-            dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"  style={{ background: "#3A5A40" }}
+            dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
+        style={{ background: "#3A5A40" }}
       >
         <div></div>
         <div className="space-y-2 space-x-2 text-white">
