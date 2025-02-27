@@ -32,6 +32,7 @@ export async function POST(req) {
       email: user.email,
       name: user.name,
       plants: user.plants,
+      notificationEnabled: user.notificationEnabled,
     };
 
     console.log(user);

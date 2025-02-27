@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
 import crypto from "crypto";
 
-
 export function validateRequestBody(body, requiredFields) {
   for (const field of requiredFields) {
-    if (!body[field] || body[field].toString().trim() === "") {
+    if (
+      body[field] === undefined ||
+      body[field] === null ||
+      body[field].toString().trim() === ""
+    ) {
       return { isValid: false, missingField: field };
     }
   }
