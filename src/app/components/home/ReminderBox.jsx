@@ -8,12 +8,14 @@ const ReminderBox = ({
     plantID
 }) => {
 
+    const router = useRouter();
+    
     const reminderClicked = () => {
 
     }
 
     const viewClicked = () => {
-
+        router.push(`../plantview?plantID=${plantID}&return=home`);
     }
 
     return (

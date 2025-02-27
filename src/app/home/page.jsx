@@ -39,6 +39,7 @@ const LoggedinHome = ({}) => {
               familyName={null}
               tags={plant.tags}
               plantID={plant.id}
+              returnPage="home"
             />
       </div>
     
