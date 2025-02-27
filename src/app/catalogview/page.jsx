@@ -1,15 +1,16 @@
 "use client";
 import React, { useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Navbar from "../components/Navbar";
 
 const imgLink =
   "https://images.pexels.com/photos/4623043/pexels-photo-4623043.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
 
 const CatalogView = ({}) => {
-  //const params = useSearchParams();
-  //const catalogID = params.get("catalogID");
-  //const returnLink = params.get("returnLink");
+
+  const params = useSearchParams();
+  const catalogID = params.get("catalogID");
+  const returnPage = params.get("return");
 
   // temporary data - hämta från databasen
   const commonName = "Peony";
@@ -23,15 +24,13 @@ const CatalogView = ({}) => {
   const router = useRouter();
 
   const returnClicked = () => {
-    // TODO: return där man kom ifrån
-    router.push("/discovery");
+    router.push(`/${returnPage}`);
   };
 
   const deletePlant = () => {
     // skickar API delete request
   };
 
-  
   const addToLibrary = () => {
     // lägg till växt med detta id i librray
   };
@@ -66,7 +65,7 @@ const CatalogView = ({}) => {
                 </button>
               </td>
               <td>
-              <button
+                <button
                   className="text-white text-sm rounded-md p-3 pl-4 pr-4 float-right"
                   style={{ background: "#3A5A40" }}
                   onClick={addToLibrary}
@@ -83,7 +82,6 @@ const CatalogView = ({}) => {
         <div className="p-2 w-[100%] overflow-hidden rounded-3xl bg-gray-200 flex flex-col space-y-5 h-auto">
           {/*upper div - flexbox*/}
           <div className="flex w-full space-x-5">
-
             {/*plant image*/}
             <img
               src={imgLink}
@@ -93,7 +91,6 @@ const CatalogView = ({}) => {
 
             {/*inner div containing plant info */}
             <div className="flex-1 p-3 bg-gray-200">
-
               {/*"different names of plant */}
 
               <p className="text-2xl p-2" style={{ color: "#3A5A40" }}>
@@ -118,8 +115,7 @@ const CatalogView = ({}) => {
             <div className="inline-block h-[400px] min-h-[1em] w-[1px] self-stretch bg-gray-700 mt-6"></div>
 
             {/*water info box */}
-            <div className="flex flex-col p-3 w-[40%] space-y-5 bg-gray-200">              
-
+            <div className="flex flex-col p-3 w-[40%] space-y-5 bg-gray-200">
               <p className="text-2xl p-2" style={{ color: "#3A5A40" }}>
                 Preferences
               </p>

@@ -1,20 +1,49 @@
 "use client";
 import React, {useRef, useState} from "react";
 import { useRouter } from "next/navigation";
+import auth from "../../services/auth";
+import axios from "axios";
+import { getCookie } from "cookies-next";
+import { TOKEN_KEY } from "@/constants";
 
 const WishlistItem = ({
     imageLink,
     scientificName,
     familyName,
-    catalogID
+    catalogID,
+    itemID,
+    returnPage
 }) => {
 
+  const router = useRouter();
+
     const plantClicked = () => {
-        alert('plant clicked!');
+        router.push(`../catalogview?catalogID=${catalogID}&return=${returnPage}`);
     }
 
-    const removeClicked = () => {
-        alert('remove clicked!');
+    async function removeClicked() {
+        try {
+            const token = getCookie(TOKEN_KEY);
+            if (!token) {
+              alert("You are not authenticated. Please log in again.");
+              return;
+            }
+            const response = await axios.delete("/api/me/wishlist", {
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+              },
+              data: { catalogID },
+            });
+      
+            if (response.status === 200) {
+              alert("Item deleted successfully.");
+            }
+          }
+          catch (error) {
+            console.error("Error deleting wishlist item:", error);
+            alert("Failed to delete wishlist item. Please try again later.");
+          }
     }
 
     return (

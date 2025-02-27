@@ -2,29 +2,28 @@ import createServer from "next/dist/server/next";
 import prisma from "../../../../../lib/prisma";
 import { createServerResponse, validateRequestBody } from "../../../utils";
 
-const uName = "momme";
-export async function GET(req) {
+export async function DELETE(req) {
     try {
-        const user = await prisma.user.findUnique({
-            where: {
-                name: {uName}
-            },
-            include: {
-                wishlist: true
-            },
+        const body = await req.json();
+        const { userName, catalogID } = body;
+        
+        const userVerified = await verifyUser(req, userName);
+        if (!userVerified)
+          return NextResponse.json({ error: "Unauthorized user" }, { status: 403 });
+    
+        const user = await getUser(userName);
+        if (!user) createServerResponse({ error: "User not found" }, 400);
+    
+        await prisma.user.wishlist.items.delete({
+          where: { catalogID: catalogID },
         });
-
-        if(!user) {
-            return createServerResponse({error: "User not found"}, 404);
-        }
-
-        if(!user.wishlist) {
-            return createServerResponse({error: "Wishlist not found"}, 404);
-        }
-
-        return createServerResponse({wishlist: user.wishlist}, 200);
-
-    } catch(error) {
-        return createServerResponse({error: "Internal server error"}, 500);
-    }
+    
+        return NextResponse.json(
+          { message: "Wishlist item successfully deleted" },
+          { status: 200 }
+        );
+      } catch (error) {
+        console.error("Wishlist item deletion error:", error);
+        return NextResponse.json({ error: "Server error" }, { status: 500 });
+      }    
 }
