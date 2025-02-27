@@ -16,7 +16,15 @@ export async function POST(req) {
         plants: {
           include: {
             reminders: true,
-            // rest of info retrieved from API using catalogID (included)
+            /* rest of info retrieved from API using catalogID:
+            commonName
+            scientificName
+            familyName
+            wateringPrefence
+            sunlightPreference
+            moreInfo/longer descriptive text
+            image link
+            */
           },
         },
 
