@@ -27,7 +27,7 @@ export async function POST(req) {
     });
 
     return createServerResponse(
-      { message: "Successfully changed notification perefrences" },
+      { message: "Successfully changed notification preferences" },
       200
     );
   } catch (error) {
