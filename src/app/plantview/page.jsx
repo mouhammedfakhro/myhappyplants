@@ -23,7 +23,6 @@ const PlantView = ({}) => {
   const thiscommonName = "___";
   const thisscientificName = "___";
   const thisfamilyName = "___";
-  const thistags = plant.tags;
   const thislastWatered = plant.lastWatered;
   const thistoBeWatered = plant.toBeWatered;
   const thisWateringPrefence = "___";
@@ -31,6 +30,10 @@ const PlantView = ({}) => {
   const thisMoreInfo = "___";
   const imgLink = "___";
 
+  const tagsFormatted = plant.tags && plant.tags.length > 0
+              ? plant.tags.map((tag) => `#${tag.tagName}`).join(" ")
+              : ""
+      
   const returnClicked = () => {
     router.push(`/${returnPage}`);
   };
@@ -114,7 +117,7 @@ const PlantView = ({}) => {
             commonName={thiscommonName}
             scientificName={thisscientificName}
             familyName={thisfamilyName}
-            tags={thistags}
+            tags={tagsFormatted}
             lastWatered={thislastWatered}
             toBeWatered={thistoBeWatered}
             wateringPreference={thisWateringPrefence}

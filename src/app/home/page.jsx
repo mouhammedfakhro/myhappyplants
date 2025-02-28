@@ -6,9 +6,9 @@ import Navbar from "../components/Navbar";
 import auth from "../../services/auth";
 
 const LoggedinHome = ({}) => {
-  const user = auth.getCurrentUser();
 
   const renderReminders = () => {
+    const user = auth.getCurrentUser();
     if (!user || !Array.isArray(user.plants)) return null;
 
     return user.plants.map((plant, plantIndex) => (
@@ -27,21 +27,27 @@ const LoggedinHome = ({}) => {
   };
 
   const renderPlantItems = () => {
+    const user = auth.getCurrentUser();
+
+    console.log(user.plants);
+
     if (!user || !Array.isArray(user.plants)) return null;
     return user.plants.map((plant, plantIndex) => (
-      <div
-      key={plantIndex}>
-            <LibraryItem
-              imageLink={null}
-              plantName={plant.nickname}
-              scientificName={null}
-              familyName={null}
-              tags={plant.tags}
-              plantID={plant.id}
-              returnPage="home"
-            />
+      <div key={plantIndex}>
+        <LibraryItem
+          imageLink={null}
+          plantName={plant.nickname}
+          scientificName={null}
+          familyName={null}
+          tags={
+            plant.tags && plant.tags.length > 0
+              ? plant.tags.map((tag) => `#${tag.tagName}`).join(" ")
+              : null
+          }
+          plantID={plant.id}
+          returnPage="home"
+        />
       </div>
-    
     ));
   };
 

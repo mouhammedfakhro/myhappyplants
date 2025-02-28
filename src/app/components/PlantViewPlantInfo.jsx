@@ -21,7 +21,7 @@ const PlantViewPlantInfo = ({
   plantId
 }) => {
   const user = auth.getCurrentUser();
-
+  
   const [nameInput, setNameInput] = useState(plantName);
   const [tagInput, setTagInput] = useState(tags);
   const [selectedDate, setSelectedDate] = useState("");
@@ -57,13 +57,33 @@ const PlantViewPlantInfo = ({
     }
   };
 
-  const updateTags = () => {
+  async function updateTags () {
     //extract #tags from the input field, save all in an array
-    const tags = tagInput.match(/#\w+/g) || [];
-    const tagsArray = tags.map((tag) => tag.substring(1));
+    const tagsText = tagInput.match(/#\w+/g) || [];
+    const tags = tagsText.map((tag) => tag.substring(1));
 
-    if (tagsArray.length > 0) {
-      // TODO: API CALL - update tags
+    try {
+      const token = getCookie(TOKEN_KEY);
+      if (!token) {
+        alert("You are not authenticated. Please log in again.");
+        return;
+      }
+      const response = await axios.put("/api/me/tags",
+        { userName, plantId, tags },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          }
+        }
+      );
+
+      if (response.status === 200) {
+        alert("Tags updated successfully.");
+      }
+    } catch (error) {
+      console.error("Error updating tags:", error);
+      alert("Failed to update tags. Please try again later.");
     }
   };
 
