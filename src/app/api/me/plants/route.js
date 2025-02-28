@@ -14,19 +14,6 @@ export async function DELETE(req) {
       return NextResponse.json({ error: "Unauthorized user" }, { status: 403 });
     }
 
-    // Delete all reminders related to this plant
-    const plant = await prisma.plant.findUnique({
-      where: { id: plantId },
-    });
-    await prisma.reminder.deleteMany({
-      where: { plantId: plantId },
-    });
-
-    // Delete all reminders related to this plant
-    /*await prisma.tag.deleteMany({
-      where: { plantId: plantId },
-    });*/
-
     // Delete plant with ID
     await prisma.plant.delete({
       where: { id: plantId }, 
