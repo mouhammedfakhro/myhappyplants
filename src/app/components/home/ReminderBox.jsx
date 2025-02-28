@@ -9,22 +9,19 @@ const ReminderBox = ({
 }) => {
 
     const router = useRouter();
+    const formattedDate = date.substring(0, 10);
     
-    const reminderClicked = () => {
-
-    }
 
     const viewClicked = () => {
         router.push(`../plantview?plantID=${plantID}&return=home`);
     }
 
     return (
-        <div className="p-5 w-full rounded-2xl bg-gray-200 space-x-5 text-black flex mb-2"
-        onClick={reminderClicked}>
+        <div className="p-5 w-full rounded-2xl bg-gray-200 space-x-5 text-black flex mb-2">
 
             <div></div>
             <div className="w-[70%] justify-items-start">
-                <p className="text-xs">{date}</p>
+                <p className="text-xs">{formattedDate}</p>
                 <p className="text-md">{message}</p>
             </div>
 

@@ -23,8 +23,8 @@ const PlantView = ({}) => {
   const thiscommonName = "___";
   const thisscientificName = "___";
   const thisfamilyName = "___";
-  const thislastWatered = plant.lastWatered;
-  const thistoBeWatered = plant.toBeWatered;
+  const thislastWatered = plant.lastWatered.substring(0, 10);;
+  const thistoBeWatered = plant.toBeWatered.substring(0, 10);;
   const thisWateringPrefence = "___";
   const thisSunlightPreference = "___";
   const thisMoreInfo = "___";
