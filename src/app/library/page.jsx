@@ -24,8 +24,7 @@ const LibraryPage = ({}) => {
     if (!user || !Array.isArray(user.plants)) return null;
     return user.plants.map((plant, plantIndex) => (
       <div
-      key={plantIndex}
-      className="mb-2">
+      key={plantIndex}>
             <LibraryItem
               imageLink={null}
               plantName={plant.nickname}

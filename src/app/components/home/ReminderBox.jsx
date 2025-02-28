@@ -19,7 +19,7 @@ const ReminderBox = ({
     }
 
     return (
-        <div className="p-5 w-full rounded-2xl bg-gray-200 space-x-5 text-black flex"
+        <div className="p-5 w-full rounded-2xl bg-gray-200 space-x-5 text-black flex mb-2"
         onClick={reminderClicked}>
 
             <div></div>
