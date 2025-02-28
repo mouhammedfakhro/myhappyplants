@@ -32,11 +32,11 @@ const PlantViewPlantInfo = ({
     const tags = tagInput.match(/#\w+/g) || [];
     const tagsArray = tags.map((tag) => tag.substring(1));
 
-    if (tagsArray)
+    if (tagsArray) {}
   };
 
   const waterPlant = () => {
-    // backend vattnar växtet
+    // backend vattnar växten
   };
 
   return (
