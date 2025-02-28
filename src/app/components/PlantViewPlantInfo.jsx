@@ -1,6 +1,10 @@
 "use client";
 import React, { useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import auth from "../../services/auth";
+import axios from "axios";
+import { getCookie } from "cookies-next";
+import { TOKEN_KEY } from "@/constants";
 
 const PlantViewPlantInfo = ({
   imageLink,
@@ -32,11 +36,38 @@ const PlantViewPlantInfo = ({
     const tags = tagInput.match(/#\w+/g) || [];
     const tagsArray = tags.map((tag) => tag.substring(1));
 
-    if (tagsArray)
+    if (tagsArray.length > 0) {
+      // TODO: API CALL - update tags
+    }
   };
 
-  const waterPlant = () => {
+  async function waterPlant() {
     // backend vattnar växtet
+    try {
+      const token = getCookie(TOKEN_KEY);
+      if (!token) {
+        alert("You are not authenticated. Please log in again.");
+        return;
+      }
+      await axios.put(
+        "/api/me/plants",
+        { selectedDate, userName },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      auth.updateToken(userName);
+      alert("Your plant was watered!");
+    } catch (error) {
+      alert("Couldn't water plant.");
+      console.error(
+        "Watering plant error:",
+        error.response?.data || error.message
+      );
+    }
   };
 
   return (
