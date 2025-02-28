@@ -8,9 +8,7 @@ import axios from "axios";
 import { getCookie } from "cookies-next";
 import { TOKEN_KEY } from "@/constants";
 
-
 const PlantView = ({}) => {
-
   const router = useRouter();
 
   const params = useSearchParams();
@@ -18,7 +16,7 @@ const PlantView = ({}) => {
   const returnPage = params.get("return");
 
   const user = auth.getCurrentUser();
-  const plant = user.plants.find(p => p.id === plantId);
+  const plant = user.plants.find((p) => p.id === plantId);
 
   // API related data missing
   const thisname = plant.nickname;
@@ -63,7 +61,7 @@ const PlantView = ({}) => {
       console.error("Error deleting Plant:", error);
       alert("Failed to delete Plant. Please try again later.");
     }
-  };
+  }
 
   return (
     <div

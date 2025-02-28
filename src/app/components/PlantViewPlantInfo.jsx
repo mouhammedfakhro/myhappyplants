@@ -26,9 +26,34 @@ const PlantViewPlantInfo = ({
   const [tagInput, setTagInput] = useState(tags);
   const [selectedDate, setSelectedDate] = useState("");
 
-  const updateName = () => {
-    if (nameInput) {
-      // backend ändrar namnet
+  const userName = user?.name;
+
+  async function updateName() {
+    if (nameInput != plantName && nameInput != "") {
+
+      try {
+        const token = getCookie(TOKEN_KEY);
+        if (!token) {
+          alert("You are not authenticated. Please log in again.");
+          return;
+        }
+        const response = await axios.put("/api/me/plants",
+          { userName, plantId, nameInput },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            }
+          }
+        );
+  
+        if (response.status === 200) {
+          alert("Plant renamed successfully.");
+        }
+      } catch (error) {
+        console.error("Error renaming Plant:", error);
+        alert("Failed to rename Plant. Please try again later.");
+      }
     }
   };
 
@@ -47,9 +72,6 @@ const PlantViewPlantInfo = ({
       alert("please select the watering date first.");
       return;
     }
-
-    const userName = user?.name;
-
     try {
       const token = getCookie(TOKEN_KEY);
       if (!token) {

@@ -16,7 +16,7 @@ const WishlistPage = ({}) => {
 
     return user.wishlist.items.map((wishlistItem, wishlistItemIndex) => (
 
-      <div key={wishlistItemIndex} className="mb-2">
+      <div key={wishlistItemIndex}>
         <WishlistItem
           imageLink={null}
           scientificName="im a plant"
