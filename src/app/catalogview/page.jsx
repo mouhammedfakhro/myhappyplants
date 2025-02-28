@@ -35,6 +35,10 @@ const CatalogView = ({}) => {
     // lägg till växt med detta id i librray
   };
 
+  const addToWishlist = () => {
+    // lägg till växt med detta catalog id i librray
+  };
+
   return (
     <div
       className="max-w-screen min-w-screen
@@ -64,13 +68,20 @@ const CatalogView = ({}) => {
                   {"<< Return"}{" "}
                 </button>
               </td>
-              <td>
+              <td >
                 <button
                   className="text-white text-sm rounded-md p-3 pl-4 pr-4 float-right"
                   style={{ background: "#3A5A40" }}
                   onClick={addToLibrary}
                 >
                   Add to My Library
+                </button>
+                <button
+                  className="text-white text-sm rounded-md p-3 pl-4 pr-4 float-right mr-2"
+                  style={{ background: "#3A5A40" }}
+                  onClick={addToWishlist}
+                >
+                  Add to Wishlist
                 </button>
               </td>
             </tr>

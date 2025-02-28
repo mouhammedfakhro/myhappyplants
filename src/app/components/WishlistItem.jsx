@@ -22,6 +22,7 @@ const WishlistItem = ({
     }
 
     async function removeClicked() {
+        /*
         try {
             const token = getCookie(TOKEN_KEY);
             if (!token) {
@@ -44,6 +45,7 @@ const WishlistItem = ({
             console.error("Error deleting wishlist item:", error);
             alert("Failed to delete wishlist item. Please try again later.");
           }
+            */
     }
 
     return (
