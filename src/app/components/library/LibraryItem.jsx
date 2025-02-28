@@ -20,7 +20,7 @@ const LibraryItem = ({
 
     return (
         <button className="p-2 w-[100%] overflow-hidden rounded-3xl bg-gray-200 flex space-x-5
-        hover:bg-gray-300" onClick={viewClicked}>
+        hover:bg-gray-300 mb-2" onClick={viewClicked}>
             
             <img src={imageLink}
             className="w-[25%] aspect-square object-cover rounded-2xl">

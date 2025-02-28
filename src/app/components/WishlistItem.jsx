@@ -49,7 +49,7 @@ const WishlistItem = ({
     }
 
     return (
-        <div className="p-2 w-[80%] overflow-hidden rounded-3xl bg-gray-200 flex space-x-5">
+        <div className="p-2 w-[80%] overflow-hidden rounded-3xl bg-gray-200 flex space-x-5 mb-2">
             
             <img src={imageLink}
             className="w-[20%] aspect-square object-cover rounded-2xl">

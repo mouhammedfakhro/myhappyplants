@@ -15,9 +15,9 @@ model Plant {
   toBeWatered DateTime
   catalogID   String
 
-  user      User       @relation(fields: [userId], references: [id])
-  reminders Reminder[]
-  tags      Tag[]
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reminders Reminder[]  
+  tags      Tag[]       
 }
 
 // TODO: Remove this
@@ -43,15 +43,15 @@ model User {
   passwordResetCode   String?
   notificationEnabled Boolean   @default(false)
   expiresAt           DateTime?
-  plants              Plant[]
-  wishlist            Wishlist?
+  plants              Plant[]   
+  wishlist            Wishlist? 
 }
 
 model Wishlist {
   id        String @id @default(uuid())
 
-  user   User?   @relation(fields: [userID], references: [id])
-  userID String? @unique
+  user   User   @relation(fields: [userID], references: [id], onDelete: Cascade)
+  userID String @unique
 
   items     WishItem[]
 }
@@ -60,8 +60,8 @@ model WishItem {
   id        String @id @default(uuid())
   catalogID String
 
-  wishlist   Wishlist?   @relation(fields: [wishlistID], references: [id])
-  wishlistID String?
+  wishlist   Wishlist   @relation(fields: [wishlistID], references: [id], onDelete: Cascade)
+  wishlistID String
 }
 
 model Reminder {
@@ -71,7 +71,7 @@ model Reminder {
   createdAt DateTime @default(now())
   label     String
 
-  plant Plant @relation(fields: [plantId], references: [id])
+  plant Plant @relation(fields: [plantId], references: [id], onDelete: Cascade)
 }
 
 model Tag {
@@ -79,5 +79,5 @@ model Tag {
   tagName String
   plantId String
 
-  plant Plant @relation(fields: [plantId], references: [id])
+  plant Plant @relation(fields: [plantId], references: [id], onDelete: Cascade)
 }

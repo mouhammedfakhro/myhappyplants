@@ -6,7 +6,7 @@ export async function DELETE(req) {
   try {
     const body = await req.json();
     const { userName } = body;
-    
+
     const userVerified = await verifyUser(req, userName);
     if (!userVerified)
       return NextResponse.json({ error: "Unauthorized user" }, { status: 403 });
@@ -19,7 +19,7 @@ export async function DELETE(req) {
     });
 
     return NextResponse.json(
-      { message: "Account successfully deleted" },
+      { message: "Account and its data successfully deleted" },
       { status: 200 }
     );
   } catch (error) {

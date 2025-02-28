@@ -1,62 +1,59 @@
 "use client";
 import React, { useRef, useState } from "react";
-import { useRouter } from "next/navigation";
-import LibraryItem from "../components/library/LibraryItem";
-import Navbar from "../components/Navbar";
-import FilterButton from "../components/library/FilterButton";
-import auth from "../../services/auth";
+import { useRouter, useSearchParams } from "next/navigation";
+import LibraryItem from "../../components/library/LibraryItem";
+import Navbar from "../../components/Navbar";
+import FilterButton from "../../components/library/FilterButton";
+import auth from "../../../services/auth";
 
-const LibraryPage = ({}) => {
-  const router = useRouter();
+const LibraryTagPage = ({}) => {
   const user = auth.getCurrentUser();
 
-  // placeholder - real data is an array of plant items
-  let testObject = {
-    imageLink:
-      "https://images.pexels.com/photos/30727074/pexels-photo-30727074/free-photo-of-vibrant-philodendron-verrucosum-in-white-pots.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-    plantName: "Olof Palme",
-    scientificName: "Monstera deliciosa",
-    familyName: "Arceae",
-    tags: "#swizz #fav",
-  };
+  const params = useSearchParams();
+  const tagName = params.get("filter");
+
+  const router = useRouter();
+
 
   const renderPlantItems = () => {
-    if (!user || !Array.isArray(user.plants)) return null;
-    return user.plants.map((plant, plantIndex) => (
-      <div key={plantIndex}>
-        <LibraryItem
-          imageLink={null}
-          plantName={plant.nickname}
-          scientificName={null}
-          familyName={null}
-          tags={
-            plant.tags && plant.tags.length > 0
-              ? plant.tags.map((tag) => `#${tag.tagName}`).join(" ")
-              : null
-          }
-          plantID={plant.id}
-          returnPage="library"
-        />
+
+    // first filter an array of such plants
+    const filteredPlants = user.plants.filter(plant => {
+        return plant.tags.some(tag => tag.tagName === tagName);
+      });
+
+    // then render them
+    return filteredPlants.map((plant, plantIndex) => (
+      <div
+      key={plantIndex}>
+            <LibraryItem
+              imageLink={null}
+              plantName={plant.nickname}
+              scientificName={null}
+              familyName={null}
+              tags={
+                plant.tags && plant.tags.length > 0
+                  ? plant.tags.map((tag) => `#${tag.tagName}`).join(" ")
+                  : null
+              }
+              plantID={plant.id}
+              returnPage="library"
+            />
       </div>
     ));
   };
 
   const renderFilters = () => {
-    
     // extract tags from each plant
     const plants = user.plants;
     // Create an array to hold all tags
     const allTags = [];
-
-      // Loop through plants and collect tags
+    // Loop through plants and collect tags
     plants.forEach((plant) => {
-      console.log(plant.tags);
-
       plant.tags.forEach((tag) => {
         allTags.push(tag.tagName);
       });
     });
-
     // Get unique tags using Set
     const uniqueTags = [...new Set(allTags)];
 
@@ -69,9 +66,12 @@ const LibraryPage = ({}) => {
               />
         </div>
       ));
-    }    
-    
+    }
   };
+
+  const clearClicked = () => {
+    router.push("/library");
+  }
 
   return (
     <div
@@ -114,7 +114,16 @@ const LibraryPage = ({}) => {
                 <td>
                   <p className="text-2xl">Filters</p>
                 </td>
-                <td></td>
+                <td>
+                  <button
+                    className="text-white text-sm rounded-md p-2 float-right
+                                    "
+                    style={{ background: "#3A5A40" }}
+                    onClick={clearClicked}
+                  >
+                    CLEAR
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -128,4 +137,4 @@ const LibraryPage = ({}) => {
   );
 };
 
-export default LibraryPage;
+export default LibraryTagPage;

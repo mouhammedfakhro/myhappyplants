@@ -4,40 +4,67 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Navbar from "../components/Navbar";
 import PlantViewPlantInfo from "../components/PlantViewPlantInfo";
 import auth from "../../services/auth";
-
+import axios from "axios";
+import { getCookie } from "cookies-next";
+import { TOKEN_KEY } from "@/constants";
 
 const PlantView = ({}) => {
-
   const router = useRouter();
 
   const params = useSearchParams();
-  const plantID = params.get("plantID");
+  const plantId = params.get("plantID");
   const returnPage = params.get("return");
 
   const user = auth.getCurrentUser();
-  const plant = user.plants.find(p => p.id === plantID);
-  
+  const plant = user.plants.find((p) => p.id === plantId);
 
-  // temporary data - hämta från databasen
+  // API related data missing
   const thisname = plant.nickname;
   const thiscommonName = "___";
   const thisscientificName = "___";
   const thisfamilyName = "___";
-  const thistags = plant.tags;
-  const thislastWatered = plant.lastWatered;
-  const thistoBeWatered = plant.toBeWatered;
+  const thislastWatered = plant.lastWatered.substring(0, 10);;
+  const thistoBeWatered = plant.toBeWatered.substring(0, 10);;
   const thisWateringPrefence = "___";
   const thisSunlightPreference = "___";
   const thisMoreInfo = "___";
   const imgLink = "___";
 
+  const tagsFormatted = plant.tags && plant.tags.length > 0
+              ? plant.tags.map((tag) => `#${tag.tagName}`).join(" ")
+              : ""
+      
   const returnClicked = () => {
     router.push(`/${returnPage}`);
   };
 
-  const deletePlant = () => {
-    // skickar API delete request
-  };
+  async function deletePlant() {
+    const userName = user?.name;
+    alert("Deleting plant of user: " + userName + ", plantId: " + plantId);
+
+    try {
+      const token = getCookie(TOKEN_KEY);
+      if (!token) {
+        alert("You are not authenticated. Please log in again.");
+        return;
+      }
+      const response = await axios.delete("/api/me/plants", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        data: { userName, plantId },
+      });
+
+      if (response.status === 200) {
+        alert("Plant deleted successfully.");
+        returnClicked();
+      }
+    } catch (error) {
+      console.error("Error deleting Plant:", error);
+      alert("Failed to delete Plant. Please try again later.");
+    }
+  }
 
   return (
     <div
@@ -90,12 +117,13 @@ const PlantView = ({}) => {
             commonName={thiscommonName}
             scientificName={thisscientificName}
             familyName={thisfamilyName}
-            tags={thistags}
+            tags={tagsFormatted}
             lastWatered={thislastWatered}
             toBeWatered={thistoBeWatered}
             wateringPreference={thisWateringPrefence}
             sunlightPreference={thisSunlightPreference}
             moreInfo={thisMoreInfo}
+            plantId={plantId}
           />
         </div>
       </div>

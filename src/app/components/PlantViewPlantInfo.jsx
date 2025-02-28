@@ -18,57 +18,105 @@ const PlantViewPlantInfo = ({
   wateringPreference,
   sunlightPreference,
   moreInfo,
+  plantId
 }) => {
-  const router = useRouter();
-
+  const user = auth.getCurrentUser();
+  
   const [nameInput, setNameInput] = useState(plantName);
   const [tagInput, setTagInput] = useState(tags);
   const [selectedDate, setSelectedDate] = useState("");
 
-  const updateName = () => {
-    if (nameInput) {
-      // backend ändrar namnet
+  const userName = user?.name;
+
+  async function updateName() {
+    if (nameInput != plantName && nameInput != "") {
+
+      try {
+        const token = getCookie(TOKEN_KEY);
+        if (!token) {
+          alert("You are not authenticated. Please log in again.");
+          return;
+        }
+        const response = await axios.put("/api/me/plants",
+          { userName, plantId, nameInput },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            }
+          }
+        );
+  
+        if (response.status === 200) {
+          alert("Plant renamed successfully.");
+        }
+      } catch (error) {
+        console.error("Error renaming Plant:", error);
+        alert("Failed to rename Plant. Please try again later.");
+      }
     }
   };
 
-  const updateTags = () => {
+  async function updateTags () {
     //extract #tags from the input field, save all in an array
-    const tags = tagInput.match(/#\w+/g) || [];
-    const tagsArray = tags.map((tag) => tag.substring(1));
+    const tagsText = tagInput.match(/#\w+/g) || [];
+    const tags = tagsText.map((tag) => tag.substring(1));
 
-    if (tagsArray.length > 0) {
-      // TODO: API CALL - update tags
-    }
-  };
-
-  async function waterPlant() {
-    // backend vattnar växtet
     try {
       const token = getCookie(TOKEN_KEY);
       if (!token) {
         alert("You are not authenticated. Please log in again.");
         return;
       }
-      await axios.put(
-        "/api/me/plants",
-        { selectedDate, userName },
+      const response = await axios.put("/api/me/tags",
+        { userName, plantId, tags },
         {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
-          },
+          }
         }
       );
-      auth.updateToken(userName);
-      alert("Your plant was watered!");
+
+      if (response.status === 200) {
+        alert("Tags updated successfully.");
+      }
     } catch (error) {
-      alert("Couldn't water plant.");
-      console.error(
-        "Watering plant error:",
-        error.response?.data || error.message
-      );
+      console.error("Error updating tags:", error);
+      alert("Failed to update tags. Please try again later.");
     }
   };
+
+  async function waterPlant() {
+    if (selectedDate === "") {
+      alert("please select the watering date first.");
+      return;
+    }
+    try {
+      const token = getCookie(TOKEN_KEY);
+      if (!token) {
+        alert("You are not authenticated. Please log in again.");
+        return;
+      }
+      const response = await axios.put("/api/me/plants/water",
+        { userName, plantId, selectedDate },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          }
+        }
+      );
+
+      if (response.status === 200) {
+        alert("Plant watered successfully.");
+      }
+    } catch (error) {
+      console.error("Error watering Plant:", error);
+      alert("Failed to water Plant. Please try again later.");
+    }
+  };
+
 
   return (
     <div className="p-2 w-[100%] overflow-hidden rounded-3xl bg-gray-200 flex flex-col space-y-5 h-auto">
