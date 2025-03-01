@@ -2,25 +2,35 @@
 import React, { useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Navbar from "../components/Navbar";
+import auth from "../../services/auth";
+import axios from "axios";
+import { getCookie } from "cookies-next";
+import { TOKEN_KEY } from "@/constants";
 
 const imgLink =
   "https://images.pexels.com/photos/4623043/pexels-photo-4623043.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
 
-const CatalogView = ({}) => {
-
+const WishItemView = ({}) => {
   const params = useSearchParams();
   const itemID = params.get("itemID");
   const catalogID = params.get("catalogID");
   const returnPage = params.get("return");
 
-  // temporary data - hämta från databasen
-  const commonName = "Peony";
-  const scientificName = "Paeonia Officinalis";
-  const familyName = "Paeoniaceae";
-  const wateringPrefence = "Every 3 days";
-  const sunlightPreference = "Medium";
+  const user = auth.getCurrentUser();
+  const userName = user?.name;
+  const wishlist = user.wishlist;
+  const wishItem = wishlist.items.find((wi) => wi.id === itemID);
+
+
+  // temporary data - hämta från API med hjälp av catalogID (defined)
+  const commonName = "Peony"; // = wishItem.commonName;
+  const scientificName = "Paeonia Officinalis"; // = wishItem.scientificName;
+  const familyName = "Paeoniaceae"; // = wishItem.familyName;
+  const wateringPrefence = "Every 3 days"; // = wishItem.watering;
+  const sunlightPreference = "Medium"; // = wishItem.sunlight;
   const moreInfo =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer neque est, dapibus eu fermentum at, malesuada sit amet risus. Pellentesque quis massa quis purus cursus tempus dignissim non sem. Sed viverra pharetra sapien, id sollicitudin justo. Suspendisse potenti. Integer in suscipit mi, eget fringilla erat. Nulla facilisi. Nullam posuere, velit a iaculis mollis, orci eros bibendum orci, ut egestas turpis ipsum a urna. Morbi rutrum, ipsum quis finibus feugiat, quam eros tristique nisi, ac posuere quam diam ac lacus. In finibus ipsum in gravida pellentesque. Nulla malesuada aliquam enim at tincidunt. Quisque quam mauris, tincidunt vel rhoncus in, feugiat id arcu. Praesent at vulputate nibh. Ut tempor eu est id suscipit. In congue tellus nec nisi laoreet dapibus. Sed ut rutrum urna.";
+  // = wishItem.description;
 
   const router = useRouter();
 
@@ -28,17 +38,34 @@ const CatalogView = ({}) => {
     router.push(`/${returnPage}`);
   };
 
-  const deletePlant = () => {
-    // skickar API delete request
-  };
+  async function addToLibrary() {
+    if (catalogID) {
+      try {
+        const token = getCookie(TOKEN_KEY);
+        if (!token) {
+          alert("You are not authenticated. Please log in again.");
+          return;
+        }
+        const response = await axios.post(
+          "/api/me/plants",
+          { userName, catalogID },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
-  const addToLibrary = () => {
-    // lägg till växt med detta id i librray
-  };
-
-  const addToWishlist = () => {
-    // lägg till växt med detta catalog id i librray
-  };
+        if (response.status === 200) {
+          alert("Plant successfully added to library.");
+        }
+      } catch (error) {
+        console.error("Error adding Plant to librray:", error);
+        alert("Failed to add Plant to library. Please try again later.");
+      }
+    }
+  }
 
   return (
     <div
@@ -69,20 +96,13 @@ const CatalogView = ({}) => {
                   {"<< Return"}{" "}
                 </button>
               </td>
-              <td >
+              <td>
                 <button
                   className="text-white text-sm rounded-md p-3 pl-4 pr-4 float-right"
                   style={{ background: "#3A5A40" }}
                   onClick={addToLibrary}
                 >
                   Add to My Library
-                </button>
-                <button
-                  className="text-white text-sm rounded-md p-3 pl-4 pr-4 float-right mr-2"
-                  style={{ background: "#3A5A40" }}
-                  onClick={addToWishlist}
-                >
-                  Add to Wishlist
                 </button>
               </td>
             </tr>
@@ -158,4 +178,4 @@ const CatalogView = ({}) => {
   );
 };
 
-export default CatalogView;
+export default WishItemView;

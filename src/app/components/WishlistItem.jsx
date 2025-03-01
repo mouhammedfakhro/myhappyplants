@@ -20,7 +20,7 @@ const WishlistItem = ({
 
   const plantClicked = () => {
     router.push(
-      `../catalogview?itemID=${itemID}&catalogID=${catalogID}&return=${returnPage}`
+      `../wishItemView?itemID=${itemID}&catalogID=${catalogID}&return=${returnPage}`
     );
   };
 
