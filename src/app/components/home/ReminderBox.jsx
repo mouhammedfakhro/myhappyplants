@@ -10,7 +10,7 @@ const ReminderBox = ({
 
     const router = useRouter();
     const formattedDate = date.substring(0, 10);
-    
+
 
     const viewClicked = () => {
         router.push(`../plantview?plantID=${plantID}&return=home`);

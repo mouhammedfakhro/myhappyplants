@@ -9,6 +9,7 @@ const imgLink =
 const CatalogView = ({}) => {
 
   const params = useSearchParams();
+  const itemID = params.get("itemID");
   const catalogID = params.get("catalogID");
   const returnPage = params.get("return");
 
