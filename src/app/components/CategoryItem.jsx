@@ -5,13 +5,14 @@ import { useRouter } from "next/navigation";
 const CategoryItem = ({
     imageLink,
     name,
+    displayName,
     categoryID
 }) => {
 
     const router = useRouter();
 
     const categoryClicked = () => {
-        router.push(`../category?categoryName=${name}`);
+        router.push(`../category?categoryName=${name}&displayName=${displayName}`);
     }
 
     return (
@@ -19,11 +20,11 @@ const CategoryItem = ({
         hover:bg-gray-300" onClick={categoryClicked}>
             
             <img src={imageLink}
-            className="w-[25%] aspect-square object-cover rounded-2xl">
+            className="w-[30%] aspect-square object-cover rounded-2xl">
             </img>
 
             <div className="justify-items-start">
-                <p className="text-xl">{name}</p>
+                <p className="text-2xl">{displayName}</p>
             </div>
 
         </button>

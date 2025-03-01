@@ -18,10 +18,11 @@ const WishlistPage = ({}) => {
 
       <div key={wishlistItemIndex}>
         <WishlistItem
-          imageLink={null}
-          scientificName="im a plant"
-          familyName={null}
+          imageLink={null} //to be retrieved from API
+          scientificName="Scientific Name" //to be retrieved from API
+          familyName="Family Name" //to be retrieved from API
           catalogID={wishlistItem.catalogID}
+          itemID={wishlistItem.id}
           returnPage="wishlist"
         />
       </div>
