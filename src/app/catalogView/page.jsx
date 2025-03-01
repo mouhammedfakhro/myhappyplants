@@ -7,18 +7,13 @@ import axios from "axios";
 import { getCookie } from "cookies-next";
 import { TOKEN_KEY } from "@/constants";
 
-
-const WishItemView = ({}) => {
+const catalogItemView = ({}) => {
   const params = useSearchParams();
-  const itemID = params.get("itemID");
   const catalogID = params.get("catalogID");
   const returnPage = params.get("return");
-
+  const router = useRouter();
   const user = auth.getCurrentUser();
   const userName = user?.name;
-  const wishlist = user.wishlist;
-  const wishItem = wishlist.items.find((wi) => wi.id === itemID);
-
 
   // temporary data - hämta från API med hjälp av catalogID (defined)
   const commonName = "Peony"; // = wishItem.commonName;
@@ -32,8 +27,6 @@ const WishItemView = ({}) => {
   const imgLink =
   "https://images.pexels.com/photos/4623043/pexels-photo-4623043.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
 
-
-  const router = useRouter();
 
   const returnClicked = () => {
     router.push(`/${returnPage}`);
@@ -57,13 +50,40 @@ const WishItemView = ({}) => {
             },
           }
         );
-
         if (response.status === 200) {
           alert("Plant successfully added to library.");
         }
       } catch (error) {
         console.error("Error adding Plant to librray:", error);
         alert("Failed to add Plant to library. Please try again later.");
+      }
+    }
+  }
+
+  async function addToWishlist() {
+    if (catalogID) {
+      try {
+        const token = getCookie(TOKEN_KEY);
+        if (!token) {
+          alert("You are not authenticated. Please log in again.");
+          return;
+        }
+        const response = await axios.post(
+          "/api/me/wishlist",
+          { userName, catalogID },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (response.status === 200) {
+          alert("Plant successfully added to wishlist.");
+        }
+      } catch (error) {
+        console.error("Error adding Plant to wishlist:", error);
+        alert("Failed to add Plant to wishlist. Please try again later.");
       }
     }
   }
@@ -99,11 +119,18 @@ const WishItemView = ({}) => {
               </td>
               <td>
                 <button
-                  className="text-white text-sm rounded-md p-3 pl-4 pr-4 float-right"
+                  className="text-white text-sm rounded-md p-3 pl-4 pr-4 float-right ml-2"
                   style={{ background: "#3A5A40" }}
                   onClick={addToLibrary}
                 >
                   Add to My Library
+                </button>
+                <button
+                  className="text-white text-sm rounded-md p-3 pl-4 pr-4 float-right"
+                  style={{ background: "#3A5A40" }}
+                  onClick={addToWishlist}
+                >
+                  Add to Wishlist
                 </button>
               </td>
             </tr>
@@ -179,4 +206,4 @@ const WishItemView = ({}) => {
   );
 };
 
-export default WishItemView;
+export default catalogItemView;

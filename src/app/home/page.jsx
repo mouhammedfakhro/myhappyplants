@@ -4,6 +4,7 @@ import LibraryItem from "../components/library/LibraryItem";
 import ReminderBox from "../components/home/ReminderBox";
 import Navbar from "../components/Navbar";
 import auth from "../../services/auth";
+import CatalogItem from "../components/CatalogItem";
 
 const LoggedinHome = ({}) => {
 

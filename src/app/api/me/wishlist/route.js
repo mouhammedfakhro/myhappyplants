@@ -2,10 +2,6 @@ import { NextResponse } from "next/server";
 import prisma from "../../../../../lib/prisma";
 import { getUser, verifyUser } from "../../../../../lib/auth";
 
-export async function POST(req) {
-  // adding item to wishlist
-}
-
 // for deleting a wishlistItem
 export async function DELETE(req) {
   try {
@@ -31,6 +27,49 @@ export async function DELETE(req) {
     );
   } catch (error) {
     console.error("Wishlist item deletion error:", error);
+    return NextResponse.json({ error: "Server error" }, { status: 500 });
+  }
+}
+
+// for adding a catalogItem to wishlist
+export async function POST(req) {
+  try {
+    const body = await req.json();
+    const { userName, catalogID } = body;
+
+    // Verify user
+    const userVerified = await verifyUser(req, userName);
+    if (!userVerified) {
+      return NextResponse.json({ error: "Unauthorized user" }, { status: 403 });
+    }
+
+    // get user id
+    const user = await prisma.user.findUnique({
+      where: { name: userName },
+    });
+
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 400 });
+    }
+
+    await prisma.wishItem.create({
+      data: {
+        wishlist: {
+          connectOrCreate: {
+            where: { userID: user.id }, 
+            create: { userID: user.id },
+          },
+        },
+        catalogID: catalogID,
+      },
+    });
+
+    return NextResponse.json(
+      { message: "Item successfully created and added to wishlist" },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("adding item to wishlist error:", error);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }
