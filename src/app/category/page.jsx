@@ -12,8 +12,9 @@ const category = ({}) => {
 
     const params = useSearchParams();
     const categoryName = params.get("categoryName");
+    const displayName = params.get("displayName");
 
-    //TODO: hämta category items som ligger i kategorin
+    //TODO: hämta API items som har type=categoryName
 
     const returnClicked = () => {
         router.push("/discovery");
@@ -57,7 +58,7 @@ const category = ({}) => {
                     <br/>
 
                     {/*context text*/}
-                    <p>Category: {categoryName} </p>
+                    <p>Category: {displayName} </p>
 
                     <br/>
 

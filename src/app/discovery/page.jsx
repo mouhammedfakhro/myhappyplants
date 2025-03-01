@@ -53,71 +53,42 @@ const DiscoveryPage = ({}) => {
                     <SearchBar/>
 
                     <br/>
+                    <p>Browse Categories</p>
 
 
                     {/*the 10 pre-selected categories*/}
                     <div className="flex space-x-2">
                         <CategoryItem
-                            imageLink="https://images.pexels.com/photos/6913065/pexels-photo-6913065.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            name="Category1"
+                            imageLink="https://images.pexels.com/photos/2778192/pexels-photo-2778192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                            name="tree"
+                            displayName="Trees"
                             categoryID="3"
                                                     
                         />
                         <CategoryItem
                             imageLink="https://images.pexels.com/photos/6913065/pexels-photo-6913065.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            name="Category2"
+                            name="flower"
+                            displayName="Flowers"
                             categoryID="3"                        
                         />
                     </div>
                     <div className="flex space-x-2">
                         <CategoryItem
-                            imageLink="https://images.pexels.com/photos/6913065/pexels-photo-6913065.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            name="Category3"
+                            imageLink="https://images.pexels.com/photos/1903965/pexels-photo-1903965.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                            name="cacti"
+                            displayName="Cacti"
                             categoryID="3"                        
                         />
                         <CategoryItem
-                            imageLink="https://images.pexels.com/photos/6913065/pexels-photo-6913065.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            name="Category4"
+                            imageLink="https://images.pexels.com/photos/691043/pexels-photo-691043.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                            name="fern"
+                            displayName="Fern"
                             categoryID="3"                        
                         />
                     </div>
-                    <div className="flex space-x-2">
-                        <CategoryItem
-                            imageLink="https://images.pexels.com/photos/6913065/pexels-photo-6913065.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            name="Category5"
-                            categoryID="3"                        
-                        />
-                        <CategoryItem
-                            imageLink="https://images.pexels.com/photos/6913065/pexels-photo-6913065.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            name="Category6"
-                            categoryID="3"                        
-                        />
-                    </div>
-                    <div className="flex space-x-2">
-                        <CategoryItem
-                            imageLink="https://images.pexels.com/photos/6913065/pexels-photo-6913065.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            name="Category7"
-                            categoryID="3"                        
-                        />
-                        <CategoryItem
-                            imageLink="https://images.pexels.com/photos/6913065/pexels-photo-6913065.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            name="Category8"
-                            categoryID="3"                        
-                        />
-                    </div>
-                    <div className="flex space-x-2">
-                        <CategoryItem
-                            imageLink="https://images.pexels.com/photos/6913065/pexels-photo-6913065.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            name="Category9"
-                            categoryID="3"                        
-                        />
-                        <CategoryItem
-                            imageLink="https://images.pexels.com/photos/6913065/pexels-photo-6913065.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                            name="Category10"
-                            categoryID="3"                        
-                        />
-                    </div>
-
+                    
+                    
+                    
                 </div>
             </div>
         </div>
