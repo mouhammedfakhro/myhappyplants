@@ -1,13 +1,37 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Navbar from "../components/Navbar";
 import SearchBar from "../components/SearchBar";
 import CategoryItem from "../components/CategoryItem";
 import CatalogItem from "../components/CatalogItem";
+import axios from "axios";
 
-const DiscoveryPage = ({}) => {
+const DiscoveryPage = () => {
   const router = useRouter();
+  const [catalogItems, setCatalogItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchCatalogItems() {
+      try {
+        const response = await axios.get(
+          "https://perenual.com/api/v2/species-list?key=sk-sUY267c5cf0decdc38938"
+        );
+        setCatalogItems(response.data.data || []);
+      } catch (error) {
+        console.error("Error fetching catalog items:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchCatalogItems();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div
@@ -89,20 +113,27 @@ const DiscoveryPage = ({}) => {
 
           <br/>
           <hr className="h-px my-5 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-          <p>TEST HERE: catalog item + catalog view </p>
+          <p>Plants </p>
 
-          <CatalogItem
-          imageLink={null}
-          scientificName="CatalogItem"
-          familyName="Family Name"
-          catalogID="2"
-          returnPage="discovery"
-          />
-          
+          {/* Map through catalog items dynamically */}
+          <div className="grid grid-cols-3 gap-4">
+            {catalogItems.map((item) => (
+              <CatalogItem
+                key={item.id}
+                id={item.id}
+                commonName={item.common_name}
+                scientificName={item.scientific_name}
+                imgLink={item.default_image?.original_url || "default-image.jpg"}
+                returnPage="discovery"
+                catalogID={item.id}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
   );
 };
+          
 
 export default DiscoveryPage;
