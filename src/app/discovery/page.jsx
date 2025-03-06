@@ -123,7 +123,7 @@ const DiscoveryPage = () => {
                 id={item.id}
                 commonName={item.common_name}
                 scientificName={item.scientific_name}
-                imgLink={item.default_image?.original_url || "default-image.jpg"}
+                imgLink={item.default_image?.original_url}
                 returnPage="discovery"
                 catalogID={item.id}
               />

@@ -155,7 +155,7 @@ const CatalogItemView = () => {
         <div className="p-2 w-[100%] overflow-hidden rounded-3xl bg-gray-200 flex flex-col space-y-5 h-auto">
           <div className="flex w-full space-x-5">
             <img
-            src={plantDetails.imgLink || "default-image.jpg"} 
+            src={plantDetails.imgLink} 
             className="w-[25%] aspect-square object-cover rounded-2xl"
             
             />
