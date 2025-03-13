@@ -110,7 +110,7 @@ describe("PlantViewPlantInfo", () => {
         expect(tagInputField).toBeInTheDocument();
 
         fireEvent.click(updateTagsButton);
-        expect(tagInputField.value).toBe("");
+        expect(tagInputField.value).toBe("#cacty #flower");
     });
 
     // initial: "" --> input: "" --> result: ""
@@ -122,6 +122,55 @@ describe("PlantViewPlantInfo", () => {
         expect(tagInputField).toBeInTheDocument();
 
         fireEvent.change(tagInputField, { target: { value: "" } });
+        fireEvent.click(updateTagsButton);
+        expect(tagInputField.value).toBe("");
+    });
+
+    // initial: "" --> input: "" --> result: ""
+    test("BVA max input length (50)", () => {
+
+        const {getByTestId, getByRole} = render(<PlantViewPlantInfo tags="" test={true}/>);
+        const updateTagsButton = screen.getByRole("button", {name: "Update Tags"});
+        const tagInputField = screen.getByPlaceholderText("enter tags..." );
+        expect(tagInputField).toBeInTheDocument();
+
+        fireEvent.change(tagInputField, { target: { value: "#aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" } });
+        fireEvent.click(updateTagsButton);
+        expect(tagInputField.value).toBe("#aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    });
+
+    test("BVA max input length + 1 (51)", () => {
+
+        const {getByTestId, getByRole} = render(<PlantViewPlantInfo tags="" test={true}/>);
+        const updateTagsButton = screen.getByRole("button", {name: "Update Tags"});
+        const tagInputField = screen.getByPlaceholderText("enter tags..." );
+        expect(tagInputField).toBeInTheDocument();
+
+        fireEvent.change(tagInputField, { target: { value: "#aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" } });
+        fireEvent.click(updateTagsButton);
+        expect(tagInputField.value).toBe("#aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    });
+
+    test("BVA max input length -1 (49)", () => {
+
+        const {getByTestId, getByRole} = render(<PlantViewPlantInfo tags="" test={true}/>);
+        const updateTagsButton = screen.getByRole("button", {name: "Update Tags"});
+        const tagInputField = screen.getByPlaceholderText("enter tags..." );
+        expect(tagInputField).toBeInTheDocument();
+
+        fireEvent.change(tagInputField, { target: { value: "#aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" } });
+        fireEvent.click(updateTagsButton);
+        expect(tagInputField.value).toBe("#aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    });
+
+    test("null input", () => {
+
+        const {getByTestId, getByRole} = render(<PlantViewPlantInfo tags="" test={true}/>);
+        const updateTagsButton = screen.getByRole("button", {name: "Update Tags"});
+        const tagInputField = screen.getByPlaceholderText("enter tags..." );
+        expect(tagInputField).toBeInTheDocument();
+
+        fireEvent.change(tagInputField, { target: { value: null } });
         fireEvent.click(updateTagsButton);
         expect(tagInputField.value).toBe("");
     });

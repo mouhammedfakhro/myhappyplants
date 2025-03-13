@@ -63,8 +63,17 @@ const PlantViewPlantInfo = ({
   }
 
   async function updateTags() {
+
+    let newTagInput = tagInput;
+    if (tagInput === null) {
+      newTagInput = "";
+    }
+    if (tagInput.length > 50){
+      newTagInput = tagInput.slice(0,50);
+    }
+
     //extract #tags from the input field, save all in an array
-    const tagsText = tagInput.match(/#\w+/g) || [];
+    const tagsText = newTagInput.match(/#\w+/g) || [];
     const tags = tagsText.map((tag) => tag.substring(1));
 
     // update tags text field with cleaned up text
