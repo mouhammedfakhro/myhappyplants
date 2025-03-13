@@ -124,6 +124,7 @@ const PlantView = ({}) => {
             sunlightPreference={thisSunlightPreference}
             moreInfo={thisMoreInfo}
             plantId={plantId}
+            test={false}
           />
         </div>
       </div>

@@ -195,4 +195,8 @@ const config = {
     // watchman: true,
   };
   
-  module.exports = config;
+  module.exports = {
+    testEnvironment: "jest-environment-jsdom",
+    setupFilesAfterEnv: ["@testing-library/jest-dom"]
+  };
+  
