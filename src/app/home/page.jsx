@@ -7,10 +7,11 @@ import auth from "../../services/auth";
 import CatalogItem from "../components/CatalogItem";
 
 const LoggedinHome = ({}) => {
-
   const renderReminders = () => {
     const user = auth.getCurrentUser();
     if (!user || !Array.isArray(user.plants)) return null;
+
+    console.log(user.plants);
 
     return user.plants.map((plant, plantIndex) => (
       <div key={plantIndex}>
@@ -36,7 +37,7 @@ const LoggedinHome = ({}) => {
     return user.plants.map((plant, plantIndex) => (
       <div key={plantIndex}>
         <LibraryItem
-          imageLink={null}
+          imageLink={plant.imageUrl}
           plantName={plant.nickname}
           scientificName={null}
           familyName={null}

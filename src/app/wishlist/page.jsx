@@ -13,6 +13,8 @@ const WishlistPage = ({}) => {
 
   const renderWishlistItems = () => {
     if (!user || !Array.isArray(user.wishlist.items)) return null;
+    
+
 
     return user.wishlist.items.map((wishlistItem, wishlistItemIndex) => (
 

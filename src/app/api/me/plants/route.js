@@ -63,7 +63,8 @@ export async function PUT(req) {
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { userName, catalogID } = body;
+    const { userName, catalogID, name, imageUrl } = body;
+    console.log(userName, catalogID, name, imageUrl);
 
     // Verify user
     const userVerified = await verifyUser(req, userName);
@@ -88,7 +89,8 @@ export async function POST(req) {
       data: {
         userId: user.id,
         catalogID: catalogID,
-        nickname: "Unnamed Plant", 
+        nickname: name, 
+        imageUrl: imageUrl,
         lastWatered: new Date(),
         toBeWatered: new Date(new Date().setDate(new Date().getDate() + waterFreq)),
       },

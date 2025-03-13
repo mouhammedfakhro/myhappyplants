@@ -9,7 +9,7 @@ import { TOKEN_KEY } from "@/constants";
 // when you search or browse a category in Discovery page - these are the components that
 // show up as results, just like in library
 const CatalogItem = ({
-  imageLink,
+  imgLink,
   scientificName,
   familyName,
   catalogID,
@@ -29,7 +29,7 @@ const CatalogItem = ({
     <button className="p-2 w-[100%] overflow-hidden rounded-3xl bg-gray-200 flex space-x-5
         hover:bg-gray-300 mb-2" onClick={itemClicked}>
             
-            <img src={imageLink}
+            <img src={imgLink}
             className="w-[25%] aspect-square object-cover rounded-2xl">
             </img>
 

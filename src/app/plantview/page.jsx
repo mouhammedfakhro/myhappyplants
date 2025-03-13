@@ -1,11 +1,10 @@
 "use client";
 
 import React, { Suspense } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Navbar from "../components/Navbar";
 import PlantViewPlantInfo from "../components/PlantViewPlantInfo";
 import auth from "../../services/auth";
-
 
 const PlantView = () => {
   return (
@@ -22,7 +21,9 @@ const PlantViewContent = () => {
   const returnPage = params.get("return");
 
   const user = auth.getCurrentUser();
-  const plant = user?.plants?.find((p) => p.id === plantID) || {};
+  const plant = user?.plants?.find((p) => p.id === plantId) || {};
+
+  console.log(plant);
 
   // Temporary data - should be fetched from the database
   const thisname = plant.nickname || "Unknown Plant";
@@ -32,15 +33,16 @@ const PlantViewContent = () => {
   const thistags = plant.tags;
   const thislastWatered = plant.lastWatered;
   const thistoBeWatered = plant.toBeWatered;
-  const thisWateringPrefence = "___";
+  const thisWateringPreference = 5;
   const thisSunlightPreference = "___";
   const thisMoreInfo = "___";
-  const imgLink = "___";
+  const imgLink = plant.imageUrl;
 
-  const tagsFormatted = plant.tags && plant.tags.length > 0
-              ? plant.tags.map((tag) => `#${tag.tagName}`).join(" ")
-              : ""
-      
+  const tagsFormatted =
+    plant.tags && plant.tags.length > 0
+      ? plant.tags.map((tag) => `#${tag.tagName}`).join(" ")
+      : "";
+
   const returnClicked = () => {
     router.push(`/${returnPage}`);
   };
@@ -91,7 +93,10 @@ const PlantViewContent = () => {
           <tbody>
             <tr>
               <td>
-                <button className="text-2xl hover:text-lime-800" onClick={returnClicked}>
+                <button
+                  className="text-2xl hover:text-lime-800"
+                  onClick={returnClicked}
+                >
                   {" "}
                   {"<< Return"}{" "}
                 </button>
