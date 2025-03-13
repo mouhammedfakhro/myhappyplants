@@ -23,9 +23,6 @@ const SignUpBox = ({}) => {
         passText,
       });
 
-      console.log("User registered successfully:", response.data);
-
-      // Redirect to email verification page
       const encodedEmail = encodeURIComponent(emailText);
       router.push(`/verifyEmail?email=${encodedEmail}`);
     } catch (error) {

@@ -1,5 +1,4 @@
 import { SignJWT } from "jose";
-import prisma from "../../../../../lib/prisma";
 import { createServerResponse } from "../../../utils";
 import bcrypt from "bcrypt";
 import { getUser } from "../../../../../lib/auth";

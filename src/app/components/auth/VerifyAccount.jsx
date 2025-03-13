@@ -8,8 +8,6 @@ const VerifyAccount = ({}) => {
   const searchParams = useSearchParams();
   const emailText = searchParams.get("email");
 
-  console.log(emailText);
-
   const router = useRouter();
   const verifyClicked = async () => {
     if (!emailText) {
@@ -27,8 +25,6 @@ const VerifyAccount = ({}) => {
         emailText,
         verCode,
       });
-
-      console.log("Verification successful:", response.data);
 
       router.push(`/verifyEmail?content=successVerify`);
     } catch (error) {
