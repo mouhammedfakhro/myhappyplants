@@ -31,9 +31,6 @@ const EmailSentbox = () => {
         pass,
       });
 
-      console.log("Password reset successful:", response.data);
-
-      // Redirect user after successful password reset
       router.push(`/passwordReset?content=successReset`);
     } catch (error) {
       console.error(

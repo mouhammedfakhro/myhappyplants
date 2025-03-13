@@ -20,19 +20,6 @@ model Plant {
   tags      Tag[]
 }
 
-// TODO: Remove this
-model Species {
-  id             String  @id @default(uuid())
-  scientificName String
-  genus          String
-  family         String
-  commonName     String?
-  imageUrl       String?
-  light          String?
-  urlWikipediaEn String?
-  waterFrequency Int?
-}
-
 model User {
   id                  String    @id @default(uuid())
   name                String    @unique

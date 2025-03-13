@@ -1,32 +1,38 @@
 "use client";
-import React, { useRef, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+
+import React, { Suspense } from "react";
+import { useRouter } from "next/navigation";
 import Navbar from "../components/Navbar";
 import PlantViewPlantInfo from "../components/PlantViewPlantInfo";
 import auth from "../../services/auth";
+import { useSearchParams } from "next/navigation";
 
+const PlantView = () => {
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <PlantViewContent />
+    </Suspense>
+  );
+};
 
-const PlantView = ({}) => {
-
+const PlantViewContent = () => {
   const router = useRouter();
-
   const params = useSearchParams();
   const plantID = params.get("plantID");
   const returnPage = params.get("return");
 
   const user = auth.getCurrentUser();
-  const plant = user.plants.find(p => p.id === plantID);
-  
+  const plant = user?.plants?.find((p) => p.id === plantID) || {};
 
-  // temporary data - hämta från databasen
-  const thisname = plant.nickname;
+  // Temporary data - should be fetched from the database
+  const thisname = plant.nickname || "Unknown Plant";
   const thiscommonName = "___";
   const thisscientificName = "___";
   const thisfamilyName = "___";
-  const thistags = plant.tags;
-  const thislastWatered = plant.lastWatered;
-  const thistoBeWatered = plant.toBeWatered;
-  const thisWateringPrefence = "___";
+  const thistags = plant.tags || [];
+  const thislastWatered = plant.lastWatered || "N/A";
+  const thistoBeWatered = plant.toBeWatered || "N/A";
+  const thisWateringPreference = "___";
   const thisSunlightPreference = "___";
   const thisMoreInfo = "___";
   const imgLink = "___";
@@ -36,14 +42,11 @@ const PlantView = ({}) => {
   };
 
   const deletePlant = () => {
-    // skickar API delete request
+    // API delete request here
   };
 
   return (
-    <div
-      className="max-w-screen min-w-screen
-        max-h-screen min-h-screen flex"
-    >
+    <div className="max-w-screen min-w-screen max-h-screen min-h-screen flex">
       <div className="w-[7%] min-h-full" style={{ background: "#3A5A40" }}>
         <Navbar />
       </div>
@@ -60,10 +63,7 @@ const PlantView = ({}) => {
           <tbody>
             <tr>
               <td>
-                <button
-                  className="text-2xl hover:text-lime-800"
-                  onClick={returnClicked}
-                >
+                <button className="text-2xl hover:text-lime-800" onClick={returnClicked}>
                   {" "}
                   {"<< Return"}{" "}
                 </button>
@@ -93,7 +93,7 @@ const PlantView = ({}) => {
             tags={thistags}
             lastWatered={thislastWatered}
             toBeWatered={thistoBeWatered}
-            wateringPreference={thisWateringPrefence}
+            wateringPreference={thisWateringPreference}
             sunlightPreference={thisSunlightPreference}
             moreInfo={thisMoreInfo}
           />

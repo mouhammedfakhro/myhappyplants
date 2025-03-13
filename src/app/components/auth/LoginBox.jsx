@@ -18,7 +18,6 @@ const LoginBox = ({}) => {
         await auth.login(usernameText, passText);
         router.push('/home');
       } catch (error) {
-        console.log("Fel användarnamn eller lösenord.");
         setErrorMessage("Incorrect username and/or password. Please try again.");
       }
     }
@@ -29,7 +28,6 @@ const LoginBox = ({}) => {
   };
 
   const signupClicked = () => {
-    console.log("asdfghjkl");
     router.push("/signup");
   };
 

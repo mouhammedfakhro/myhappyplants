@@ -1,4 +1,3 @@
-import createServer from "next/dist/server/next";
 import prisma from "../../../../../lib/prisma";
 import { createServerResponse, validateRequestBody } from "../../../utils";
 
