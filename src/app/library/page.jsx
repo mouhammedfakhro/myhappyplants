@@ -25,7 +25,7 @@ const LibraryPage = ({}) => {
     return user.plants.map((plant, plantIndex) => (
       <div key={plantIndex}>
         <LibraryItem
-          imageLink={null}
+          imageLink={plant.imageUrl}
           plantName={plant.nickname}
           scientificName={null}
           familyName={null}
