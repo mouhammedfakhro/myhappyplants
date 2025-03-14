@@ -126,7 +126,6 @@ describe("PlantViewPlantInfo", () => {
         expect(tagInputField.value).toBe("");
     });
 
-    // initial: "" --> input: "" --> result: ""
     test("BVA max input length (50)", () => {
 
         const {getByTestId, getByRole} = render(<PlantViewPlantInfo tags="" test={true}/>);
