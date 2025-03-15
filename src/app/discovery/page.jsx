@@ -16,7 +16,7 @@ const DiscoveryPage = () => {
     async function fetchCatalogItems() {
       try {
         const response = await axios.get(
-          `https://perenual.com/api/v2/species-list?key=${process.env.NEXT_PUBLIC_PERENUAL_API_KEY}`
+          `https://perenual.com/api/v2/species-list?key=${process.env.NEXT_PUBLIC_PERENUAL_API_KEY2}`
         );
 
         setCatalogItems(response.data.data || []);

@@ -1,6 +1,7 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 import Navbar from "../components/Navbar";
 import WishlistItem from "../components/WishlistItem";
 import auth from "../../services/auth";
@@ -9,27 +10,54 @@ const WishlistPage = ({}) => {
   const router = useRouter();
   const user = auth.getCurrentUser();
 
-  console.log(user.wishlist);
+  console.log(user?.wishlist);
 
   const renderWishlistItems = () => {
-    if (!user || !Array.isArray(user.wishlist.items)) return null;
-    
+    if (!user || !user.wishlist || !Array.isArray(user.wishlist.items)) return null;
 
+    const fetchPlantDetails = async (catalogID) => {
+      try {
+        const response = await axios.get(
+          `https://perenual.com/api/v2/species/details/${catalogID}?key=${process.env.PERENUAL_API_KEY}`
+        );
+        const data = response.data;
+        return {
+          imageLink: data.default_image?.original_url || null,
+          scientificName: data.scientific_name || "Scientific Name",
+          familyName: data.family_name || "Family Name",
+        };
+      } catch (error) {
+        console.error("Error fetching plant details:", error);
+        return {
+          imageLink: null,
+          scientificName: "Scientific Name",
+          familyName: "Family Name",
+        };
+      }
+    };
 
-    return user.wishlist.items.map((wishlistItem, wishlistItemIndex) => (
+    return user.wishlist.items.map((wishlistItem, wishlistItemIndex) => {
+      const [plantDetails, setPlantDetails] = useState(null);
 
-      <div key={wishlistItemIndex}>
-        <WishlistItem
-          imageLink={null} //to be retrieved from API
-          scientificName="Scientific Name" //to be retrieved from API
-          familyName="Family Name" //to be retrieved from API
-          catalogID={wishlistItem.catalogID}
-          itemID={wishlistItem.id}
-          returnPage="wishlist"
-        />
-      </div>
+      useEffect(() => {
+        fetchPlantDetails(wishlistItem.catalogID).then(setPlantDetails);
+      }, [wishlistItem.catalogID]);
 
-    ));
+      if (!plantDetails) return null;
+
+      return (
+        <div key={wishlistItemIndex}>
+          <WishlistItem
+            imageLink={plantDetails.imageLink}
+            scientificName={plantDetails.scientificName}
+            familyName={plantDetails.familyName}
+            catalogID={wishlistItem.catalogID}
+            itemID={wishlistItem.id}
+            returnPage="wishlist"
+          />
+        </div>
+      );
+    });
   };
 
   return (

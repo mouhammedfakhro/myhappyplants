@@ -31,7 +31,7 @@ const LoggedinHome = ({}) => {
   const renderPlantItems = () => {
     const user = auth.getCurrentUser();
 
-    console.log(user.plants);
+    console.log(user?.plants);
 
     if (!user || !Array.isArray(user.plants)) return null;
     return user.plants.map((plant, plantIndex) => (
