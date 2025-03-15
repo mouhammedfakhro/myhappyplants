@@ -39,7 +39,7 @@ const LoggedinHome = ({}) => {
         <LibraryItem
           imageLink={plant.imageUrl}
           plantName={plant.nickname}
-          scientificName={null}
+          scientificName={plant.scientificName}
           familyName={null}
           tags={
             plant.tags && plant.tags.length > 0

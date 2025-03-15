@@ -29,7 +29,7 @@ const LibraryTagPage = ({}) => {
             <LibraryItem
               imageLink={null}
               plantName={plant.nickname}
-              scientificName={null}
+              scientificName={plant.scientific_name}
               familyName={null}
               tags={
                 plant.tags && plant.tags.length > 0

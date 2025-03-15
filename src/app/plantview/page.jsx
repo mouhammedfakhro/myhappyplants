@@ -5,6 +5,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Navbar from "../components/Navbar";
 import PlantViewPlantInfo from "../components/PlantViewPlantInfo";
 import auth from "../../services/auth";
+import axios from "axios";
+import {getCookie} from "cookies-next";
+import {TOKEN_KEY} from "@/constants";
+
 
 const PlantView = () => {
   return (
