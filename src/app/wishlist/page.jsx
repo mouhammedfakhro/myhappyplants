@@ -18,7 +18,7 @@ const WishlistPage = ({}) => {
     const fetchPlantDetails = async (catalogID) => {
       try {
         const response = await axios.get(
-          `https://perenual.com/api/v2/species/details/${catalogID}?key=${process.env.PERENUAL_API_KEY}`
+          `https://perenual.com/api/v2/species/details/${catalogID}?key=${process.env.NEXT_PUBLIC_PERENUAL_API_KEY}`
         );
         const data = response.data;
         return {
