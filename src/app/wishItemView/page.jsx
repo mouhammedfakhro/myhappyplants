@@ -1,12 +1,11 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Navbar from "../components/Navbar";
 import auth from "../../services/auth";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 import { TOKEN_KEY } from "@/constants";
-
 
 const WishItemView = ({}) => {
   const params = useSearchParams();
@@ -16,22 +15,37 @@ const WishItemView = ({}) => {
 
   const user = auth.getCurrentUser();
   const userName = user?.name;
-  const wishlist = user.wishlist;
-  const wishItem = wishlist.items.find((wi) => wi.id === itemID);
 
+  const [plantDetails, setPlantDetails] = useState({});
+  const [loading, setLoading] = useState(true);
 
-  // temporary data - hämta från API med hjälp av catalogID (defined)
-  const commonName = "Peony"; // = wishItem.commonName;
-  const scientificName = "Paeonia Officinalis"; // = wishItem.scientificName;
-  const familyName = "Paeoniaceae"; // = wishItem.familyName;
-  const wateringPrefence = "Every 3 days"; // = wishItem.watering;
-  const sunlightPreference = "Medium"; // = wishItem.sunlight;
-  const moreInfo =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer neque est, dapibus eu fermentum at, malesuada sit amet risus. Pellentesque quis massa quis purus cursus tempus dignissim non sem. Sed viverra pharetra sapien, id sollicitudin justo. Suspendisse potenti. Integer in suscipit mi, eget fringilla erat. Nulla facilisi. Nullam posuere, velit a iaculis mollis, orci eros bibendum orci, ut egestas turpis ipsum a urna. Morbi rutrum, ipsum quis finibus feugiat, quam eros tristique nisi, ac posuere quam diam ac lacus. In finibus ipsum in gravida pellentesque. Nulla malesuada aliquam enim at tincidunt. Quisque quam mauris, tincidunt vel rhoncus in, feugiat id arcu. Praesent at vulputate nibh. Ut tempor eu est id suscipit. In congue tellus nec nisi laoreet dapibus. Sed ut rutrum urna.";
-  // = wishItem.description;
-  const imgLink =
-  "https://images.pexels.com/photos/4623043/pexels-photo-4623043.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2";
+  useEffect(() => {
+    if (catalogID) {
+      async function fetchPlantDetails() {
+        try {
+          const response = await axios.get(
+            `https://perenual.com/api/v2/species/details/${catalogID}?key=${process.env.NEXT_PUBLIC_PERENUAL_API_KEY}`
+          );
+          const data = response.data;
+          setPlantDetails({
+            commonName: data.common_name,
+            scientificName: data.scientific_name,
+            familyName: data.family_name,
+            wateringPreference: data.watering || "Not specified",
+            sunlightPreference: data.sunlight || "Not specified",
+            moreInfo: data.description || "No additional information available",
+            imgLink: data.default_image?.original_url || null,
+          });
+        } catch (error) {
+          console.error("Error fetching plant details:", error);
+        } finally {
+          setLoading(false);
+        }
+      }
 
+      fetchPlantDetails();
+    }
+  }, [catalogID]);
 
   const router = useRouter();
 
@@ -62,10 +76,18 @@ const WishItemView = ({}) => {
           alert("Plant successfully added to library.");
         }
       } catch (error) {
-        console.error("Error adding Plant to librray:", error);
+        console.error("Error adding Plant to library:", error);
         alert("Failed to add Plant to library. Please try again later.");
       }
     }
+  }
+
+  if (loading) {
+    return <div>Loading...</div>; // Display a loading message while waiting for the API response
+  }
+
+  if (!plantDetails) {
+    return <div>Plant details not found.</div>; // In case no data is returned
   }
 
   return (
@@ -117,7 +139,7 @@ const WishItemView = ({}) => {
           <div className="flex w-full space-x-5">
             {/*plant image*/}
             <img
-              src={imgLink}
+              src={plantDetails.imgLink}
               alt="plant image"
               className="w-[25%] aspect-square object-cover rounded-2xl"
             />
@@ -133,15 +155,15 @@ const WishItemView = ({}) => {
 
               <p className="text-md p-2" style={{ color: "#3A5A40" }}>
                 Common name:{" "}
-                <span style={{ color: "#A3B18A" }}>{commonName}</span>
+                <span style={{ color: "#A3B18A" }}>{plantDetails.commonName}</span>
               </p>
               <p className="text-md p-2" style={{ color: "#3A5A40" }}>
                 Scientific name:{" "}
-                <span style={{ color: "#A3B18A" }}>{scientificName}</span>
+                <span style={{ color: "#A3B18A" }}>{plantDetails.scientificName}</span>
               </p>
               <p className="text-md p-2" style={{ color: "#3A5A40" }}>
                 Family name:{" "}
-                <span style={{ color: "#A3B18A" }}>{familyName}</span>
+                <span style={{ color: "#A3B18A" }}>{plantDetails.family}</span>
               </p>
             </div>
 
@@ -156,11 +178,11 @@ const WishItemView = ({}) => {
 
               <p className="text-md p-2" style={{ color: "#3A5A40" }}>
                 Watering:{" "}
-                <span style={{ color: "#A3B18A" }}>{wateringPrefence}</span>
+                <span style={{ color: "#A3B18A" }}>{plantDetails.wateringPreference}</span>
               </p>
               <p className="text-md p-2" style={{ color: "#3A5A40" }}>
                 Sunlight:{" "}
-                <span style={{ color: "#A3B18A" }}>{sunlightPreference}</span>
+                <span style={{ color: "#A3B18A" }}>{plantDetails.sunlightPreference}</span>
               </p>
             </div>
           </div>
@@ -170,7 +192,7 @@ const WishItemView = ({}) => {
               More information
             </p>
             <p className="text-md p-2" style={{ color: "#3A5A40" }}>
-              {moreInfo}
+              {plantDetails.moreInfo}
             </p>
           </div>
         </div>
