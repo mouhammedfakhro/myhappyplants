@@ -163,7 +163,7 @@ const WishItemView = ({}) => {
               </p>
               <p className="text-md p-2" style={{ color: "#3A5A40" }}>
                 Family name:{" "}
-                <span style={{ color: "#A3B18A" }}>{plantDetails.family}</span>
+                <span style={{ color: "#A3B18A" }}>{plantDetails.familyName}</span>
               </p>
             </div>
 

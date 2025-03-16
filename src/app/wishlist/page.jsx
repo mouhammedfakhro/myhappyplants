@@ -24,7 +24,7 @@ const WishlistPage = ({}) => {
         return {
           imageLink: data.default_image?.original_url || null,
           scientificName: data.scientific_name || "Scientific Name",
-          familyName: data.family_name || "Family Name",
+          familyName: data.family|| "Family Name",
         };
       } catch (error) {
         console.error("Error fetching plant details:", error);

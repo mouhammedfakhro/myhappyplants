@@ -30,7 +30,7 @@ const CatalogItemView = () => {
           setPlantDetails({
             commonName: data.common_name,
             scientificName: data.scientific_name,
-            familyName: data.family_name,
+            familyName: data.family,
             wateringPreference: data.watering || "Not specified",
             sunlightPreference: data.sunlight || "Not specified",
             moreInfo: data.description || "No additional information available",
