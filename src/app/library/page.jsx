@@ -35,6 +35,7 @@ const LibraryPage = ({}) => {
               : null
           }
           plantID={plant.id}
+          catalogID={plant.catalogID} // Pass catalogID
           returnPage="library"
         />
       </div>

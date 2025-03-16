@@ -47,6 +47,7 @@ const LoggedinHome = ({}) => {
               : null
           }
           plantID={plant.id}
+          catalogID={plant.catalogID} // Pass catalogID
           returnPage="home"
         />
       </div>

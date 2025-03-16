@@ -1,14 +1,13 @@
 "use client";
 
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Navbar from "../components/Navbar";
 import PlantViewPlantInfo from "../components/PlantViewPlantInfo";
 import auth from "../../services/auth";
 import axios from "axios";
-import {getCookie} from "cookies-next";
-import {TOKEN_KEY} from "@/constants";
-
+import { getCookie } from "cookies-next";
+import { TOKEN_KEY } from "@/constants";
 
 const PlantView = () => {
   return (
@@ -27,19 +26,50 @@ const PlantViewContent = () => {
   const user = auth.getCurrentUser();
   const plant = user?.plants?.find((p) => p.id === plantId) || {};
 
-  console.log(plant);
+  const [plantDetails, setPlantDetails] = useState({});
+  const [loading, setLoading] = useState(true);
 
-  // Temporary data - should be fetched from the database
+  useEffect(() => {
+    async function fetchPlantDetails() {
+      try {
+        const response = await axios.get(
+          `https://perenual.com/api/v2/species/details/${plant.catalogID}?key=${process.env.NEXT_PUBLIC_PERENUAL_API_KEY2}`
+        );
+        const data = response.data;
+        setPlantDetails({
+          commonName: data.common_name,
+          scientificName: data.scientific_name,
+          familyName: data.family,
+          wateringPreference: data.watering || "Not specified",
+          sunlightPreference: data.sunlight || "Not specified",
+          moreInfo: data.description || "No additional information available",
+        });
+      } catch (error) {
+        console.error("Error fetching plant details:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    if (plant.catalogID) {
+      fetchPlantDetails();
+    }
+  }, [plant.catalogID]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   const thisname = plant.nickname || "Unknown Plant";
-  const thiscommonName = "___";
-  const thisscientificName = "___";
-  const thisfamilyName = "___";
+  const thiscommonName = plantDetails.commonName || "___";
+  const thisscientificName = plantDetails.scientificName || "___";
+  const thisfamilyName = plantDetails.familyName || "___";
   const thistags = plant.tags;
   const thislastWatered = plant.lastWatered;
   const thistoBeWatered = plant.toBeWatered;
-  const thisWateringPreference = 5;
-  const thisSunlightPreference = "___";
-  const thisMoreInfo = "___";
+  const thisWateringPreference = plantDetails.wateringPreference || 5;
+  const thisSunlightPreference = plantDetails.sunlightPreference || "___";
+  const thisMoreInfo = plantDetails.moreInfo || "___";
   const imgLink = plant.imageUrl;
 
   const tagsFormatted =
