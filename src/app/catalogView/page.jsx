@@ -23,7 +23,7 @@ const CatalogItemView = () => {
       async function fetchPlantDetails() {
         try {
           const response = await axios.get(
-            `https://perenual.com/api/v2/species/details/${catalogID}?key=${process.env.NEXT_PUBLIC_PERENUAL_API_KEY2}`
+            `https://perenual.com/api/v2/species/details/${catalogID}?key=${process.env.NEXT_PUBLIC_PERENUAL_API_KEY}`
           );
           console.log(response.data);
           const data = response.data;
