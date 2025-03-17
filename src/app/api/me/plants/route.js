@@ -63,8 +63,7 @@ export async function PUT(req) {
 export async function POST(req) {
   try {
     const body = await req.json();
-    const { userName, catalogID, name, imageUrl } = body;
-    console.log(userName, catalogID, name, imageUrl);
+    const { userName, catalogID, nickname, imageUrl } = body;
 
     // Verify user
     const userVerified = await verifyUser(req, userName);
@@ -87,9 +86,11 @@ export async function POST(req) {
     // add plant to library
     await prisma.plant.create({
       data: {
-        userId: user.id,
+        user: {
+          connect: { id: user.id },
+        },
         catalogID: catalogID,
-        nickname: name, 
+        nickname: nickname,
         imageUrl: imageUrl,
         lastWatered: new Date(),
         toBeWatered: new Date(new Date().setDate(new Date().getDate() + waterFreq)),
@@ -97,11 +98,11 @@ export async function POST(req) {
     });
 
     return NextResponse.json(
-      { message: "Plant successfully created and added to library" },
+      { message: "Plant successfully added to library" },
       { status: 200 }
     );
   } catch (error) {
-    console.error("adding plant to library error:", error);
+    console.error("Error adding plant to library:", error);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }

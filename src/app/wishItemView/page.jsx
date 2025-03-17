@@ -54,6 +54,12 @@ const WishItemView = ({}) => {
   };
 
   async function addToLibrary() {
+    const nickname = prompt("Enter a nickname for the plant:");
+    if (!nickname) {
+      alert("Nickname is required to add the plant to the library.");
+      return;
+    }
+
     if (catalogID) {
       try {
         const token = getCookie(TOKEN_KEY);
@@ -63,7 +69,7 @@ const WishItemView = ({}) => {
         }
         const response = await axios.post(
           "/api/me/plants",
-          { userName, catalogID },
+          { userName, catalogID, nickname, imageUrl: plantDetails.imgLink },
           {
             headers: {
               Authorization: `Bearer ${token}`,
