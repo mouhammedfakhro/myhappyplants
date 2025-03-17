@@ -66,6 +66,13 @@ const CatalogItemView = () => {
           return;
         }
 
+        // Check if the plant is already in the user's library
+        const existingPlant = user?.plants?.find((p) => p.catalogID === catalogID);
+        if (existingPlant) {
+          alert("The plant is already in your library.");
+          return;
+        }
+
         const imageUrl = plantDetails.imgLink;
 
         const response = await axios.post(
