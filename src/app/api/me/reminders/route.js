@@ -1,36 +1,48 @@
-import { SignJWT } from "jose";
 import prisma from "../../../../../lib/prisma";
 import { createServerResponse } from "../../../utils";
-import bcrypt from "bcrypt";
+import { NextResponse } from "next/server";
+import { verifyUser } from "../../../../../lib/auth";
 
-const SECRET_KEY = process.env.JWT_SECRET;
 
 export async function POST(req) {
   try {
-    const user = await prisma.user.findUnique({
-      where: { name: username },
+    const reminder = await prisma.reminder.create({
+      data: {
+        plantId: "a9e5fa6e-0a6c-45f8-89d7-fc27e1d77877",
+        label: "Reminder!",
+      },
     });
-
-    if (!user) createServerResponse({ error: "User not found" }, 400);
-
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch)
-      return createServerResponse({ error: "Invalid password" }, 400);
-
-    const userPayLoad = {
-      id: user.id,
-      email: user.email,
-      name: user.name,
-      plants: user.plants,
-      reminders: user.reminders
-    };
-
-    const token = await new SignJWT(userPayLoad)
-      .setProtectedHeader({ alg: "HS256" })
-      .sign(new TextEncoder().encode(SECRET_KEY));
-
-    return createServerResponse({ token }, 200);
+    if (!reminder) {
+      return NextResponse.json("Failed to create reminder.", { status: 200 });
+    }
+    return NextResponse.json("Successfully created a reminder.", {
+      status: 200,
+    });
   } catch (e) {
     return createServerResponse({ error: "Invalid request body" }, 400);
+  }
+}
+
+export async function GET(req) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const userName = searchParams.get("userName");
+
+    const userVerified = await verifyUser(req, userName);
+    if (!userVerified) {
+      return NextResponse.json({ error: "Unauthorized user" }, { status: 403 });
+    }
+
+    const user = await prisma.user.findUnique({
+      where: { name: userName },
+      include: { plants: { include: { reminders: true } } },
+    });
+
+    return NextResponse.json(plants, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { error: "Unable to fetch reminders" },
+      { status: 404 }
+    );
   }
 }

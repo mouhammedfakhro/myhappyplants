@@ -89,10 +89,12 @@ export async function POST(req) {
       data: {
         userId: user.id,
         catalogID: catalogID,
-        nickname: name, 
+        nickname: name,
         imageUrl: imageUrl,
         lastWatered: new Date(),
-        toBeWatered: new Date(new Date().setDate(new Date().getDate() + waterFreq)),
+        toBeWatered: new Date(
+          new Date().setDate(new Date().getDate() + waterFreq)
+        ),
       },
     });
 
@@ -103,5 +105,34 @@ export async function POST(req) {
   } catch (error) {
     console.error("adding plant to library error:", error);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
+  }
+}
+
+export async function GET(req) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const userName = searchParams.get("userName");
+
+    const userVerified = await verifyUser(req, userName);
+    if (!userVerified) {
+      return NextResponse.json({ error: "Unauthorized user" }, { status: 403 });
+    }
+
+    // get user id
+    const user = await prisma.user.findUnique({
+      where: { name: userName },
+      include: { plants: { include: { reminders: true } } },
+    });
+
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 400 });
+    }
+
+    return NextResponse.json(user, { status: 200 });
+  } catch (error) {
+    return NextResponse.json(
+      { message: "Error fetching plants." },
+      { status: 404 }
+    );
   }
 }
