@@ -1,0 +1,157 @@
+@startuml
+skinparam componentStyle rectangle
+left to right direction
+package app {
+  component route <<component>>
+  component route <<component>>
+  component route <<component>>
+  component route <<component>>
+  component route <<component>>
+  component route <<component>>
+  component route <<component>>
+  component route <<component>>
+  component route <<component>>
+  component route <<component>>
+  component route <<component>>
+  component route <<component>>
+  component route <<component>>
+  component page <<component>>
+  component page <<component>>
+  component EmailSentBox <<component>>
+  component ForgotPasswordBox <<database>>
+  component LoginBox <<component>>
+  component SignUpBox <<component>>
+  component SuccessfulPasswordResetBox <<component>>
+  component SuccessfulVerification <<component>>
+  component VerifyAccount <<component>>
+  component CatalogItem <<component>>
+  component CategoryItem <<component>>
+  component ReminderBox <<component>>
+  component FilterButton <<component>>
+  component LibraryItem <<component>>
+  component Navbar <<component>>
+  component PlantViewPlantInfo <<component>>
+  component SearchBar <<component>>
+  component WishlistItem <<component>>
+  component page <<component>>
+  component page <<component>>
+  component LandingPage <<component>>
+  component layout <<component>>
+  component page <<component>>
+  component page <<component>>
+  component page <<component>>
+  component page <<component>>
+  component page <<component>>
+  component page <<component>>
+  component page <<component>>
+  component page <<component>>
+  component page <<component>>
+  component utils <<component>>
+  component page <<component>>
+  component page <<component>>
+  component page <<component>>
+}
+
+package Uncategorized {
+  component constants <<component>>
+  component middleware <<component>>
+}
+
+package services {
+  component auth <<webservice>>
+}
+
+route -- server
+route -- prisma
+route -- auth
+route -- jose
+route -- utils
+route -- bcrypt
+route -- mailersend
+page -- react
+page -- navigation
+page -- Navbar
+page -- auth
+page -- axios
+page -- "cookies-next"
+page -- constants
+EmailSentBox -- react
+EmailSentBox -- navigation
+EmailSentBox -- axios
+ForgotPasswordBox -- react
+ForgotPasswordBox -- navigation
+ForgotPasswordBox -- axios
+LoginBox -- react
+LoginBox -- navigation
+LoginBox -- auth
+SignUpBox -- react
+SignUpBox -- navigation
+SignUpBox -- axios
+SuccessfulPasswordResetBox -- react
+SuccessfulPasswordResetBox -- navigation
+SuccessfulVerification -- react
+SuccessfulVerification -- navigation
+VerifyAccount -- react
+VerifyAccount -- navigation
+VerifyAccount -- axios
+CatalogItem -- react
+CatalogItem -- navigation
+CatalogItem -- auth
+CatalogItem -- axios
+CatalogItem -- "cookies-next"
+CatalogItem -- constants
+CategoryItem -- react
+CategoryItem -- navigation
+ReminderBox -- react
+ReminderBox -- navigation
+FilterButton -- react
+FilterButton -- navigation
+LibraryItem -- react
+LibraryItem -- navigation
+Navbar -- react
+Navbar -- navigation
+Navbar -- auth
+PlantViewPlantInfo -- react
+PlantViewPlantInfo -- navigation
+PlantViewPlantInfo -- auth
+PlantViewPlantInfo -- axios
+PlantViewPlantInfo -- "cookies-next"
+PlantViewPlantInfo -- constants
+SearchBar -- react
+SearchBar -- navigation
+SearchBar -- auth
+WishlistItem -- react
+WishlistItem -- navigation
+WishlistItem -- auth
+WishlistItem -- axios
+WishlistItem -- "cookies-next"
+WishlistItem -- constants
+page -- SearchBar
+page -- CategoryItem
+page -- CatalogItem
+page -- LibraryItem
+page -- ReminderBox
+LandingPage -- globals
+LandingPage -- react
+LandingPage -- LoginBox
+layout -- globals
+page -- FilterButton
+page -- LandingPage
+page -- page
+page -- EmailSentBox
+page -- SuccessfulPasswordResetBox
+page -- ForgotPasswordBox
+page -- PlantViewPlantInfo
+page -- SignUpBox
+utils -- server
+utils -- crypto
+page -- VerifyAccount
+page -- SuccessfulVerification
+page -- WishlistItem
+middleware -- server
+middleware -- jose
+auth -- axios
+auth -- client
+auth -- constants
+auth -- "jwt-decode"
+@enduml
