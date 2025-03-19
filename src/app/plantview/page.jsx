@@ -1,3 +1,5 @@
+// Authors: Akmal Safi, Olivia Svensson, Rana Noorzadeh, Mouhammed Fakhro
+
 "use client";
 
 import React, { Suspense, useEffect, useState } from "react";

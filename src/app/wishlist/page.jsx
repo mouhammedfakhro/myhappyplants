@@ -1,3 +1,4 @@
+// Authors: Rana Noorzadeh, Mouhammed Fakhro, Akmal Safi, Olivia Svensson
 "use client";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
