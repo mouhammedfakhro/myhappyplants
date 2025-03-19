@@ -17,4 +17,14 @@ describe("validateRequestBody", () => {
       isValid: true,
     });
   });
+
+  test("returns isValid false when a required field is missing", () => {
+    const body = {name: "John"};
+    const requiredFields = ["name", "email"];
+
+    expect(validateRequestBody(body, requiredFields)).toEqual({
+        isValid: false,
+        missingField: "email",
+    })
+  })
 });
