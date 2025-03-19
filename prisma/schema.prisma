@@ -16,9 +16,9 @@ model Plant {
   catalogID   String
   imageUrl    String
 
-  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  reminders Reminder[]  
-  tags      Tag[]       
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reminders Reminder[]
+  tags      Tag[]
 }
 
 model User {
@@ -31,24 +31,24 @@ model User {
   passwordResetCode   String?
   notificationEnabled Boolean   @default(false)
   expiresAt           DateTime?
-  plants              Plant[]   
-  wishlist            Wishlist? 
+  plants              Plant[]
+  wishlist            Wishlist?
 }
 
 model Wishlist {
-  id        String @id @default(uuid())
+  id String @id @default(uuid())
 
   user   User   @relation(fields: [userID], references: [id], onDelete: Cascade)
   userID String @unique
 
-  items     WishItem[]
+  items WishItem[]
 }
 
 model WishItem {
   id        String @id @default(uuid())
   catalogID String
 
-  wishlist   Wishlist   @relation(fields: [wishlistID], references: [id], onDelete: Cascade)
+  wishlist   Wishlist @relation(fields: [wishlistID], references: [id], onDelete: Cascade)
   wishlistID String
 }
 

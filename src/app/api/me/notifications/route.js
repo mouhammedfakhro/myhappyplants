@@ -1,3 +1,4 @@
+import { NextResponse } from "next/server";
 import { verifyUser } from "../../../../../lib/auth";
 import prisma from "../../../../../lib/prisma";
 import { createServerResponse, validateRequestBody } from "../../../utils";
@@ -34,3 +35,4 @@ export async function PUT(req) {
     return createServerResponse({ error: "Internal server error" }, 500);
   }
 }
+

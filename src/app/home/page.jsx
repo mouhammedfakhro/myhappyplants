@@ -1,58 +1,45 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LibraryItem from "../components/library/LibraryItem";
 import ReminderBox from "../components/home/ReminderBox";
 import Navbar from "../components/Navbar";
 import auth from "../../services/auth";
-import CatalogItem from "../components/CatalogItem";
+import axios from "axios";
 
 const LoggedinHome = ({}) => {
-  const renderReminders = () => {
-    const user = auth.getCurrentUser();
-    if (!user || !Array.isArray(user.plants)) return null;
+  const [plants, setPlants] = useState([]);
 
-    console.log(user.plants);
+  useEffect(() => {
+    const fetchPlants = async () => {
+      const user = auth.getCurrentUser();
+      if (!user) return;
 
-    return user.plants.map((plant, plantIndex) => (
-      <div key={plantIndex}>
-        {Array.isArray(plant.reminders) &&
-          plant.reminders.map((reminder) => (
-            <ReminderBox
-              key={reminder.id}
-              date={reminder.createdAt}
-              message={reminder.label}
-              plantID={plant.id}
-            />
-          ))}
-      </div>
-    ));
-  };
-
-  const renderPlantItems = () => {
-    const user = auth.getCurrentUser();
-
-    console.log(user?.plants);
-
-    if (!user || !Array.isArray(user.plants)) return null;
-    return user.plants.map((plant, plantIndex) => (
-      <div key={plantIndex}>
-        <LibraryItem
-          imageLink={plant.imageUrl}
-          plantName={plant.nickname}
-          scientificName={plant.scientificName}
-          familyName={null}
-          tags={
-            plant.tags && plant.tags.length > 0
-              ? plant.tags.map((tag) => `#${tag.tagName}`).join(" ")
-              : null
+      try {
+        const token = user.token; 
+  
+        const response = await axios.get("/api/me/plants", {
+          headers: {
+            Authorization: `Bearer ${token}`, 
+          },
+          params: {
+            userName: user.name,
           }
-          plantID={plant.id}
-          catalogID={plant.catalogID} // Pass catalogID
-          returnPage="home"
-        />
-      </div>
-    ));
-  };
+        });
+
+        console.log("Fetched Data:", response.data.plants);
+
+        if (response.data.plants) {
+          setPlants(response.data.plants);
+        } else {
+          console.log("No plants in response.");
+        }
+      } catch (error) {
+        console.error("Error fetching wishlist:", error);
+      }
+    };
+
+    fetchPlants();
+  }, []);
 
   return (
     <div
@@ -76,8 +63,29 @@ const LoggedinHome = ({}) => {
         <p>Library Overview</p>
 
         <div className="space-y-3">
-          <div></div>
-          <div>{renderPlantItems()}</div>
+          <div>
+            {plants.length > 0 ? (
+              plants.map((plant) => (
+                <ul key={plant.id}>
+                  <LibraryItem
+                    imageLink={plant.imageUrl}
+                    plantName={plant.nickname}
+                    scientificName={null}
+                    familyName={null}
+                    tags={
+                      plant.tags && plant.tags.length > 0
+                        ? plant.tags.map((tag) => `#${tag.tagName}`).join(" ")
+                        : null
+                    }
+                    plantID={plant.id}
+                    returnPage="home"
+                  />
+                </ul>
+              ))
+            ) : (
+              <p>No plants found.</p>
+            )}
+          </div>
         </div>
       </div>
 
@@ -94,7 +102,28 @@ const LoggedinHome = ({}) => {
         <div className="space-y-2 space-x-2 text-white">
           <div></div>
           <p>Reminders</p>
-          <div>{renderReminders()}</div>
+          <div>
+            {plants.length > 0 ? (
+              plants.map((plant) => (
+                <div key={plant.id}>
+                  <ul>
+                    {plant.reminders.map((reminder) => (
+                      <li key={reminder.id}>
+                        <ReminderBox
+                          key={reminder.id}
+                          date={reminder.createdAt}
+                          message={reminder.label}
+                          plantID={reminder.plantId}
+                        />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))
+            ) : (
+              <p>No reminders available.</p>
+            )}
+          </div>
         </div>
       </div>
     </div>
