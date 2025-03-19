@@ -1,3 +1,4 @@
+// Authors: Rana Noorzadeh, Mouhammed Fakhro, Akmal Safi, Olivia Svensson
 "use client";
 import React, { useEffect, useState } from "react";
 import LibraryItem from "../components/library/LibraryItem";

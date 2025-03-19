@@ -1,3 +1,4 @@
+// Authors: Olivia Svensson, Rana Noorzadeh, Mouhammed Fakhro
 "use client";
 import React, { Suspense } from "react";
 import SignUpBox from "../components/auth/SignUpBox";
