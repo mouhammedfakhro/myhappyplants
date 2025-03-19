@@ -8,6 +8,7 @@ jest.mock("next/server", () => ({
 import { validateRequestBody } from "../../src/app/utils";
 
 describe("validateRequestBody", () => {
+    
   test("returns isValid true when all required fields are present", () => {
     const body = { name: "John", email: "john@example.com" };
     const requiredFields = ["name", "email"];
@@ -16,5 +17,4 @@ describe("validateRequestBody", () => {
       isValid: true,
     });
   });
-
 });
