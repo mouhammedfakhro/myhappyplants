@@ -81,30 +81,21 @@ export async function POST(req) {
 
 export async function GET(req) {
   try {
-    const { searchParams } = new URL(req.url); 
+    const { searchParams } = new URL(req.url);
     const userName = searchParams.get("userName");
     const userId = searchParams.get("userId");
 
     const userVerified = await verifyUser(req, userName);
     if (!userVerified) {
-      return NextResponse.json({ error: "Unauthorized user" }, { status: 403 });
+      return NextResponse.json(
+        { error: "Unauthorize d user" },
+        { status: 403 }
+      );
     }
 
-    const user = await prisma.user.findUnique({
-      where: { name: userName },
-    });
-
-    console.log(user);
-
-    if (!user) {
-      return NextResponse.json({ error: "User not found" }, { status: 400 });
-    }
-
-    const wishlist = await prisma.wishlist.findFirst({
+    const wishlist = await prisma.wishlist.findUnique({
       where: { userID: userId },
-      include: {
-        items: true,
-      },
+      include: { items: true },
     });
 
     if (!wishlist) {
