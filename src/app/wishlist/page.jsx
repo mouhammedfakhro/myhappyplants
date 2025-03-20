@@ -9,56 +9,90 @@ import auth from "../../services/auth";
 
 const WishlistPage = ({}) => {
   const router = useRouter();
-  const user = auth.getCurrentUser();
+  const [plants, setPlants] = useState([]);
 
-  console.log(user?.wishlist);
+  useEffect(() => {
+    const fetchWishlist = async () => {
+      const user = auth.getCurrentUser();
+      if (!user) return;
 
-  const renderWishlistItems = () => {
-    if (!user || !user.wishlist || !Array.isArray(user.wishlist.items)) return null;
-
-    const fetchPlantDetails = async (catalogID) => {
       try {
-        const response = await axios.get(
-          `https://perenual.com/api/v2/species/details/${catalogID}?key=${process.env.NEXT_PUBLIC_PERENUAL_API_KEY}`
-        );
-        const data = response.data;
-        return {
-          imageLink: data.default_image?.original_url || null,
-          scientificName: data.scientific_name || "Scientific Name",
-          familyName: data.family|| "Family Name",
-        };
+        const token = user.token;
+        const response = await axios.get("/api/me/wishlist", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          params: {
+            userName: user.name,
+            userId: user.id,
+          },
+        });
+
+        if (response.data.items) {
+          const wishlistItems = response.data.items;
+
+          const fetchAllDetails = async () => {
+            const detailsPromises = wishlistItems.map((item) =>
+              fetchPlantDetails(item.catalogID)
+            );
+
+            const details = await Promise.all(detailsPromises);
+
+            const updatedPlants = wishlistItems.map((item, index) => ({
+              ...item,
+              ...details[index],
+            }));
+
+            setPlants(updatedPlants);
+          };
+
+          fetchAllDetails();
+        } else {
+          console.log("No plants in response.");
+        }
       } catch (error) {
-        console.error("Error fetching plant details:", error);
-        return {
-          imageLink: null,
-          scientificName: "Scientific Name",
-          familyName: "Family Name",
-        };
+        console.error("Error fetching wishlist:", error);
       }
     };
 
-    return user.wishlist.items.map((wishlistItem, wishlistItemIndex) => {
-      const [plantDetails, setPlantDetails] = useState(null);
+    fetchWishlist();
+  }, []);
 
-      useEffect(() => {
-        fetchPlantDetails(wishlistItem.catalogID).then(setPlantDetails);
-      }, [wishlistItem.catalogID]);
-
-      if (!plantDetails) return null;
-
-      return (
-        <div key={wishlistItemIndex}>
-          <WishlistItem
-            imageLink={plantDetails.imageLink}
-            scientificName={plantDetails.scientificName}
-            familyName={plantDetails.familyName}
-            catalogID={wishlistItem.catalogID}
-            itemID={wishlistItem.id}
-            returnPage="wishlist"
-          />
-        </div>
+  const fetchPlantDetails = async (catalogID) => {
+    try {
+      const response = await axios.get(
+        `https://perenual.com/api/v2/species/details/${catalogID}?key=${process.env.NEXT_PUBLIC_PERENUAL_API_KEY}`
       );
-    });
+      const data = response.data;
+      console.log(data)
+      return {
+        imageLink: data.default_image?.original_url || null,
+        scientificName: data.scientific_name || "Scientific Name",
+        familyName: data.family || "Family Name",
+      };
+    } catch (error) {
+      console.error("Error fetching plant details:", error);
+      return {
+        imageLink: null,
+        scientificName: "Scientific Name",
+        familyName: "Family Name",
+      };
+    }
+  };
+
+  const renderWishlistItems = () => {
+    return plants.map((wishlistItem, wishlistItemIndex) => (
+      <div key={wishlistItemIndex}>
+        <WishlistItem
+          imageLink={wishlistItem.imageLink}
+          scientificName={wishlistItem.scientificName}
+          familyName={wishlistItem.familyName}
+          catalogID={wishlistItem.catalogID}
+          itemID={wishlistItem.id}
+          returnPage="wishlist"
+        />
+      </div>
+    ));
   };
 
   return (
