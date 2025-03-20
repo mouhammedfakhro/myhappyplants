@@ -6,7 +6,7 @@ const createJestConfig = nextJest({
 
 const config = {
   coverageProvider: 'v8',
-  testEnvironment: 'jsdom', // Ensure this is set
+  testEnvironment: 'node', // Ensure this is set
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1', // Map @/ alias to src
   },
