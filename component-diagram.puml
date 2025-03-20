@@ -1,21 +1,11 @@
 @startuml
 skinparam componentStyle rectangle
+skinparam dpi 150
+skinparam linetype ortho
 left to right direction
+
 package app {
   component route <<component>>
-  component route <<component>>
-  component route <<component>>
-  component route <<component>>
-  component route <<component>>
-  component route <<component>>
-  component route <<component>>
-  component route <<component>>
-  component route <<component>>
-  component route <<component>>
-  component route <<component>>
-  component route <<component>>
-  component route <<component>>
-  component page <<component>>
   component page <<component>>
   component EmailSentBox <<component>>
   component ForgotPasswordBox <<database>>
@@ -33,23 +23,9 @@ package app {
   component PlantViewPlantInfo <<component>>
   component SearchBar <<component>>
   component WishlistItem <<component>>
-  component page <<component>>
-  component page <<component>>
   component LandingPage <<component>>
   component layout <<component>>
-  component page <<component>>
-  component page <<component>>
-  component page <<component>>
-  component page <<component>>
-  component page <<component>>
-  component page <<component>>
-  component page <<component>>
-  component page <<component>>
-  component page <<component>>
   component utils <<component>>
-  component page <<component>>
-  component page <<component>>
-  component page <<component>>
 }
 
 package Uncategorized {
@@ -61,97 +37,120 @@ package services {
   component auth <<webservice>>
 }
 
-route -- server
-route -- prisma
-route -- auth
-route -- jose
-route -- utils
-route -- bcrypt
-route -- mailersend
-page -- react
-page -- navigation
-page -- Navbar
-page -- auth
-page -- axios
-page -- "cookies-next"
-page -- constants
-EmailSentBox -- react
-EmailSentBox -- navigation
-EmailSentBox -- axios
-ForgotPasswordBox -- react
-ForgotPasswordBox -- navigation
-ForgotPasswordBox -- axios
-LoginBox -- react
-LoginBox -- navigation
-LoginBox -- auth
-SignUpBox -- react
-SignUpBox -- navigation
-SignUpBox -- axios
-SuccessfulPasswordResetBox -- react
-SuccessfulPasswordResetBox -- navigation
-SuccessfulVerification -- react
-SuccessfulVerification -- navigation
-VerifyAccount -- react
-VerifyAccount -- navigation
-VerifyAccount -- axios
-CatalogItem -- react
-CatalogItem -- navigation
-CatalogItem -- auth
-CatalogItem -- axios
-CatalogItem -- "cookies-next"
-CatalogItem -- constants
-CategoryItem -- react
-CategoryItem -- navigation
-ReminderBox -- react
-ReminderBox -- navigation
-FilterButton -- react
-FilterButton -- navigation
-LibraryItem -- react
-LibraryItem -- navigation
-Navbar -- react
-Navbar -- navigation
-Navbar -- auth
-PlantViewPlantInfo -- react
-PlantViewPlantInfo -- navigation
-PlantViewPlantInfo -- auth
-PlantViewPlantInfo -- axios
-PlantViewPlantInfo -- "cookies-next"
-PlantViewPlantInfo -- constants
-SearchBar -- react
-SearchBar -- navigation
-SearchBar -- auth
-WishlistItem -- react
-WishlistItem -- navigation
-WishlistItem -- auth
-WishlistItem -- axios
-WishlistItem -- "cookies-next"
-WishlistItem -- constants
-page -- SearchBar
-page -- CategoryItem
-page -- CatalogItem
-page -- LibraryItem
-page -- ReminderBox
-LandingPage -- globals
-LandingPage -- react
-LandingPage -- LoginBox
-layout -- globals
-page -- FilterButton
-page -- LandingPage
-page -- page
-page -- EmailSentBox
-page -- SuccessfulPasswordResetBox
-page -- ForgotPasswordBox
-page -- PlantViewPlantInfo
-page -- SignUpBox
-utils -- server
-utils -- crypto
-page -- VerifyAccount
-page -- SuccessfulVerification
-page -- WishlistItem
-middleware -- server
-middleware -- jose
-auth -- axios
-auth -- client
-auth -- constants
-auth -- "jwt-decode"
+route -[#ff0000]- server
+route -[#ff4500]- prisma
+route -[#C71585]- auth
+route -[#ffd700]- jose  
+route -[#ffa500]- utils
+route -[#008000]- bcrypt
+route -[#006400]- mailersend
+
+page -[#7fff00]- react
+page -[#ffd700]- navigation
+page -[#00008b]- Navbar
+page -[#C71585]- auth
+page -[#4169e1]- axios
+page -[#dc143c]- "cookies-next"
+page -[#9932cc]- constants
+
+EmailSentBox -[#7fff00]- react
+EmailSentBox -[#ffd700]- navigation
+EmailSentBox -[#4169e1]- axios
+
+ForgotPasswordBox -[#7fff00]- react
+ForgotPasswordBox -[#ffd700]- navigation
+ForgotPasswordBox -[#4169e1]- axios
+
+LoginBox -[#7fff00]- react
+LoginBox -[#ffd700]- navigation
+LoginBox -[#C71585]- auth
+
+SignUpBox -[#7fff00]- react
+SignUpBox -[#ffd700]- navigation
+SignUpBox -[#4169e1]- axios
+
+SuccessfulPasswordResetBox -[#7fff00]- react
+SuccessfulPasswordResetBox -[#ffd700]- navigation
+
+SuccessfulVerification -[#7fff00]- react
+SuccessfulVerification -[#ffd700]- navigation
+
+VerifyAccount -[#7fff00]- react
+VerifyAccount -[#ffd700]- navigation
+VerifyAccount -[#4169e1]- axios
+
+CatalogItem -[#7fff00]- react
+CatalogItem -[#ffd700]- navigation
+CatalogItem -[#C71585]- auth
+CatalogItem -[#4169e1]- axios
+CatalogItem -[#dc143c]- "cookies-next"
+CatalogItem -[#9932cc]- constants
+
+CategoryItem -[#7fff00]- react
+CategoryItem -[#ffd700]- navigation
+
+ReminderBox -[#7fff00]- react
+ReminderBox -[#ffd700]- navigation
+
+FilterButton -[#7fff00]- react
+FilterButton -[#ffd700]- navigation
+
+LibraryItem -[#7fff00]- react
+LibraryItem -[#ffd700]- navigation
+
+Navbar -[#7fff00]- react
+Navbar -[#ffd700]- navigation
+Navbar -[#C71585]- auth
+
+PlantViewPlantInfo -[#7fff00]- react
+PlantViewPlantInfo -[#ffd700]- navigation
+PlantViewPlantInfo -[#C71585]- auth
+PlantViewPlantInfo -[#4169e1]- axios
+PlantViewPlantInfo -[#dc143c]- "cookies-next"
+PlantViewPlantInfo -[#9932cc]- constants
+
+SearchBar -[#7fff00]- react
+SearchBar -[#ffd700]- navigation
+SearchBar -[#C71585]- auth
+
+WishlistItem -[#7fff00]- react
+WishlistItem -[#ffd700]- navigation
+WishlistItem -[#C71585]- auth
+WishlistItem -[#4169e1]- axios
+WishlistItem -[#dc143c]- "cookies-next"
+WishlistItem -[#9932cc]- constants
+
+page -[#blue]- SearchBar
+page -[#blue]- CategoryItem
+page -[#blue]- CatalogItem
+page -[#blue]- LibraryItem
+page -[#blue]- ReminderBox
+LandingPage -[#blue]- globals
+LandingPage -[#7fff00]- react
+LandingPage -[#blue]- LoginBox
+
+layout -[#blue]- globals
+
+page -[#blue]- FilterButton
+page -[#blue]- LandingPage
+page -[#blue]- EmailSentBox
+page -[#blue]- SuccessfulPasswordResetBox
+page -[#blue]- ForgotPasswordBox
+page -[#blue]- PlantViewPlantInfo
+page -[#blue]- SignUpBox
+
+utils -[#ff0000]- server
+utils -[#gray]- crypto
+
+page -[#blue]- VerifyAccount
+page -[#blue]- SuccessfulVerification
+page -[#blue]- WishlistItem
+
+middleware -[#ff0000]- server
+middleware -[#ffd700]- jose
+
+auth -[#4169e1]- axios
+auth -[#4b0082]- client
+auth -[#9932cc]- constants
+auth -[#red]- "jwt-decode"
 @enduml
