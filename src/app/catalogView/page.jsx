@@ -7,7 +7,7 @@ import auth from "../../services/auth";
 import axios from "axios";
 import { getCookie } from "cookies-next";
 import { TOKEN_KEY } from "@/constants";
-
+// Akmal Safi
 const CatalogItemView = () => {
   const params = useSearchParams();
   const catalogID = params.get("catalogID");
